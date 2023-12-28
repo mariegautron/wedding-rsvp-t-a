@@ -4,14 +4,18 @@ import { UserOutlined } from "@ant-design/icons";
 import { Layout, Menu } from "antd";
 import { FC } from "react";
 
-const { Header, Sider, Content } = Layout;
+const { Sider } = Layout;
 
 const CustomSider: FC<{ collapsed: boolean }> = ({ collapsed }) => {
   return (
-    <Sider trigger={null} collapsible collapsed={collapsed}>
-      <div className="demo-logo-vertical" />
+    <Sider
+      trigger={null}
+      collapsible
+      collapsed={collapsed}
+      theme="light"
+      style={{ background: "#606C5D" }}
+    >
       <Menu
-        theme="dark"
         mode="inline"
         defaultSelectedKeys={["1"]}
         items={[

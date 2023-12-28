@@ -1,3 +1,5 @@
+import "./globals.css";
+
 export const metadata = {
   title: "Thomas & Amélie - Le mariage",
 };
@@ -9,7 +11,11 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body style={{ height: "100vh" }}>{children}</body>
+      <body>
+        {/* <ConfigProvider theme={themeTokens}> */}
+        <div style={{ height: "100vh" }}>{children}</div>
+        {/* </ConfigProvider> */}
+      </body>
     </html>
   );
 }

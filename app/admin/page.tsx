@@ -1,9 +1,6 @@
 "use server";
 
-import AuthButton from "@/components/AuthButton";
 import LoginForm from "@/components/LoginForm";
-import AdminLayout from "@/layouts/AdminLayout";
-import React from "react";
 
 const Dashboard = () => {
   return (
@@ -14,6 +11,7 @@ const Dashboard = () => {
         alignItems: "center",
         height: "100vh",
       }}
+      className="isAdmin"
     >
       <LoginForm />
     </div>

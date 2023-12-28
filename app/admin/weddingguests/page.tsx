@@ -1,12 +1,11 @@
 "use server";
 
-import { Alert } from "antd";
-import AuthButton from "@/components/AuthButton";
 import GuestList from "@/components/GuestList";
 import AdminLayout from "@/layouts/AdminLayout";
-import { createClient } from "@/utils/supabase/server";
-import { cookies } from "next/headers";
 import { COLLECTION_NAMES } from "@/utils/supabase/enums";
+import { createClient } from "@/utils/supabase/server";
+import { Alert } from "antd";
+import { cookies } from "next/headers";
 
 export default async function WeddingGuests() {
   let data = [];
