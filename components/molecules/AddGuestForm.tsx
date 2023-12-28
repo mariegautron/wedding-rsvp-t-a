@@ -1,7 +1,7 @@
 "use client";
 
 import { WeddingGuests } from "@/utils/types/weddinggests";
-import { Button, Form, Input, message } from "antd";
+import { Button, Form, Input, Switch, message } from "antd";
 import { FC } from "react";
 import { useRouter } from "next/navigation";
 import { MenuPath } from "@/utils/constants/menuItems";
@@ -23,29 +23,47 @@ const AddGuestForm: FC<AddGuestFormProps> = ({ addWeddingGuest }) => {
         "Erreur lors de l'ajout de l'invité :",
         (error as any).message
       );
-      message.error("Une erreur s'est produite lors de l'ajout de l'invité.");
+      message.error((error as any).message);
     }
   };
 
   return (
-    <Form onFinish={handleFormSubmit}>
-      {/* Votre formulaire pour ajouter un nouvel invité */}
-      {/* Exemple : */}
-      <Form.Item
-        label="Prénom"
-        name="firstname"
-        rules={[{ required: true, message: "Veuillez entrer le prénom" }]}
-      >
-        <Input />
-      </Form.Item>
-      {/* Autres champs du formulaire */}
-      {/* ... */}
-      <Form.Item>
-        <Button type="primary" htmlType="submit">
-          Ajouter
-        </Button>
-      </Form.Item>
-    </Form>
+    <div style={{ maxWidth: 400, margin: "auto" }}>
+      <h2>Ajouter un nouvel invité</h2>
+      <Form onFinish={handleFormSubmit}>
+        <Form.Item
+          label="Prénom"
+          name="firstname"
+          rules={[{ required: true, message: "Veuillez entrer le prénom" }]}
+        >
+          <Input />
+        </Form.Item>
+
+        <Form.Item
+          label="Nom de famille"
+          name="lastname"
+          rules={[
+            { required: true, message: "Veuillez entrer le nom de famille" },
+          ]}
+        >
+          <Input />
+        </Form.Item>
+
+        <Form.Item
+          label="Peut venir avec quelqu'un"
+          name="canComeWithSomeone"
+          valuePropName="checked"
+        >
+          <Switch />
+        </Form.Item>
+
+        <Form.Item>
+          <Button type="primary" htmlType="submit" style={{ width: "100%" }}>
+            Ajouter
+          </Button>
+        </Form.Item>
+      </Form>
+    </div>
   );
 };
 

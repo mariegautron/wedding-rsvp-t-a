@@ -19,8 +19,6 @@ export default async function WeddingGuests() {
       .select();
     data = response.data || [];
 
-    console.log({ data });
-
     if (response.error) {
       throw new Error(response.error.message);
     }
