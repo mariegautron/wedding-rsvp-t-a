@@ -1,11 +1,11 @@
 "use client";
 
+import themeTokens from "@/utils/theme";
 import { ConfigProvider, Layout, theme } from "antd";
 import { useState } from "react";
 import "../app/globals.css";
 import CustomHeader from "./CustomHeader";
 import CustomSider from "./CustomSider";
-import themeTokens from "@/utils/theme";
 
 const { Content } = Layout;
 
@@ -17,7 +17,7 @@ const AdminLayout = ({ children }: { children: React.ReactNode }) => {
 
   return (
     <ConfigProvider theme={themeTokens}>
-      <Layout style={{ height: "100%" }} className="isAdmin">
+      <Layout className="isAdmin">
         <CustomSider collapsed={collapsed} />
         <Layout>
           <CustomHeader collapsed={collapsed} setCollapsed={setCollapsed} />
@@ -25,7 +25,6 @@ const AdminLayout = ({ children }: { children: React.ReactNode }) => {
             style={{
               margin: "24px 16px",
               padding: 24,
-              minHeight: 280,
               background: colorBgContainer,
             }}
           >

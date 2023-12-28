@@ -1,6 +1,6 @@
 "use server";
 
-import GuestList from "@/components/GuestList";
+import GuestListView from "@/components/page/GuestListView";
 import AdminLayout from "@/layouts/AdminLayout";
 import { COLLECTION_NAMES } from "@/utils/supabase/enums";
 import { createClient } from "@/utils/supabase/server";
@@ -35,7 +35,7 @@ export default async function WeddingGuests() {
       {error && (
         <Alert message="Erreur" description={error} type="error" showIcon />
       )}
-      {!error && <GuestList data={data} />}
+      {!error && <GuestListView data={data} />}
     </AdminLayout>
   );
 }

@@ -1,6 +1,7 @@
 "use server";
 
 import { LoginFormValues } from "@/components/LoginForm";
+import { MenuPath } from "@/utils/constants/menuItems";
 import { createClient } from "@/utils/supabase/server";
 import { cookies } from "next/headers";
 import { redirect } from "next/navigation";
@@ -18,7 +19,7 @@ export const signIn = async (values: LoginFormValues) => {
   });
 
   if (error) {
-    return redirect("/admin/weddingguests");
+    return redirect(MenuPath.WEDDING_GUESTS);
   }
 
   return redirect("/");

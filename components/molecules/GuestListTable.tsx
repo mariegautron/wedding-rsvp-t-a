@@ -4,7 +4,7 @@ import { Table, Switch, Tag } from "antd";
 import { WeddingGuests } from "@/utils/types/weddinggests";
 import { FC } from "react";
 
-const GuestList: FC<{ data: WeddingGuests[] }> = ({ data }) => {
+const GuestListTable: FC<{ data: WeddingGuests[] }> = ({ data }) => {
   const columns = [
     {
       title: "Prénom",
@@ -70,7 +70,6 @@ const GuestList: FC<{ data: WeddingGuests[] }> = ({ data }) => {
 
   return (
     <div className="bg-gray-100 p-6">
-      <h1 className="text-2xl font-bold mb-4">Liste des invités</h1>
       <Table
         dataSource={data}
         columns={columns}
@@ -81,4 +80,4 @@ const GuestList: FC<{ data: WeddingGuests[] }> = ({ data }) => {
   );
 };
 
-export default GuestList;
+export default GuestListTable;
