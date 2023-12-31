@@ -57,7 +57,7 @@ async function sendEmail({
 export async function POST(req: Request) {
   const body = await req.json();
 
-  const { guestEmail, invitationMessage, guestId } = body;
+  const { guestEmail, invitationMessage, guestUuid } = body;
 
   console.log(invitationMessage);
 
@@ -68,7 +68,7 @@ export async function POST(req: Request) {
       subject: "Invitation au mariage de Thomas & Amélie",
       variables: {
         message: invitationMessage,
-        url: `${process.env.NEXT_PUBLIC_BASE_URL}?id=${guestId}`,
+        url: `${process.env.NEXT_PUBLIC_BASE_URL}?uuid=${guestUuid}`,
       },
     });
 

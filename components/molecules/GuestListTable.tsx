@@ -1,23 +1,30 @@
 "use client";
 
-import { Table, Switch, Tag, Button, Space, Menu, Dropdown } from "antd";
+import {
+  Table,
+  Switch,
+  Tag,
+  Button,
+  Space,
+  Menu,
+  Dropdown,
+  Drawer,
+} from "antd";
 import { WeddingGuests } from "@/utils/types/weddinggests";
 import { FC, useState } from "react";
 import SendEmailModal from "./SendEmailModal";
-import { CopyOutlined, DownOutlined } from "@ant-design/icons";
+import { CopyOutlined, DownOutlined, EyeOutlined } from "@ant-design/icons";
+import DrawerDetailsGuest from "./DrawerDetailsGuest";
 
 const GuestListTable: FC<{ data: WeddingGuests[] }> = ({ data }) => {
   const [emailOpen, setSendEmailOpen] = useState(false);
-  const [selectedGuest, setSelectedGuest] = useState({
-    email: "",
-    guestId: "",
-  });
+  const [selectedGuest, setSelectedGuest] = useState<WeddingGuests>();
+  const [drawerVisible, setDrawerVisible] = useState(false);
+
+  console.log(selectedGuest);
 
   const clearSelectedGuest = () => {
-    setSelectedGuest({
-      email: "",
-      guestId: "",
-    });
+    setSelectedGuest(undefined);
   };
 
   const actionsMenu = (record: any) => (
@@ -29,13 +36,34 @@ const GuestListTable: FC<{ data: WeddingGuests[] }> = ({ data }) => {
           <Menu.Item
             key="sendEmail"
             onClick={() => {
-              setSelectedGuest({ email: record.email, guestId: record.id });
+              setSelectedGuest({ ...record });
               setSendEmailOpen(true);
             }}
           >
             Envoyer l'email d'invitation
           </Menu.Item>
         )}
+      <Menu.Item
+        key="copyLink"
+        onClick={() => {
+          navigator.clipboard.writeText(
+            `${process.env.NEXT_PUBLIC_BASE_URL}?uuid=${record.uuid}`
+          );
+        }}
+        icon={<CopyOutlined />}
+      >
+        Copier le lien d'invitation
+      </Menu.Item>
+      <Menu.Item
+        key="viewDetails"
+        onClick={() => {
+          setSelectedGuest({ ...record });
+          setDrawerVisible(true);
+        }}
+        icon={<EyeOutlined />}
+      >
+        Voir le détail
+      </Menu.Item>
     </Menu>
   );
 
@@ -51,24 +79,6 @@ const GuestListTable: FC<{ data: WeddingGuests[] }> = ({ data }) => {
       dataIndex: "lastname",
       key: "lastname",
       sorter: (a: any, b: any) => a.lastname.localeCompare(b.lastname),
-    },
-    {
-      title: "Url d'invitation",
-      dataIndex: "id",
-      key: "id",
-      render: (id: string) => (
-        <Space>
-          <span>{`${process.env.NEXT_PUBLIC_BASE_URL}?id=${id}`}</span>
-          <Button
-            onClick={() => {
-              navigator.clipboard.writeText(
-                `${process.env.NEXT_PUBLIC_BASE_URL}?id=${id}`
-              );
-            }}
-            icon={<CopyOutlined />}
-          />
-        </Space>
-      ),
     },
     {
       title: "Réponse",
@@ -151,9 +161,16 @@ const GuestListTable: FC<{ data: WeddingGuests[] }> = ({ data }) => {
         emailOpen={emailOpen}
         setSendEmailOpen={setSendEmailOpen}
         clearSelectedGuest={clearSelectedGuest}
-        guestEmail={selectedGuest.email}
-        guestId={selectedGuest.guestId}
+        guestEmail={selectedGuest?.email}
+        guestUuid={selectedGuest?.uuid}
       />
+      {drawerVisible && selectedGuest && (
+        <DrawerDetailsGuest
+          guest={selectedGuest}
+          drawerVisible={drawerVisible}
+          setDrawerVisible={setDrawerVisible}
+        />
+      )}
     </div>
   );
 };

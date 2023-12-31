@@ -5,6 +5,7 @@ import { Button, Form, Input, Switch, message } from "antd";
 import { FC } from "react";
 import { useRouter } from "next/navigation";
 import { MenuPath } from "@/utils/constants/menuItems";
+import { v4 as uuidv4 } from "uuid";
 
 interface AddGuestFormProps {
   addWeddingGuest: (values: WeddingGuests) => Promise<void>;
@@ -15,7 +16,11 @@ const AddGuestForm: FC<AddGuestFormProps> = ({ addWeddingGuest }) => {
 
   const handleFormSubmit = async (values: WeddingGuests) => {
     try {
-      await addWeddingGuest(values);
+      const uuid = uuidv4();
+
+      const guestWithUUID = { ...values, uuid };
+
+      await addWeddingGuest(guestWithUUID);
       message.success("Invité ajouté avec succès !");
       router.push(MenuPath.WEDDING_GUESTS);
     } catch (error) {
@@ -47,6 +52,17 @@ const AddGuestForm: FC<AddGuestFormProps> = ({ addWeddingGuest }) => {
           ]}
         >
           <Input />
+        </Form.Item>
+
+        <Form.Item
+          label="Email"
+          name="email"
+          rules={[
+            { required: true, message: "Veuillez entrer l'email" },
+            { type: "email", message: "Veuillez entrer un email valide" },
+          ]}
+        >
+          <Input type="email" />
         </Form.Item>
 
         <Form.Item

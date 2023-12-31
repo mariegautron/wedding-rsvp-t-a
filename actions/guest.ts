@@ -32,7 +32,7 @@ export const addWeddingGuest = async (values: WeddingGuests): Promise<any> => {
   "use server";
 
   try {
-    const { firstname, lastname } = values;
+    const { firstname, lastname, email, uuid, canComeWithSomeone } = values;
 
     const guestExists = await checkIfGuestExists(firstname, lastname);
 
@@ -46,7 +46,9 @@ export const addWeddingGuest = async (values: WeddingGuests): Promise<any> => {
     const guestData: WeddingGuests = {
       firstname,
       lastname,
-      canComeWithSomeone: values.canComeWithSomeone || false,
+      email,
+      uuid,
+      canComeWithSomeone: canComeWithSomeone || false,
     };
 
     const { data, error } = await supabase

@@ -7,8 +7,8 @@ import { useState } from "react";
 interface SendEmailModalProps {
   emailOpen: boolean;
   setSendEmailOpen: React.Dispatch<React.SetStateAction<boolean>>;
-  guestEmail: string;
-  guestId: string;
+  guestEmail?: string;
+  guestUuid?: string;
   clearSelectedGuest: () => void;
 }
 
@@ -16,7 +16,7 @@ const SendEmailModal: React.FC<SendEmailModalProps> = ({
   emailOpen,
   setSendEmailOpen,
   guestEmail,
-  guestId,
+  guestUuid,
   clearSelectedGuest,
 }) => {
   const [form] = Form.useForm();
@@ -24,11 +24,15 @@ const SendEmailModal: React.FC<SendEmailModalProps> = ({
 
   const handleSendEmail = async () => {
     try {
+      if (!guestEmail || !guestUuid) {
+        throw Error();
+      }
+
       setSending(true);
       const values = await form.validateFields();
       const { invitationMessage } = values;
 
-      await sendEmail(guestEmail, invitationMessage, guestId);
+      await sendEmail(guestEmail, invitationMessage, guestUuid);
       setSending(false);
       setSendEmailOpen(false);
       clearSelectedGuest();

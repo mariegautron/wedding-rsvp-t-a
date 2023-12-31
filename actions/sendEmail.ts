@@ -1,12 +1,12 @@
 export const sendEmail = async (
   guestEmail: string,
   invitationMessage: string,
-  guestId: string
+  guestUuid: string
 ) => {
   try {
     const response = await fetch("/api/send-email", {
       method: "POST",
-      body: JSON.stringify({ guestEmail, invitationMessage, guestId }),
+      body: JSON.stringify({ guestEmail, invitationMessage, guestUuid }),
       headers: {
         "Content-Type": "application/json",
       },
