@@ -6,12 +6,14 @@
     "start": "next start"
   },
   "dependencies": {
+    "@ant-design/icons": "^5.2.6",
     "@supabase/ssr": "latest",
     "@supabase/supabase-js": "latest",
     "antd": "^5.12.1",
     "autoprefixer": "10.4.15",
     "geist": "^1.0.0",
     "next": "latest",
+    "node-mailjet": "^6.0.5",
     "postcss": "8.4.29",
     "react": "18.2.0",
     "react-dom": "18.2.0",
