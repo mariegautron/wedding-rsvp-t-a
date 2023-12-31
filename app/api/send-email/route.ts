@@ -59,8 +59,6 @@ export async function POST(req: Request) {
 
   const { guestEmail, invitationMessage, guestUuid } = body;
 
-  console.log(invitationMessage);
-
   try {
     await sendEmail({
       to: guestEmail,
@@ -72,15 +70,24 @@ export async function POST(req: Request) {
       },
     });
 
-    return new NextResponse({
-      status: 200,
-      body: { message: "Success: email was sent" },
-    });
+    return NextResponse.json(
+      {
+        message: "Success: email was sent",
+      },
+      {
+        status: 200,
+      }
+    );
   } catch (error) {
     console.log(error);
-    return new NextResponse({
-      status: 500,
-      body: { message: "COULD NOT SEND MESSAGE" },
-    });
+
+    return NextResponse.json(
+      {
+        message: "COULD NOT SEND MESSAGE",
+      },
+      {
+        status: 500,
+      }
+    );
   }
 }

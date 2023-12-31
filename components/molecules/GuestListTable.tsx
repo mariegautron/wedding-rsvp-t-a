@@ -1,20 +1,16 @@
 "use client";
 
-import {
-  Table,
-  Switch,
-  Tag,
-  Button,
-  Space,
-  Menu,
-  Dropdown,
-  Drawer,
-} from "antd";
 import { WeddingGuests } from "@/utils/types/weddinggests";
+import {
+  CopyOutlined,
+  DownOutlined,
+  EyeOutlined,
+  MailOutlined,
+} from "@ant-design/icons";
+import { Button, Dropdown, Menu, Switch, Table, Tag } from "antd";
 import { FC, useState } from "react";
-import SendEmailModal from "./SendEmailModal";
-import { CopyOutlined, DownOutlined, EyeOutlined } from "@ant-design/icons";
 import DrawerDetailsGuest from "./DrawerDetailsGuest";
+import SendEmailModal from "./SendEmailModal";
 
 const GuestListTable: FC<{ data: WeddingGuests[] }> = ({ data }) => {
   const [emailOpen, setSendEmailOpen] = useState(false);
@@ -29,20 +25,6 @@ const GuestListTable: FC<{ data: WeddingGuests[] }> = ({ data }) => {
 
   const actionsMenu = (record: any) => (
     <Menu className="isAdmin">
-      {process.env.NEXT_PUBLIC_ACTIVATE_EMAIL === "1" &&
-        record.email &&
-        record.isPresent !== true &&
-        record.isPresent !== false && (
-          <Menu.Item
-            key="sendEmail"
-            onClick={() => {
-              setSelectedGuest({ ...record });
-              setSendEmailOpen(true);
-            }}
-          >
-            Envoyer l'email d'invitation
-          </Menu.Item>
-        )}
       <Menu.Item
         key="copyLink"
         onClick={() => {
@@ -64,6 +46,22 @@ const GuestListTable: FC<{ data: WeddingGuests[] }> = ({ data }) => {
       >
         Voir le détail
       </Menu.Item>
+
+      {process.env.NEXT_PUBLIC_ACTIVATE_EMAIL === "1" &&
+        record.email &&
+        record.isPresent !== true &&
+        record.isPresent !== false && (
+          <Menu.Item
+            key="sendEmail"
+            onClick={() => {
+              setSelectedGuest({ ...record });
+              setSendEmailOpen(true);
+            }}
+            icon={<MailOutlined />}
+          >
+            Envoyer l'email d'invitation
+          </Menu.Item>
+        )}
     </Menu>
   );
 
@@ -134,16 +132,11 @@ const GuestListTable: FC<{ data: WeddingGuests[] }> = ({ data }) => {
       key: "actions",
       render: (_: any, record: any) => (
         <>
-          {process.env.NEXT_PUBLIC_ACTIVATE_EMAIL === "1" &&
-            record.email &&
-            record.isPresent !== true &&
-            record.isPresent !== false && (
-              <Dropdown overlay={actionsMenu(record)} trigger={["click"]}>
-                <Button>
-                  Actions <DownOutlined />
-                </Button>
-              </Dropdown>
-            )}
+          <Dropdown overlay={actionsMenu(record)} trigger={["click"]}>
+            <Button>
+              Actions <DownOutlined />
+            </Button>
+          </Dropdown>
         </>
       ),
     },

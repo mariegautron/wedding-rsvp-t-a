@@ -1,8 +1,7 @@
 "use client";
 
 import { signIn } from "@/actions/user";
-import useIsAuthenticated from "@/utils/hooks/useIsAuthenticated";
-import { Button, Checkbox, Form, Input, Typography } from "antd";
+import { Button, Form, Input, Typography } from "antd";
 
 const { Title } = Typography;
 
@@ -58,7 +57,7 @@ const LoginForm: React.FC = () => {
 
         <Form.Item>
           <Button type="primary" htmlType="submit" style={{ width: "100%" }}>
-            Log in
+            Se connecter
           </Button>
         </Form.Item>
       </Form>

@@ -24,6 +24,9 @@ const DrawerDetailsGuest: FC<{
         <p>
           <strong>Nom :</strong> {guest?.lastname}
         </p>
+        <p>
+          <strong>Email :</strong> {guest?.email}
+        </p>
         <Space>
           <p>
             <strong>Lien d'invitation :</strong>{" "}
