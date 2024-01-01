@@ -1,33 +1,105 @@
 import { FC } from "react";
 import { Typography, Button } from "antd";
+import HeroTemplatePage from "../atoms/HeroTemplatePage";
+import useDeadlineCheck from "@/utils/hooks/useDeadlineCheck";
+import GuestResponses from "./GuestResponses";
+import { WeddingGuests } from "@/utils/types/weddinggests";
 
 const { Title, Text } = Typography;
 
-const Hero: FC<{ firstname: string }> = ({ firstname }) => {
+interface HeroProps {
+  guest: WeddingGuests;
+}
+
+const Hero: FC<HeroProps> = ({ guest }) => {
+  console.log(guest);
+
+  const isDeadlinePassed = useDeadlineCheck();
+
+  const hasResponded =
+    guest.isPresent !== undefined && guest.isPresent !== null;
+
+  if (hasResponded && !isDeadlinePassed) {
+    // Person has responded and deadline is not passed
+    return (
+      <HeroTemplatePage>
+        <Title level={2}>Bonjour {guest.firstname},</Title>
+        <Title level={2}>tu as déjà répondu à l'invitation !</Title>
+
+        <Text style={{ display: "block", fontSize: 25 }}>
+          Voici tes réponses. Tu as jusqu'au 14 février pour les modifier.
+        </Text>
+        <GuestResponses guest={guest} />
+        <Text style={{ display: "block", fontSize: 25 }}>
+          Pour rappel, le mariage aura lieu le{" "}
+          <span style={{ textDecoration: "underline", fontSize: 25 }}>
+            22 juin 2024 au 2 rue de la mairie, 86370 Chateau-Larcher
+          </span>
+        </Text>
+        <Button type="primary" style={{ marginTop: 20 }}>
+          Modifier ma réponse
+        </Button>
+      </HeroTemplatePage>
+    );
+  }
+
+  if (!hasResponded && !isDeadlinePassed) {
+    // Person hasn't responded and deadline is not passed
+    return (
+      <HeroTemplatePage>
+        <Title level={2}>Bonjour {guest.firstname},</Title>
+        <Title level={2}>tu es invité(e) au mariage de </Title>
+        <Title level={1} style={{ marginTop: 20, marginBottom: 20 }}>
+          Thomas & Amélie
+        </Title>
+        <Text style={{ display: "block", fontSize: 25 }}>
+          Nous sommes ravis de t’inviter à partager ce jour unique avec nous,
+          qui se déroulera le{" "}
+          <span style={{ textDecoration: "underline", fontSize: 25 }}>
+            22 juin 2024 au 2 rue de la mairie, 86370 Chateau-Larcher
+          </span>
+        </Text>
+        <Button type="primary" style={{ marginTop: 20 }}>
+          Répondre à l'invitation
+        </Button>
+      </HeroTemplatePage>
+    );
+  }
+
+  if (hasResponded && isDeadlinePassed) {
+    // Person has responded and deadline is passed
+    return (
+      <HeroTemplatePage>
+        <Title level={2}>Bonjour {guest.firstname},</Title>
+        <Title level={2}>tu as déjà répondu à l'invitation !</Title>
+        <Text style={{ display: "block", fontSize: 25 }}>
+          Voici tes réponses. Malheureusement, la date limite pour modifier tes
+          réponses est passée.
+        </Text>
+        <GuestResponses guest={guest} />
+        <Text style={{ display: "block", fontSize: 25 }}>
+          Pour rappel, le mariage aura lieu le
+          <span style={{ textDecoration: "underline", fontSize: 25 }}>
+            22 juin 2024 au 2 rue de la mairie, 86370 Chateau-Larcher
+          </span>
+        </Text>
+      </HeroTemplatePage>
+    );
+  }
+
+  // Person hasn't responded and deadline is passed
   return (
-    <div className="hero">
-      <div className="leaves"></div>
-      <div className="container">
-        <div className="w50 text-container">
-          <Title level={2}>Bonjour {firstname},</Title>
-          <Title level={2}>tu es invité(e) au mariage de </Title>
-          <Title level={1} style={{ marginTop: 20, marginBottom: 20 }}>
-            Thomas & Amélie
-          </Title>
-          <Text style={{ display: "block", fontSize: 25 }}>
-            Nous sommes ravis de t’inviter à partager ce jour unique avec nous,
-            qui se déroulera le{" "}
-            <span style={{ textDecoration: "underline", fontSize: 25 }}>
-              22 juin 2024 au 2 rue de la mairie, 86370 Chateau-Larcher
-            </span>
-          </Text>
-          <Button type="primary" style={{ marginTop: 20 }}>
-            Répondre à l'invitation
-          </Button>
-        </div>
-      </div>
-      <div className="image-container" />
-    </div>
+    <HeroTemplatePage>
+      <Title level={2}>Bonjour {guest.firstname},</Title>
+      <Title level={2}>tu es invité(e) au mariage de </Title>
+      <Title level={1} style={{ marginTop: 20, marginBottom: 20 }}>
+        Thomas & Amélie
+      </Title>
+
+      <Text style={{ display: "block", fontSize: 25 }}>
+        Il est malheureusement trop tard pour répondre.
+      </Text>
+    </HeroTemplatePage>
   );
 };
 

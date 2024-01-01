@@ -25,7 +25,6 @@ const themeTokens = {
       paddingInline: 40,
     },
     Typography: {
-      fontFamilyCode: "Dancing Script, cursive",
       linkDecoration: "underline",
       lineHeight: 1.5,
       fontSizeHeading1: 80,

@@ -2,6 +2,13 @@ import { Drawer, Tag, Divider, Space, Button } from "antd";
 import { FC } from "react";
 import { WeddingGuests } from "@/utils/types/weddinggests";
 import { CopyOutlined } from "@ant-design/icons";
+import {
+  TagRepsponseComeWithSomeone,
+  TagResponseCanComeWithSomeone,
+  TagResponseIsPresent,
+} from "../atoms/TagsResponses";
+import InvitationLink from "../atoms/InvitationLink";
+import GuestResponses from "./GuestResponses";
 
 const DrawerDetailsGuest: FC<{
   guest: WeddingGuests;
@@ -17,62 +24,7 @@ const DrawerDetailsGuest: FC<{
       visible={drawerVisible}
       width={400}
     >
-      <div>
-        <p>
-          <strong>Prénom :</strong> {guest?.firstname}
-        </p>
-        <p>
-          <strong>Nom :</strong> {guest?.lastname}
-        </p>
-        <p>
-          <strong>Email :</strong> {guest?.email}
-        </p>
-        <Space>
-          <p>
-            <strong>Lien d'invitation :</strong>{" "}
-            <span>{`${process.env.NEXT_PUBLIC_BASE_URL}?uuid=${guest.uuid}`}</span>
-          </p>
-          <Button
-            onClick={() => {
-              navigator.clipboard.writeText(
-                `${process.env.NEXT_PUBLIC_BASE_URL}?uuid=${guest.uuid}`
-              );
-            }}
-            icon={<CopyOutlined />}
-          />
-        </Space>
-        <p>
-          <strong>Réponse :</strong>{" "}
-          {guest?.isPresent === true ? (
-            <Tag color="green">Présent</Tag>
-          ) : guest?.isPresent === false ? (
-            <Tag color="red">Absent</Tag>
-          ) : (
-            <Tag color="default">Non spécifié</Tag>
-          )}
-        </p>
-        <p>
-          <strong>Peut venir avec quelqu'un :</strong>{" "}
-          {guest?.canComeWithSomeone ? "Oui" : "Non"}
-        </p>
-        {guest?.canComeWithSomeone && (
-          <p>
-            <strong>Vient avec :</strong>{" "}
-            {guest?.comeWithSomeone === true ? (
-              <Tag color="green">{`${guest.guestOfGuestFirstname} ${guest.guestOfGuestLastname}`}</Tag>
-            ) : guest?.comeWithSomeone === false ? (
-              <Tag color="red">Non</Tag>
-            ) : (
-              <Tag color="default">Non spécifié</Tag>
-            )}
-          </p>
-        )}
-        {guest.message && (
-          <p>
-            <strong>Message :</strong> {guest.message || "Non spécifié"}
-          </p>
-        )}
-      </div>
+      <GuestResponses guest={guest} variant="big" />
     </Drawer>
   );
 };

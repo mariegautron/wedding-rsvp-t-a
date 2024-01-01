@@ -11,6 +11,11 @@ import { Button, Dropdown, Menu, Switch, Table, Tag } from "antd";
 import { FC, useState } from "react";
 import DrawerDetailsGuest from "./DrawerDetailsGuest";
 import SendEmailModal from "./SendEmailModal";
+import {
+  TagRepsponseComeWithSomeone,
+  TagResponseCanComeWithSomeone,
+  TagResponseIsPresent,
+} from "../atoms/TagsResponses";
 
 const GuestListTable: FC<{ data: WeddingGuests[] }> = ({ data }) => {
   const [emailOpen, setSendEmailOpen] = useState(false);
@@ -81,48 +86,28 @@ const GuestListTable: FC<{ data: WeddingGuests[] }> = ({ data }) => {
       dataIndex: "isPresent",
       key: "isPresent",
       render: (isPresent: boolean | null) => (
-        <span>
-          {isPresent === true ? (
-            <Tag color="green">Présent</Tag>
-          ) : isPresent === false ? (
-            <Tag color="red">Absent</Tag>
-          ) : (
-            <Tag color="default">Non spécifié</Tag>
-          )}
-        </span>
+        <TagResponseIsPresent isPresent={isPresent} />
       ),
     },
     {
       title: "Peut venir avec quelqu'un",
       dataIndex: "canComeWithSomeone",
       key: "canComeWithSomeone",
-      render: (canComeWith: boolean, record: any) => (
-        <Switch
-          checked={canComeWith}
-          onChange={(checked) => {
-            // Mettre à jour la possibilité de venir avec quelqu'un ici avec l'appel à une fonction de mise à jour
-            console.log(
-              `Changement de la permission pour ${record.firstname} ${record.lastname} : ${checked}`
-            );
-          }}
-        />
+      render: (canComeWith: boolean) => (
+        <TagResponseCanComeWithSomeone canComeWithSomeone={canComeWith} />
       ),
     },
     {
       title: "Vient avec",
       dataIndex: "comeWithSomeone",
       key: "comeWithSomeone",
-      render: (comeWith: boolean | null, record: any) => {
-        if (comeWith === true) {
-          return (
-            <Tag color="green">{`${record.guestOfGuestFirstname} ${record.guestOfGuestLastname}`}</Tag>
-          );
-        } else if (comeWith === false) {
-          return <Tag color="red">Non</Tag>;
-        } else {
-          return <Tag color="default">Non spécifié</Tag>;
-        }
-      },
+      render: (comeWith: boolean | null, record: any) => (
+        <TagRepsponseComeWithSomeone
+          comeWithSomeone={comeWith}
+          guestOfGuestFirstname={record.guestOfGuestFirstname}
+          guestOfGuestLastname={record.guestOfGuestLastname}
+        />
+      ),
     },
     {
       title: "Actions",

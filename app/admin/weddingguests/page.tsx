@@ -28,12 +28,5 @@ export default async function WeddingGuests() {
       "Une erreur s'est produite lors du chargement des invités.";
   }
 
-  return (
-    <AdminLayout>
-      {error && (
-        <Alert message="Erreur" description={error} type="error" showIcon />
-      )}
-      {!error && <GuestListView data={data} />}
-    </AdminLayout>
-  );
+  return <AdminLayout>{!error && <GuestListView data={data} />}</AdminLayout>;
 }

@@ -1,44 +1,39 @@
 "use client";
 
 import useGuestData from "@/utils/hooks/useGuestData";
-import { WeddingGuests } from "@/utils/types/weddinggests";
 import { Result, Spin } from "antd";
-import { useSearchParams } from "next/navigation";
 import { FC } from "react";
+import HeroTemplatePage from "../atoms/HeroTemplatePage";
 import Hero from "../molecules/Hero";
+import { WeddingGuests } from "@/utils/types/weddinggests";
 
 const HomePage: FC<{
   fetchGuestData: (uuid: string) => Promise<WeddingGuests | null | undefined>;
 }> = ({ fetchGuestData }) => {
-  const searchParams = useSearchParams();
-
   const [guestData, loading] = useGuestData(fetchGuestData);
 
-  if (!searchParams.get("uuid")) {
-    return (
-      <Result
-        status="warning"
-        title="Tu dois recevoir un lien d'invitation pour accéder au site."
-      />
-    );
-  }
-
   if (loading) {
-    return <Spin size="large" />;
+    return (
+      <HeroTemplatePage>
+        <Spin size="large" />
+      </HeroTemplatePage>
+    );
   }
 
   if (!guestData) {
     return (
-      <Result
-        status="error"
-        title="Ton lien d'invitation n'est surement pas bon !"
-      />
+      <HeroTemplatePage>
+        <Result
+          status="error"
+          title="Ton lien d'invitation n'est sûrement pas bon !"
+        />
+      </HeroTemplatePage>
     );
   }
 
   return (
     <div>
-      <Hero firstname={guestData.firstname} />
+      <Hero guest={guestData} />
     </div>
   );
 };
