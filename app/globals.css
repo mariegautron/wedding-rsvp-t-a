@@ -91,3 +91,14 @@
     margin-bottom: 5%;
   }
 }
+
+/* Styles pour le composant RSVPStepper */
+
+.rsvp {
+  background-color: #fffbf5;
+  padding: 80px;
+}
+
+.gap-50 > :not(:first-child) {
+  margin-top: 50px;
+}

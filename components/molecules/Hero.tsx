@@ -12,8 +12,6 @@ interface HeroProps {
 }
 
 const Hero: FC<HeroProps> = ({ guest }) => {
-  console.log(guest);
-
   const isDeadlinePassed = useDeadlineCheck();
 
   const hasResponded =

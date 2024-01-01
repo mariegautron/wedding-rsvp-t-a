@@ -6,6 +6,8 @@ import { FC } from "react";
 import HeroTemplatePage from "../atoms/HeroTemplatePage";
 import Hero from "../molecules/Hero";
 import { WeddingGuests } from "@/utils/types/weddinggests";
+import FormStepper from "../molecules/FormStepper";
+import RSVPStepper from "../molecules/RSVPStepper";
 
 const HomePage: FC<{
   fetchGuestData: (uuid: string) => Promise<WeddingGuests | null | undefined>;
@@ -34,6 +36,7 @@ const HomePage: FC<{
   return (
     <div>
       <Hero guest={guestData} />
+      <RSVPStepper />
     </div>
   );
 };

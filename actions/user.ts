@@ -22,5 +22,5 @@ export const signIn = async (values: LoginFormValues) => {
     return redirect(MenuPath.WEDDING_GUESTS);
   }
 
-  return redirect("/");
+  return redirect(MenuPath.WEDDING_GUESTS);
 };

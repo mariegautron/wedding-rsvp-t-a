@@ -43,6 +43,14 @@ const themeTokens = {
       itemSelectedColor: "rgb(35, 35, 35)",
       itemActiveBg: "rgb(241, 195, 118)",
     },
+    Radio: {
+      buttonCheckedBg: "rgb(96, 108, 93)",
+      buttonSolidCheckedActiveBg: "rgb(96, 108, 93)",
+      buttonSolidCheckedBg: "rgb(96, 108, 93)",
+      buttonSolidCheckedHoverBg: "rgb(96, 108, 93)",
+      buttonSolidCheckedColor: "rgb(255, 255, 255)",
+      buttonColor: "rgb(96, 108, 93)",
+    },
   },
 };
 
