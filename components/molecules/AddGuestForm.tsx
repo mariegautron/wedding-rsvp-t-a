@@ -2,10 +2,11 @@
 
 import { WeddingGuests } from "@/utils/types/weddinggests";
 import { Button, Form, Input, Switch, message } from "antd";
-import { FC } from "react";
+import { FC, useState } from "react";
 import { useRouter } from "next/navigation";
 import { MenuPath } from "@/utils/constants/menuItems";
 import { v4 as uuidv4 } from "uuid";
+import { PlusOutlined } from "@ant-design/icons";
 
 interface AddGuestFormProps {
   addWeddingGuest: (values: WeddingGuests) => Promise<void>;
@@ -13,8 +14,15 @@ interface AddGuestFormProps {
 
 const AddGuestForm: FC<AddGuestFormProps> = ({ addWeddingGuest }) => {
   const router = useRouter();
+  const [showAdditionalFields, setShowAdditionalFields] = useState(false);
+
+  const handleAdditionalFieldsClick = () => {
+    setShowAdditionalFields(!showAdditionalFields);
+  };
 
   const handleFormSubmit = async (values: WeddingGuests) => {
+    console.log(values);
+
     try {
       const uuid = uuidv4();
 
@@ -54,14 +62,7 @@ const AddGuestForm: FC<AddGuestFormProps> = ({ addWeddingGuest }) => {
           <Input />
         </Form.Item>
 
-        <Form.Item
-          label="Email"
-          name="email"
-          rules={[
-            { required: true, message: "Veuillez entrer l'email" },
-            { type: "email", message: "Veuillez entrer un email valide" },
-          ]}
-        >
+        <Form.Item label="Email" name="email">
           <Input type="email" />
         </Form.Item>
 
@@ -70,11 +71,56 @@ const AddGuestForm: FC<AddGuestFormProps> = ({ addWeddingGuest }) => {
           name="canComeWithSomeone"
           valuePropName="checked"
         >
-          <Switch />
+          <Switch checkedChildren="Oui" unCheckedChildren="Non" />
         </Form.Item>
 
+        {showAdditionalFields ? (
+          <>
+            <Form.Item
+              label="La personne sera-t-elle présente ?"
+              name="isPresent"
+            >
+              <Switch checkedChildren="Oui" unCheckedChildren="Non" />
+            </Form.Item>
+
+            <Form.Item
+              label="La personne vient-elle avec quelqu'un ?"
+              name="comeWithSomeone"
+            >
+              <Switch checkedChildren="Oui" unCheckedChildren="Non" />
+            </Form.Item>
+
+            <Form.Item label="Prénom de l'invité" name="guestOfGuestFirstname">
+              <Input />
+            </Form.Item>
+
+            <Form.Item label="Nom de l'invité" name="guestOfGuestLastname">
+              <Input />
+            </Form.Item>
+          </>
+        ) : (
+          <Button
+            type="link"
+            onClick={handleAdditionalFieldsClick}
+            style={{
+              display: "flex",
+              alignItems: "center",
+              padding: "8px 16px",
+              border: "none",
+              textDecoration: "underline",
+            }}
+          >
+            <PlusOutlined style={{ marginRight: 8 }} />
+            Je veux indiquer des informations supplémentaires
+          </Button>
+        )}
+
         <Form.Item>
-          <Button type="primary" htmlType="submit" style={{ width: "100%" }}>
+          <Button
+            type="primary"
+            htmlType="submit"
+            style={{ width: "100%", marginTop: 20 }}
+          >
             Ajouter
           </Button>
         </Form.Item>
