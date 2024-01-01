@@ -17,9 +17,12 @@ const themeTokens = {
   components: {
     Button: {
       fontSize: 16,
-      borderRadiusLG: 10,
-      borderRadius: 4,
+      borderRadiusLG: 50,
+      borderRadius: 50,
       borderRadiusSM: 50,
+      paddingBlock: 8,
+      controlHeight: 50,
+      paddingInline: 40,
     },
     Typography: {
       fontFamilyCode: "Dancing Script, cursive",

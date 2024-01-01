@@ -16,3 +16,74 @@
 .ant-layout {
   min-height: 100vh;
 }
+
+.container {
+  width: 80%;
+  margin: 0 auto;
+}
+
+/* Styles pour le composant Hero */
+.hero {
+  position: relative;
+  width: 100%;
+  height: 100vh;
+  background-image: url("/images/hero-image.png");
+  background-size: cover;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  text-align: left;
+}
+
+.hero .leaves {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 30%;
+  background-image: url("/images/leaves-1.svg");
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: left bottom;
+  z-index: 0;
+}
+
+.hero .text-container {
+  position: relative;
+  z-index: 1;
+}
+
+.hero .w50 {
+  max-width: 45%;
+  padding: 20px;
+}
+
+@media screen and (max-width: 767px) {
+  .hero {
+    flex-direction: column-reverse;
+    align-items: center;
+    padding-bottom: 60px;
+    text-align: center;
+  }
+
+  .hero .image-container {
+    width: 100%;
+    height: 600px;
+    background-image: url("/images/thomas-et-amelie.jpg");
+    background-size: cover;
+    background-position: center;
+    margin-bottom: 30px;
+  }
+
+  .hero .w50 {
+    max-width: 100%;
+  }
+
+  .hero .text-container {
+    background-color: rgba(255, 255, 255, 1);
+    padding: 20px;
+    border-radius: 8px;
+    margin-bottom: 5%;
+  }
+}
