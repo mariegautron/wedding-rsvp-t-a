@@ -22,7 +22,7 @@ const GuestView: React.FC<GuestViewProps> = ({ data }) => {
 
   const [showOnlyNotResponded, setShowOnlyNotResponded] = useState(false);
   const [showOnlyPresent, setShowOnlyPresent] = useState(false);
-  const [showOnlyNoOneCanCome, setShowOnlyNoOneCanCome] = useState(false);
+  const [showOnlyOneCanCome, setShowOnlyOneCanCome] = useState(false);
   const [searchName, setSearchName] = useState("");
 
   const inputRef = useRef(null);
@@ -31,8 +31,13 @@ const GuestView: React.FC<GuestViewProps> = ({ data }) => {
     return <LoginForm />;
   }
 
+  console.log(data);
+
   const guestCount = data.length;
   const presentCount = data.filter((guest) => guest.isPresent === true).length;
+  const noPresentCount = data.filter(
+    (guest) => guest.isPresent === false
+  ).length;
   const rsvpRespondedCount = data.filter(
     (guest) => guest.isPresent !== true && guest.isPresent !== false
   ).length;
@@ -42,8 +47,9 @@ const GuestView: React.FC<GuestViewProps> = ({ data }) => {
 
   const statistics = [
     { title: "Invités", value: guestCount },
-    { title: "Réponses au RSVP", value: rsvpRespondedCount },
+    { title: "Pas encore répondu", value: rsvpRespondedCount },
     { title: "Présents", value: presentCount },
+    { title: "Pas présent", value: noPresentCount },
     { title: "Invités avec quelqu'un", value: comeWithSomeoneCount },
   ];
 
@@ -57,7 +63,8 @@ const GuestView: React.FC<GuestViewProps> = ({ data }) => {
     if (showOnlyPresent && guest.isPresent !== true) {
       return false;
     }
-    if (showOnlyNoOneCanCome && guest.canComeWithSomeone === true) {
+
+    if (showOnlyOneCanCome && guest.canComeWithSomeone === false) {
       return false;
     }
 
@@ -74,7 +81,7 @@ const GuestView: React.FC<GuestViewProps> = ({ data }) => {
   const resetFilters = () => {
     setShowOnlyNotResponded(false);
     setShowOnlyPresent(false);
-    setShowOnlyNoOneCanCome(false);
+    setShowOnlyOneCanCome(false);
     setSearchName("");
   };
 
@@ -113,11 +120,12 @@ const GuestView: React.FC<GuestViewProps> = ({ data }) => {
           >
             Répondu - Viennent
           </Checkbox>
+
           <Checkbox
-            checked={showOnlyNoOneCanCome}
-            onChange={(e) => setShowOnlyNoOneCanCome(e.target.checked)}
+            checked={showOnlyOneCanCome}
+            onChange={(e) => setShowOnlyOneCanCome(e.target.checked)}
           >
-            Ne peuvent pas venir avec quelqu'un
+            Peuvent venir avec quelqu'un
           </Checkbox>
         </Space>
       </div>
