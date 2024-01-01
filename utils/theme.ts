@@ -16,7 +16,7 @@ const themeTokens = {
   },
   components: {
     Button: {
-      fontSize: 16,
+      fontSize: 20,
       borderRadiusLG: 50,
       borderRadius: 50,
       borderRadiusSM: 50,

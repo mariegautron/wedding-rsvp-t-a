@@ -16,7 +16,7 @@ const RadioButtonTag: React.FC<RadioButtonTagProps> = ({
   return (
     <Radio.Button
       style={{
-        fontSize: 30,
+        fontSize: 25,
         paddingRight: 50,
         marginRight: 20,
         paddingLeft: 50,

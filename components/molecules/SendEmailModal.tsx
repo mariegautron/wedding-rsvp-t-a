@@ -1,7 +1,7 @@
 "use client";
 
 import { sendEmail } from "@/actions/sendEmail";
-import { Modal, Form, Input, Button } from "antd";
+import { Modal, Form, Input, Button, message } from "antd";
 import { useState } from "react";
 
 interface SendEmailModalProps {
@@ -34,6 +34,7 @@ const SendEmailModal: React.FC<SendEmailModalProps> = ({
 
       await sendEmail(guestEmail, invitationMessage, guestUuid);
       setSending(false);
+      message.success(`Le mail a bien été envoyé à ${guestEmail}`);
       setSendEmailOpen(false);
       clearSelectedGuest();
     } catch (error) {

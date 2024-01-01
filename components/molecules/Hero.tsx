@@ -4,6 +4,7 @@ import HeroTemplatePage from "../atoms/HeroTemplatePage";
 import useDeadlineCheck from "@/utils/hooks/useDeadlineCheck";
 import GuestResponses from "./GuestResponses";
 import { WeddingGuests } from "@/utils/types/weddinggests";
+import useFormattedDeadline from "@/utils/hooks/useFormattedDeadline";
 
 const { Title, Text } = Typography;
 
@@ -17,6 +18,8 @@ const Hero: FC<HeroProps> = ({ guest }) => {
   const hasResponded =
     guest.isPresent !== undefined && guest.isPresent !== null;
 
+  const formattedDeadline = useFormattedDeadline();
+
   if (hasResponded && !isDeadlinePassed) {
     // Person has responded and deadline is not passed
     return (
@@ -25,7 +28,8 @@ const Hero: FC<HeroProps> = ({ guest }) => {
         <Title level={2}>tu as déjà répondu à l'invitation !</Title>
 
         <Text style={{ display: "block", fontSize: 25 }}>
-          Voici tes réponses. Tu as jusqu'au 14 février pour les modifier.
+          Voici tes réponses. Tu as jusqu'au {formattedDeadline} pour les
+          modifier.
         </Text>
         <GuestResponses guest={guest} />
         <Text style={{ display: "block", fontSize: 25 }}>

@@ -11,6 +11,7 @@
     "@supabase/supabase-js": "latest",
     "antd": "^5.12.1",
     "autoprefixer": "10.4.15",
+    "date-fns": "^3.0.6",
     "geist": "^1.0.0",
     "next": "latest",
     "node-mailjet": "^6.0.5",
