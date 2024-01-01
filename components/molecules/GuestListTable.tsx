@@ -17,8 +17,6 @@ const GuestListTable: FC<{ data: WeddingGuests[] }> = ({ data }) => {
   const [selectedGuest, setSelectedGuest] = useState<WeddingGuests>();
   const [drawerVisible, setDrawerVisible] = useState(false);
 
-  console.log(selectedGuest);
-
   const clearSelectedGuest = () => {
     setSelectedGuest(undefined);
   };

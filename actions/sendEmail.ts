@@ -14,13 +14,11 @@ export const sendEmail = async (
 
     if (response.ok) {
       console.log("Email sent successfully!");
-      // Gérer la confirmation à l'utilisateur ici
     } else {
       console.error("Failed to send email");
-      // Gérer l'échec d'envoi à l'utilisateur ici
     }
   } catch (error) {
     console.error("Error sending email:", error);
-    // Gérer les erreurs à l'utilisateur ici
+    // Gérer les erreurs à l'utilisateur ic
   }
 };

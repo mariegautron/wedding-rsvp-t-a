@@ -5,7 +5,7 @@ import { WeddingGuests } from "@/utils/types/weddinggests";
 import { UserOutlined, UsergroupAddOutlined } from "@ant-design/icons";
 import { Button, Checkbox, Input, Space, Typography } from "antd";
 import Link from "next/link";
-import LoginForm from "../LoginForm";
+import LoginForm from "../molecules/LoginForm";
 import GuestListTable from "../molecules/GuestListTable";
 import StatisticList from "../molecules/StatisticList";
 import { useRef, useState } from "react";

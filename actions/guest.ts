@@ -1,3 +1,5 @@
+"use server";
+
 import { COLLECTION_NAMES } from "@/utils/supabase/enums";
 import { createClient } from "@/utils/supabase/server";
 import { WeddingGuests } from "@/utils/types/weddinggests";
@@ -64,5 +66,40 @@ export const addWeddingGuest = async (values: WeddingGuests): Promise<any> => {
   } catch (error: any) {
     console.error("Erreur lors de l'ajout des invités :", error.message);
     throw new Error(error.message);
+  }
+};
+
+const getGuestByUuid = async (uuid: string): Promise<WeddingGuests | null> => {
+  "use server";
+
+  const cookieStore = cookies();
+  const supabase = createClient(cookieStore);
+
+  const { data, error } = await supabase
+    .from(COLLECTION_NAMES.WEDDING_GUESTS)
+    .select("*")
+    .eq("uuid", uuid)
+    .single();
+
+  if (error) {
+    throw new Error(
+      "Une erreur s'est produite lors de la récupération de l'invité."
+    );
+  }
+
+  return data;
+};
+
+export const fetchGuestData = async (uuid: string) => {
+  "use server";
+
+  try {
+    const guest: WeddingGuests | null = await getGuestByUuid(uuid as string);
+    return guest;
+  } catch (error) {
+    console.error(
+      "Erreur lors de la récupération des données du guest :",
+      error
+    );
   }
 };

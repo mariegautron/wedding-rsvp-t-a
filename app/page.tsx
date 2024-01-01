@@ -1,21 +1,8 @@
-import { createClient } from "@/utils/supabase/server";
-import { cookies } from "next/headers";
+"use server";
+
+import { fetchGuestData } from "@/actions/guest";
+import HomePage from "@/components/page/HomePage";
 
 export default async function Index() {
-  const cookieStore = cookies();
-
-  const canInitSupabaseClient = () => {
-    // This function is just for the interactive tutorial.
-    // Feel free to remove it once you have Supabase connected.
-    try {
-      createClient(cookieStore);
-      return true;
-    } catch (e) {
-      return false;
-    }
-  };
-
-  const isSupabaseConnected = canInitSupabaseClient();
-
-  return <p>Coucou</p>;
+  return <HomePage fetchGuestData={fetchGuestData} />;
 }

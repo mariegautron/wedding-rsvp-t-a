@@ -5,8 +5,6 @@ const useIsAuthenticated = () => {
     Boolean(localStorage.getItem("IS_AUTH"))
   );
 
-  console.log({ isAuthenticated });
-
   useEffect(() => {
     // TODO: Understanding cookie/session etc from supabase
     const isAuth = localStorage.getItem("IS_AUTH");
