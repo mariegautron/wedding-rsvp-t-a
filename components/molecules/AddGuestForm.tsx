@@ -21,8 +21,6 @@ const AddGuestForm: FC<AddGuestFormProps> = ({ addWeddingGuest }) => {
   };
 
   const handleFormSubmit = async (values: WeddingGuests) => {
-    console.log(values);
-
     try {
       const uuid = uuidv4();
 

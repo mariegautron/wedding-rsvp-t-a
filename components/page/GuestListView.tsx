@@ -31,8 +31,6 @@ const GuestView: React.FC<GuestViewProps> = ({ data }) => {
     return <LoginForm />;
   }
 
-  console.log(data);
-
   const guestCount = data.length;
   const presentCount = data.filter((guest) => guest.isPresent === true).length;
   const noPresentCount = data.filter(

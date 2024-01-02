@@ -23,18 +23,13 @@ const globalJourney: JourneyStep[] = [
 
 const FormStepper: React.FC<{ guest: WeddingGuests }> = ({ guest }) => {
 
-  console.log({guest})
   const [currentStep, setCurrentStep] = useState<JourneyStep>(globalJourney[0]);
   const [userSelections, setUserSelections] = useState<UserSelections>({});
   const [journey, setJourney] = useState<JourneyStep[]>([]);
 
   const [allChoices, setAllChoices] = useState<WeddingGuests>(guest)
 
-  console.log({userSelections})
 
-  console.log({allChoices})
-
-  console.log({journey})
 
   useEffect(() => {
     const guestChoicesConditions: WeddingGuests = {
@@ -44,7 +39,6 @@ const FormStepper: React.FC<{ guest: WeddingGuests }> = ({ guest }) => {
       canComeWithSomeone: guest.canComeWithSomeone
     };
 
-    console.log({guestChoicesConditions})
 
     setAllChoices(guestChoicesConditions)
 
@@ -79,8 +73,7 @@ const FormStepper: React.FC<{ guest: WeddingGuests }> = ({ guest }) => {
   };
 
   const handleSubmit = () => {
-    const allAnswers = { ...userSelections };
-    console.log("Réponses envoyées :", allAnswers);
+    console.log("Réponses envoyées :", allChoices);
   };
 
   const renderContent = () => {

@@ -11,7 +11,6 @@ export type JourneyStep =
 export const determineJourney = (
   guest: Partial<WeddingGuests>
 ): JourneyStep[] => {
-  console.log({ guest });
 
   const journey: JourneyStep[] = ["isPresent"];
 

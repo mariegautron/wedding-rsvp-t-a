@@ -40,7 +40,7 @@ export const TagRepsponseComeWithSomeone: FC<{
   return (
     <span>
       {comeWithSomeone === true ? (
-        <Tag color="green">{`Vient avec ${guestOfGuestFirstname} ${guestOfGuestLastname}`}</Tag>
+        <Tag color="green">{guestOfGuestLastname ? `Vient avec ${guestOfGuestFirstname} ${guestOfGuestLastname}`: `Vient avec ${guestOfGuestFirstname}`}</Tag>
       ) : comeWithSomeone === false ? (
         <Tag color="red">Ne vient pas accompagné·e</Tag>
       ) : (
