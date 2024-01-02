@@ -7,11 +7,22 @@ interface HeroTemplateProps {
 const HeroTemplatePage: FC<HeroTemplateProps> = ({ children }) => {
   return (
     <div className="hero">
-      <div className="leaves"></div>
-      <div className="container">
-        <div className="w50 text-container">{children}</div>
+      <div className=" hero-container">
+        <div className="container">
+          <div className="text-container">{children}</div>
+        </div>
+        <img
+          className="image-container"
+          src="/images/new-hero-image.png"
+          alt="Hero Image"
+        />
       </div>
-      <div className="image-container" />
+      <img
+        className="leaves svg-decoration"
+        src="/images/leaves-1.svg"
+        aria-hidden="true"
+        alt="Leaves"
+      />
     </div>
   );
 };

@@ -1,12 +1,12 @@
 "use client";
 
 import useGuestData from "@/utils/hooks/useGuestData";
+import { WeddingGuests } from "@/utils/types/weddinggests";
 import { Result, Spin } from "antd";
 import { FC } from "react";
+import Footer from "../atoms/Footer";
 import HeroTemplatePage from "../atoms/HeroTemplatePage";
 import Hero from "../molecules/Hero";
-import { WeddingGuests } from "@/utils/types/weddinggests";
-import FormStepper from "../molecules/FormStepper";
 import RSVPStepper from "../molecules/RSVPStepper";
 
 const HomePage: FC<{
@@ -37,6 +37,8 @@ const HomePage: FC<{
     <div>
       <Hero guest={guestData} />
       <RSVPStepper guest={guestData} />
+      {/* <PhotoGallery /> */}
+      <Footer />
     </div>
   );
 };

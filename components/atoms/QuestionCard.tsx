@@ -44,8 +44,16 @@ const QuestionCard: React.FC<QuestionCardProps> = ({
 
   return (
     <>
-      <Text style={{ fontSize: "20px" }}>Question {questionNumber}</Text>
-      <Card style={{ padding: "30px", textAlign: "center" }}>
+      <Card
+        title={
+          <Text style={{ fontSize: "20px" }}>Question {questionNumber}</Text>
+        }
+        style={{
+          padding: "30px",
+          textAlign: "center",
+          boxShadow: "0px 2px 2px 0px rgba(0, 0, 0, 0.10)",
+        }}
+      >
         <Space direction="vertical" size="large">
           <Text style={{ fontSize: "40px" }}>{questionTitle}</Text>
           {children}

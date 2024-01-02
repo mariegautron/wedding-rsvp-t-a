@@ -20,6 +20,13 @@ const Hero: FC<HeroProps> = ({ guest }) => {
 
   const formattedDeadline = useFormattedDeadline();
 
+  const scrollToRsvp = () => {
+    const rsvpSection = document.getElementById("rsvp");
+    if (rsvpSection) {
+      rsvpSection.scrollIntoView({ behavior: "smooth" });
+    }
+  };
+
   if (hasResponded && !isDeadlinePassed) {
     // Person has responded and deadline is not passed
     return (
@@ -38,7 +45,7 @@ const Hero: FC<HeroProps> = ({ guest }) => {
             22 juin 2024 au 2 rue de la mairie, 86370 Chateau-Larcher
           </span>
         </Text>
-        <Button type="primary" style={{ marginTop: 20 }}>
+        <Button type="primary" style={{ marginTop: 20 }} onClick={scrollToRsvp}>
           Modifier ma réponse
         </Button>
       </HeroTemplatePage>
@@ -61,7 +68,7 @@ const Hero: FC<HeroProps> = ({ guest }) => {
             22 juin 2024 au 2 rue de la mairie, 86370 Chateau-Larcher
           </span>
         </Text>
-        <Button type="primary" style={{ marginTop: 20 }}>
+        <Button type="primary" style={{ marginTop: 20 }} onClick={scrollToRsvp}>
           Répondre à l'invitation
         </Button>
       </HeroTemplatePage>

@@ -6,14 +6,17 @@ interface StepGuestOfGuestProps {
   handleNext: () => void;
   handlePrev: () => void;
   handleSelectionChange: (value: object) => void;
-  defaultValues?: { guestOfGuestFirstname?: string; guestOfGuestLastname?: string }; 
+  defaultValues?: {
+    guestOfGuestFirstname?: string;
+    guestOfGuestLastname?: string;
+  };
 }
 
 const StepGuestOfGuest: FC<StepGuestOfGuestProps> = ({
   handleNext,
   handlePrev,
   handleSelectionChange,
-  defaultValues = {}, // Récupération de la prop defaultValues
+  defaultValues = {},
 }) => {
   const onFinish = (values: any) => {
     handleSelectionChange(values);
@@ -30,11 +33,11 @@ const StepGuestOfGuest: FC<StepGuestOfGuestProps> = ({
     >
       <Form
         name="guestOfGuestForm"
-        initialValues={defaultValues} 
+        initialValues={defaultValues}
         onFinish={onFinish}
       >
         <Row gutter={[16, 16]}>
-          <Col span={12}>
+          <Col xs={24} sm={12}>
             <Form.Item
               label="Prénom de l'invité"
               name="guestOfGuestFirstname"
@@ -47,7 +50,7 @@ const StepGuestOfGuest: FC<StepGuestOfGuestProps> = ({
               />
             </Form.Item>
           </Col>
-          <Col span={12}>
+          <Col xs={24} sm={12}>
             <Form.Item
               label="Nom de l'invité"
               name="guestOfGuestLastname"
