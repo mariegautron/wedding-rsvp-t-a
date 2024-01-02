@@ -7,7 +7,7 @@ import {
   EyeOutlined,
   MailOutlined,
 } from "@ant-design/icons";
-import { Button, Dropdown, Menu, Switch, Table, Tag } from "antd";
+import { Button, Checkbox, Dropdown, Menu, Switch, Table, Tag } from "antd";
 import { FC, useState } from "react";
 import DrawerDetailsGuest from "./DrawerDetailsGuest";
 import SendEmailModal from "./SendEmailModal";
@@ -17,7 +17,10 @@ import {
   TagResponseIsPresent,
 } from "../atoms/TagsResponses";
 
-const GuestListTable: FC<{ data: WeddingGuests[] }> = ({ data }) => {
+const GuestListTable: FC<{
+  data: WeddingGuests[];
+  updateInvitSend: (guestId: number, invitSend: boolean) => Promise<void>;
+}> = ({ data, updateInvitSend }) => {
   const [emailOpen, setSendEmailOpen] = useState(false);
   const [selectedGuest, setSelectedGuest] = useState<WeddingGuests>();
   const [drawerVisible, setDrawerVisible] = useState(false);
@@ -69,6 +72,18 @@ const GuestListTable: FC<{ data: WeddingGuests[] }> = ({ data }) => {
   );
 
   const columns = [
+    {
+      title: "Invit envoyée",
+      key: "invitSend",
+      render: (_: any, record: WeddingGuests) => (
+        <Checkbox
+          checked={record.invitSend}
+          onChange={() =>
+            updateInvitSend(record.id as number, !record.invitSend)
+          }
+        />
+      ),
+    },
     {
       title: "Prénom",
       dataIndex: "firstname",

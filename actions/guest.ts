@@ -4,6 +4,8 @@ import { COLLECTION_NAMES } from "@/utils/supabase/enums";
 import { createClient } from "@/utils/supabase/server";
 import { WeddingGuests } from "@/utils/types/weddinggests";
 import { cookies } from "next/headers";
+import { revalidatePath } from "next/cache";
+import { MenuPath } from "@/utils/constants/menuItems";
 
 // Fonction pour vérifier si l'invité existe déjà dans la base de données
 const checkIfGuestExists = async (
@@ -117,3 +119,20 @@ export const fetchGuestData = async (uuid: string) => {
     );
   }
 };
+
+export default async function updateInvitSend(
+  guestId: number,
+  invitSend: boolean
+) {
+  "use server";
+
+  const cookieStore = cookies();
+  const supabase = createClient(cookieStore);
+
+  const { data, error } = await supabase
+    .from(COLLECTION_NAMES.WEDDING_GUESTS)
+    .update({ invitSend })
+    .eq("id", guestId);
+
+  revalidatePath(MenuPath.WEDDING_GUESTS);
+}

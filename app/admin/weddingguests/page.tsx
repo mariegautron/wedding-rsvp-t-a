@@ -1,10 +1,10 @@
 "use server";
 
+import updateInvitSend from "@/actions/guest";
 import GuestListView from "@/components/page/GuestListView";
 import AdminLayout from "@/layouts/AdminLayout";
 import { COLLECTION_NAMES } from "@/utils/supabase/enums";
 import { createClient } from "@/utils/supabase/server";
-import { Alert } from "antd";
 import { cookies } from "next/headers";
 
 export default async function WeddingGuests() {
@@ -28,5 +28,13 @@ export default async function WeddingGuests() {
       "Une erreur s'est produite lors du chargement des invités.";
   }
 
-  return <AdminLayout>{!error && <GuestListView data={data} />}</AdminLayout>;
+  console.log({ data });
+
+  return (
+    <AdminLayout>
+      {!error && (
+        <GuestListView data={data} updateInvitSend={updateInvitSend} />
+      )}
+    </AdminLayout>
+  );
 }

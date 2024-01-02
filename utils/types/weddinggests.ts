@@ -10,4 +10,5 @@ export type WeddingGuests = {
   message?: string;
   guestOfGuestFirstname?: string;
   guestOfGuestLastname?: string;
+  invitSend?: boolean;
 };

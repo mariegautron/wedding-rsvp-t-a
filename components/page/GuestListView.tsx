@@ -3,31 +3,29 @@
 import useIsAuthenticated from "@/utils/hooks/useIsAuthenticated";
 import { WeddingGuests } from "@/utils/types/weddinggests";
 import { UserOutlined, UsergroupAddOutlined } from "@ant-design/icons";
-import { Button, Checkbox, Collapse, Input, Space, Typography } from "antd";
+import { Button, Collapse, Space, Typography } from "antd";
 import Link from "next/link";
-import LoginForm from "../molecules/LoginForm";
-import GuestListTable from "../molecules/GuestListTable";
-import StatisticList from "../molecules/StatisticList";
-import { useRef, useState } from "react";
+import { useMemo, useRef, useState } from "react";
 import FiltersAndSearchPanel from "../molecules/FiltersAndSearchPanel";
+import GuestListTable from "../molecules/GuestListTable";
+import LoginForm from "../molecules/LoginForm";
+import StatisticList from "../molecules/StatisticList";
 
 const { Panel } = Collapse;
 const { Title } = Typography;
-const { Search } = Input;
 
 interface GuestViewProps {
   data: WeddingGuests[];
+  updateInvitSend: (guestId: number, invitSend: boolean) => Promise<void>;
 }
 
-const GuestView: React.FC<GuestViewProps> = ({ data }) => {
+const GuestView: React.FC<GuestViewProps> = ({ data, updateInvitSend }) => {
   const isAuth = useIsAuthenticated();
 
   const [showOnlyNotResponded, setShowOnlyNotResponded] = useState(false);
   const [showOnlyPresent, setShowOnlyPresent] = useState(false);
   const [showOnlyOneCanCome, setShowOnlyOneCanCome] = useState(false);
   const [searchName, setSearchName] = useState("");
-
-  const inputRef = useRef(null);
 
   if (!isAuth) {
     return <LoginForm />;
@@ -78,12 +76,22 @@ const GuestView: React.FC<GuestViewProps> = ({ data }) => {
     return true;
   });
 
+  console.log({ data });
+
+  console.log({ guestsToShow });
+
   const resetFilters = () => {
     setShowOnlyNotResponded(false);
     setShowOnlyPresent(false);
     setShowOnlyOneCanCome(false);
     setSearchName("");
   };
+
+  const sortedGuests = useMemo(
+    () =>
+      [...guestsToShow].sort((a, b) => a.firstname.localeCompare(b.firstname)),
+    [guestsToShow]
+  );
 
   return (
     <div>
@@ -119,7 +127,7 @@ const GuestView: React.FC<GuestViewProps> = ({ data }) => {
           />
         </Panel>
       </Collapse>
-      <GuestListTable data={guestsToShow} />
+      <GuestListTable data={sortedGuests} updateInvitSend={updateInvitSend} />
     </div>
   );
 };
