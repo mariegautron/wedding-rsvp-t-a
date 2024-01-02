@@ -3,13 +3,15 @@
 import useIsAuthenticated from "@/utils/hooks/useIsAuthenticated";
 import { WeddingGuests } from "@/utils/types/weddinggests";
 import { UserOutlined, UsergroupAddOutlined } from "@ant-design/icons";
-import { Button, Checkbox, Input, Space, Typography } from "antd";
+import { Button, Checkbox, Collapse, Input, Space, Typography } from "antd";
 import Link from "next/link";
 import LoginForm from "../molecules/LoginForm";
 import GuestListTable from "../molecules/GuestListTable";
 import StatisticList from "../molecules/StatisticList";
 import { useRef, useState } from "react";
+import FiltersAndSearchPanel from "../molecules/FiltersAndSearchPanel";
 
+const { Panel } = Collapse;
 const { Title } = Typography;
 const { Search } = Input;
 
@@ -101,49 +103,22 @@ const GuestView: React.FC<GuestViewProps> = ({ data }) => {
           <Link href="/admin/weddingguests/add">Ajouter un invité</Link>
         </Button>
       </div>
-      <Title level={4}>Statistiques</Title>
       <StatisticList statistics={statistics} />
-      <Title level={4}>Filtres</Title>
-      <div style={{ marginBottom: "24px" }}>
-        <Space direction="horizontal">
-          <Checkbox
-            checked={showOnlyNotResponded}
-            onChange={(e) => setShowOnlyNotResponded(e.target.checked)}
-          >
-            Pas encore répondu
-          </Checkbox>
-          <Checkbox
-            checked={showOnlyPresent}
-            onChange={(e) => setShowOnlyPresent(e.target.checked)}
-          >
-            Répondu - Viennent
-          </Checkbox>
-
-          <Checkbox
-            checked={showOnlyOneCanCome}
-            onChange={(e) => setShowOnlyOneCanCome(e.target.checked)}
-          >
-            Peuvent venir avec quelqu'un
-          </Checkbox>
-        </Space>
-      </div>
-      <Title level={4}>Recherche</Title>
-      <Search
-        ref={inputRef}
-        placeholder="Rechercher"
-        allowClear
-        enterButton
-        onSearch={(value) => setSearchName(value)}
-        style={{ marginBottom: "24px" }}
-      />
-      <Button
-        type="default"
-        onClick={resetFilters}
-        style={{ marginBottom: "24px" }}
-      >
-        Réinitialiser les filtres
-      </Button>
       <Title level={4}>Tableaux des invités</Title>
+      <Collapse accordion style={{ marginBottom: 20, marginTop: 20 }}>
+        <Panel header="Filtres & Recherche" key="2">
+          <FiltersAndSearchPanel
+            showOnlyNotResponded={showOnlyNotResponded}
+            setShowOnlyNotResponded={setShowOnlyNotResponded}
+            showOnlyPresent={showOnlyPresent}
+            setShowOnlyPresent={setShowOnlyPresent}
+            showOnlyOneCanCome={showOnlyOneCanCome}
+            setShowOnlyOneCanCome={setShowOnlyOneCanCome}
+            setSearchName={setSearchName}
+            resetFilters={resetFilters}
+          />
+        </Panel>
+      </Collapse>
       <GuestListTable data={guestsToShow} />
     </div>
   );
