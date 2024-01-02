@@ -3,15 +3,13 @@ import { Radio } from "antd";
 interface RadioButtonTagProps {
   value: string;
   text: string;
-  onChange: (step: number, value: string) => void;
-  step: number;
+  onChange: (value: string) => void;
 }
 
 const RadioButtonTag: React.FC<RadioButtonTagProps> = ({
   value,
   text,
   onChange,
-  step,
 }) => {
   return (
     <Radio.Button
@@ -24,7 +22,7 @@ const RadioButtonTag: React.FC<RadioButtonTagProps> = ({
         paddingTop: 20,
       }}
       value={value}
-      onClick={() => onChange(step, value)}
+      onClick={() => onChange(value)}
     >
       {text}
     </Radio.Button>

@@ -4,15 +4,24 @@ import RadioButtonTag from "../atoms/RadioButtonTags";
 
 interface RadioTagListProps {
   options: { value: string; text: string }[];
-  onChange: (step: number, value: string) => void;
-  step: number;
+  onChange: (value: string) => void;
+  defaultValue?: string | boolean | object;
 }
 
-const RadioTagList: FC<RadioTagListProps> = ({ options, onChange, step }) => {
+const RadioTagList: FC<RadioTagListProps> = ({
+  options,
+  onChange,
+  defaultValue,
+}) => {
   return (
-    <Radio.Group buttonStyle="solid">
+    <Radio.Group buttonStyle="solid" defaultValue={defaultValue}>
       {options.map((option) => (
-        <RadioButtonTag onChange={onChange} step={step} {...option} />
+        <RadioButtonTag
+          key={option.value}
+          value={option.value}
+          text={option.text}
+          onChange={onChange}
+        />
       ))}
     </Radio.Group>
   );

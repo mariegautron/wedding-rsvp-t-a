@@ -36,7 +36,7 @@ const HomePage: FC<{
   return (
     <div>
       <Hero guest={guestData} />
-      <RSVPStepper />
+      <RSVPStepper guest={guestData} />
     </div>
   );
 };
