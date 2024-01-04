@@ -74,17 +74,10 @@ const FormStepper: React.FC<{
     setAllChoices({ ...allChoices, [currentStep]: value });
   };
 
-  console.log({ allChoices });
-
   const handleSubmit = async () => {
     try {
       setIsLoading(true);
-
-      console.log("Réponses envoyées :", allChoices);
-
       const result = await updateGuest({ ...allChoices, invitSend: true });
-
-      console.log({ result });
 
       if (result && result[0]) {
         handleNext();

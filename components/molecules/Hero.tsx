@@ -6,6 +6,7 @@ import GuestResponses from "./GuestResponses";
 import { WeddingGuests } from "@/utils/types/weddinggests";
 import useFormattedDeadline from "@/utils/hooks/useFormattedDeadline";
 import useGuestHasResponded from "@/utils/hooks/useGuestHasResponded";
+import { useFormattedEventDate } from "@/utils/hooks/useFormattedEventDate";
 
 const { Title, Text } = Typography;
 
@@ -15,6 +16,8 @@ interface HeroProps {
 
 const Hero: FC<HeroProps> = ({ guest }) => {
   const isDeadlinePassed = useDeadlineCheck();
+
+  const eventDate = useFormattedEventDate();
 
   const hasResponded = useGuestHasResponded(guest);
 
@@ -41,8 +44,14 @@ const Hero: FC<HeroProps> = ({ guest }) => {
         <GuestResponses guest={guest} />
         <Text style={{ display: "block", fontSize: 25 }}>
           Pour rappel, le mariage aura lieu le{" "}
-          <span style={{ textDecoration: "underline", fontSize: 25 }}>
-            22 juin 2024 au 2 rue de la mairie, 86370 Chateau-Larcher
+          <span
+            style={{
+              textDecoration: "underline",
+              fontSize: 25,
+              marginRight: 5,
+            }}
+          >
+            {eventDate} au {process.env.NEXT_PUBLIC_EVENT_PLACE}
           </span>
         </Text>
         <Button type="primary" style={{ marginTop: 20 }} onClick={scrollToRsvp}>
@@ -65,7 +74,7 @@ const Hero: FC<HeroProps> = ({ guest }) => {
           Nous sommes ravis de t’inviter à partager ce jour unique avec nous,
           qui se déroulera le{" "}
           <span style={{ textDecoration: "underline", fontSize: 25 }}>
-            22 juin 2024 au 2 rue de la mairie, 86370 Chateau-Larcher
+            {eventDate} au {process.env.NEXT_PUBLIC_EVENT_PLACE}
           </span>
         </Text>
         <Button type="primary" style={{ marginTop: 20 }} onClick={scrollToRsvp}>
@@ -89,7 +98,7 @@ const Hero: FC<HeroProps> = ({ guest }) => {
         <Text style={{ display: "block", fontSize: 25 }}>
           Pour rappel, le mariage aura lieu le
           <span style={{ textDecoration: "underline", fontSize: 25 }}>
-            22 juin 2024 au 2 rue de la mairie, 86370 Chateau-Larcher
+            {eventDate} au {process.env.NEXT_PUBLIC_EVENT_PLACE}
           </span>
         </Text>
       </HeroTemplatePage>

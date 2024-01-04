@@ -86,10 +86,6 @@ const GuestView: React.FC<GuestViewProps> = ({ data, updateInvitSend }) => {
     return true;
   });
 
-  console.log({ data });
-
-  console.log({ guestsToShow });
-
   const resetFilters = () => {
     setShowOnlyNotResponded(false);
     setShowOnlyPresent(false);

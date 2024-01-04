@@ -1,16 +1,16 @@
 import { useEffect, useState } from "react";
+import { getDeadlineDate } from "../functions/getDeadlineDate";
 
 const useDeadlineCheck = (): boolean => {
   const [isDeadlinePassed, setIsDeadlinePassed] = useState(false);
-  const deadline = process.env.REACT_APP_DEADLINE_DATE || "";
 
   useEffect(() => {
-    if (deadline) {
-      const deadlineDate = new Date(deadline);
-      const now = new Date();
-      setIsDeadlinePassed(now.getTime() > deadlineDate.getTime());
-    }
-  }, [deadline]);
+    const deadlineDate = getDeadlineDate();
+
+    const now = new Date();
+
+    setIsDeadlinePassed(now.getTime() > deadlineDate.getTime());
+  }, []);
 
   return isDeadlinePassed;
 };

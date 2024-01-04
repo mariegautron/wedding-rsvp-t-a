@@ -8,6 +8,7 @@ import Footer from "../atoms/Footer";
 import HeroTemplatePage from "../atoms/HeroTemplatePage";
 import Hero from "../molecules/Hero";
 import RSVPStepper from "../molecules/RSVPStepper";
+import useDeadlineCheck from "@/utils/hooks/useDeadlineCheck";
 
 const HomePage: FC<{
   fetchGuestData: (uuid: string) => Promise<WeddingGuests | null | undefined>;
@@ -16,6 +17,8 @@ const HomePage: FC<{
   ) => Promise<WeddingGuests[] | null | undefined>;
 }> = ({ fetchGuestData, updateGuest }) => {
   const [guestData, loading] = useGuestData(fetchGuestData);
+
+  const deadlinePassed = useDeadlineCheck();
 
   if (loading) {
     return (
@@ -39,7 +42,9 @@ const HomePage: FC<{
   return (
     <div>
       <Hero guest={guestData} />
-      <RSVPStepper guest={guestData} updateGuest={updateGuest} />
+      {!deadlinePassed && (
+        <RSVPStepper guest={guestData} updateGuest={updateGuest} />
+      )}
       {/* <PhotoGallery /> */}
       <Footer />
     </div>

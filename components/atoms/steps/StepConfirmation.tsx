@@ -2,6 +2,7 @@ import useFormattedDeadline from "@/utils/hooks/useFormattedDeadline";
 import { Typography } from "antd";
 import { FC } from "react";
 import QuestionCard from "../QuestionCard";
+import { useFormattedEventDate } from "@/utils/hooks/useFormattedEventDate";
 
 const { Title } = Typography;
 
@@ -10,12 +11,14 @@ interface StepConfirmationProps {
 }
 
 const StepConfirmation: FC<StepConfirmationProps> = ({ handlePrev }) => {
+  const eventDate = useFormattedEventDate();
+
   const formattedDeadline = useFormattedDeadline();
 
   return (
     <QuestionCard
       questionNumber={5}
-      questionTitle="Merci infiniement pour ta réponse, et nous avons hâte de te voir le 22 juin."
+      questionTitle={`Merci infiniement pour ta réponse, et nous avons hâte de te voir le ${eventDate}`}
       withPrevButton
       handlePrev={handlePrev}
     >

@@ -1,21 +1,27 @@
 import { useEffect, useState } from "react";
-import { format } from "date-fns";
-import { fr } from "date-fns/locale";
+import { getDeadlineDate } from "../functions/getDeadlineDate";
 
-const useFormattedDeadline = () => {
-  const dateString = process.env.NEXT_PUBLIC_DEADLINE_DATE;
-  const formatString = "d MMMM 'à' HH'h'mm";
-
+const useFormattedDeadline = (): string => {
   const [formattedDate, setFormattedDate] = useState("");
 
   useEffect(() => {
-    if (!dateString || !formatString) return;
+    const parisDate = getDeadlineDate();
 
-    const date = new Date(dateString);
-    const formatted = format(date, formatString, { locale: fr });
+    const options: Intl.DateTimeFormatOptions = {
+      year: "numeric",
+      month: "long",
+      day: "numeric",
+      hour: "numeric",
+      minute: "numeric",
+      timeZone: "Europe/Paris",
+    };
+
+    const formatted = new Intl.DateTimeFormat("fr-FR", options).format(
+      parisDate
+    );
 
     setFormattedDate(formatted);
-  }, [dateString, formatString]);
+  }, []);
 
   return formattedDate;
 };

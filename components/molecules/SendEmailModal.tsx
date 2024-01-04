@@ -2,6 +2,7 @@
 
 import { sendEmail } from "@/actions/sendEmail";
 import { ERROR_MESSAGES } from "@/utils/constants/messages";
+import { useFormattedEventDate } from "@/utils/hooks/useFormattedEventDate";
 import { Modal, Form, Input, Button, message } from "antd";
 import { useState } from "react";
 
@@ -20,6 +21,8 @@ const SendEmailModal: React.FC<SendEmailModalProps> = ({
   guestUuid,
   clearSelectedGuest,
 }) => {
+  const eventDate = useFormattedEventDate();
+
   const [form] = Form.useForm();
   const [sending, setSending] = useState(false);
 
@@ -82,7 +85,7 @@ const SendEmailModal: React.FC<SendEmailModalProps> = ({
           label="Message d'invitation"
           name="invitationMessage"
           // TODO: Put in database for adminitrate default message
-          initialValue={`Bonjour,\n\nNous t'invitons à notre mariage ! Nous sommes ravis de t’inviter à partager ce jour unique avec nous, qui se déroulera le 22 juin 2024 au 2 rue de la mairie, 86370 Chateau-Larcher\n\nConfirme-nous ta présence !`}
+          initialValue={`Bonjour,\n\nNous t'invitons à notre mariage ! Nous sommes ravis de t’inviter à partager ce jour unique avec nous, qui se déroulera le ${eventDate} au ${process.env.NEXT_PUBLIC_EVENT_PLACE}.\n\nConfirme-nous ta présence !`}
         >
           <Input.TextArea rows={4} />
         </Form.Item>
