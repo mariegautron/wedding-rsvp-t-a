@@ -24,7 +24,7 @@ const RSVPStepper: FC<{ guest: WeddingGuests }> = ({ guest }) => {
       </Title>
       <div className="container py-10" style={{ position: "relative" }}>
         <FormStepper guest={guest} />
-      </div>{" "}
+      </div>
       <img
         src="/images/leaves-2.svg"
         aria-hidden="true"

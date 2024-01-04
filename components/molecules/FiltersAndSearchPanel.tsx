@@ -11,6 +11,8 @@ interface FiltersAndSearchProps {
   resetFilters: () => void;
   showOnlyInvitNotSent: boolean;
   setShowOnlyInvitNotSent: (showOnlyInvitNotSent: boolean) => void;
+  showOnlyInvitSent: boolean;
+  setShowOnlyInvitSent: (showOnlyInvitSent: boolean) => void;
 }
 
 const FiltersAndSearchPanel: React.FC<FiltersAndSearchProps> = ({
@@ -24,6 +26,8 @@ const FiltersAndSearchPanel: React.FC<FiltersAndSearchProps> = ({
   resetFilters,
   showOnlyInvitNotSent,
   setShowOnlyInvitNotSent,
+  showOnlyInvitSent,
+  setShowOnlyInvitSent,
 }) => {
   return (
     <div style={{ width: "100%" }}>
@@ -33,7 +37,7 @@ const FiltersAndSearchPanel: React.FC<FiltersAndSearchProps> = ({
         gutter={[8, 8]}
         style={{ marginBottom: 20 }}
       >
-        <Col span={6}>
+        <Col span={4}>
           <Checkbox
             style={{ width: "100%" }}
             checked={showOnlyNotResponded}
@@ -42,7 +46,7 @@ const FiltersAndSearchPanel: React.FC<FiltersAndSearchProps> = ({
             Pas encore répondu
           </Checkbox>
         </Col>
-        <Col span={6}>
+        <Col span={4}>
           <Checkbox
             style={{ width: "100%" }}
             checked={showOnlyPresent}
@@ -51,7 +55,7 @@ const FiltersAndSearchPanel: React.FC<FiltersAndSearchProps> = ({
             Répondu - Viennent
           </Checkbox>
         </Col>
-        <Col span={6}>
+        <Col span={4}>
           <Checkbox
             style={{ width: "100%" }}
             checked={showOnlyOneCanCome}
@@ -60,7 +64,7 @@ const FiltersAndSearchPanel: React.FC<FiltersAndSearchProps> = ({
             Peuvent venir avec quelqu'un
           </Checkbox>
         </Col>
-        <Col span={6}>
+        <Col span={4}>
           <Checkbox
             style={{ width: "100%" }}
             checked={showOnlyInvitNotSent}
@@ -69,7 +73,17 @@ const FiltersAndSearchPanel: React.FC<FiltersAndSearchProps> = ({
             Invitations non envoyées
           </Checkbox>
         </Col>
+        <Col span={4}>
+          <Checkbox
+            style={{ width: "100%" }}
+            checked={showOnlyInvitSent}
+            onChange={(e) => setShowOnlyInvitSent(e.target.checked)}
+          >
+            Invitations envoyées
+          </Checkbox>
+        </Col>
       </Row>
+
       <Row justify="space-between" align="middle" gutter={[8, 8]}>
         <Col span={18}>
           <Input.Search
