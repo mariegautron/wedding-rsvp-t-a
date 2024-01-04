@@ -25,6 +25,7 @@ const GuestView: React.FC<GuestViewProps> = ({ data, updateInvitSend }) => {
   const [showOnlyNotResponded, setShowOnlyNotResponded] = useState(false);
   const [showOnlyPresent, setShowOnlyPresent] = useState(false);
   const [showOnlyOneCanCome, setShowOnlyOneCanCome] = useState(false);
+  const [showOnlyInvitNotSent, setShowOnlyInvitNotSent] = useState(false);
   const [searchName, setSearchName] = useState("");
 
   if (!isAuth) {
@@ -71,6 +72,10 @@ const GuestView: React.FC<GuestViewProps> = ({ data, updateInvitSend }) => {
       if (!guestName.includes(searchName.toLowerCase())) {
         return false;
       }
+    }
+
+    if (showOnlyInvitNotSent && guest.invitSend === true) {
+      return false;
     }
 
     return true;
@@ -124,6 +129,8 @@ const GuestView: React.FC<GuestViewProps> = ({ data, updateInvitSend }) => {
             setShowOnlyOneCanCome={setShowOnlyOneCanCome}
             setSearchName={setSearchName}
             resetFilters={resetFilters}
+            showOnlyInvitNotSent={showOnlyInvitNotSent}
+            setShowOnlyInvitNotSent={setShowOnlyInvitNotSent}
           />
         </Panel>
       </Collapse>
