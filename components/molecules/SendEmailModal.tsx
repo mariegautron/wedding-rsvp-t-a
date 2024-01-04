@@ -1,6 +1,7 @@
 "use client";
 
 import { sendEmail } from "@/actions/sendEmail";
+import { ERROR_MESSAGES } from "@/utils/constants/messages";
 import { Modal, Form, Input, Button, message } from "antd";
 import { useState } from "react";
 
@@ -38,6 +39,7 @@ const SendEmailModal: React.FC<SendEmailModalProps> = ({
       setSendEmailOpen(false);
       clearSelectedGuest();
     } catch (error) {
+      message.error(ERROR_MESSAGES.ADMIN_ERROR);
       console.error("Send email error:", error);
       setSending(false);
     }

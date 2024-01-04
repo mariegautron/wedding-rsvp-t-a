@@ -7,6 +7,7 @@ import { useRouter } from "next/navigation";
 import { MenuPath } from "@/utils/constants/menuItems";
 import { v4 as uuidv4 } from "uuid";
 import { PlusOutlined } from "@ant-design/icons";
+import { ERROR_MESSAGES, SUCCESS_MESSAGES } from "@/utils/constants/messages";
 
 interface AddGuestFormProps {
   addWeddingGuest: (values: WeddingGuests) => Promise<void>;
@@ -27,14 +28,14 @@ const AddGuestForm: FC<AddGuestFormProps> = ({ addWeddingGuest }) => {
       const guestWithUUID = { ...values, uuid };
 
       await addWeddingGuest(guestWithUUID);
-      message.success("Invité ajouté avec succès !");
+      message.success(SUCCESS_MESSAGES.ADD_GUEST);
       router.push(MenuPath.WEDDING_GUESTS);
     } catch (error) {
       console.error(
         "Erreur lors de l'ajout de l'invité :",
         (error as any).message
       );
-      message.error((error as any).message);
+      message.error(ERROR_MESSAGES.ADMIN_ERROR);
     }
   };
 

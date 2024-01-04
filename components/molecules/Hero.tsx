@@ -5,6 +5,7 @@ import useDeadlineCheck from "@/utils/hooks/useDeadlineCheck";
 import GuestResponses from "./GuestResponses";
 import { WeddingGuests } from "@/utils/types/weddinggests";
 import useFormattedDeadline from "@/utils/hooks/useFormattedDeadline";
+import useGuestHasResponded from "@/utils/hooks/useGuestHasResponded";
 
 const { Title, Text } = Typography;
 
@@ -15,8 +16,7 @@ interface HeroProps {
 const Hero: FC<HeroProps> = ({ guest }) => {
   const isDeadlinePassed = useDeadlineCheck();
 
-  const hasResponded =
-    guest.isPresent !== undefined && guest.isPresent !== null;
+  const hasResponded = useGuestHasResponded(guest);
 
   const formattedDeadline = useFormattedDeadline();
 

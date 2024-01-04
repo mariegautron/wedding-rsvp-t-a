@@ -1,16 +1,19 @@
-import { useState, useEffect } from "react";
+import { ERROR_MESSAGES } from "@/utils/constants/messages";
+import {
+  JourneyStep,
+  determineJourney,
+} from "@/utils/functions/determinateJourney";
+import { WeddingGuests } from "@/utils/types/weddinggests";
+import { message } from "antd";
+import { useEffect, useState } from "react";
 import StepComeWithSomeone from "../atoms/steps/StepComeWithSomeone";
 import StepConfirmation from "../atoms/steps/StepConfirmation";
 import StepDommage from "../atoms/steps/StepDommage";
 import StepGuestOfGuest from "../atoms/steps/StepGuestOfGuest";
 import StepIsPresent from "../atoms/steps/StepIsPresent";
 import StepMessage from "../atoms/steps/StepMessage";
-import { JourneyStep, determineJourney } from "@/utils/functions/determinateJourney";
-import { WeddingGuests } from "@/utils/types/weddinggests";
-
-interface UserSelections {
-  [key: string]: string | boolean | object; // Types pour les sélections de l'utilisateur
-}
+import { booleanToString } from "@/utils/functions/booleanToString";
+import useGuestHasResponded from "@/utils/hooks/useGuestHasResponded";
 
 const globalJourney: JourneyStep[] = [
   "isPresent",
@@ -21,36 +24,35 @@ const globalJourney: JourneyStep[] = [
   "confirmation",
 ];
 
-const FormStepper: React.FC<{ guest: WeddingGuests }> = ({ guest }) => {
-
+const FormStepper: React.FC<{
+  guest: WeddingGuests;
+  updateGuest: (
+    updatedGuestData: WeddingGuests
+  ) => Promise<WeddingGuests[] | null | undefined>;
+}> = ({ guest, updateGuest }) => {
   const [currentStep, setCurrentStep] = useState<JourneyStep>(globalJourney[0]);
-  const [userSelections, setUserSelections] = useState<UserSelections>({});
   const [journey, setJourney] = useState<JourneyStep[]>([]);
+  const [allChoices, setAllChoices] = useState<WeddingGuests>(guest);
+  const [isLoading, setIsLoading] = useState(false);
 
-  const [allChoices, setAllChoices] = useState<WeddingGuests>(guest)
-
-
+  const hasResponded = useGuestHasResponded(allChoices);
 
   useEffect(() => {
     const guestChoicesConditions: WeddingGuests = {
       ...guest,
-      isPresent: userSelections.isPresent ? userSelections.isPresent === "true" : guest.isPresent,
-      comeWithSomeone: userSelections.comeWithSomeone ? userSelections.comeWithSomeone === "true" : guest.comeWithSomeone,
-      canComeWithSomeone: guest.canComeWithSomeone
+      isPresent: hasResponded ? allChoices.isPresent : guest.isPresent,
+      comeWithSomeone: allChoices.comeWithSomeone || guest.comeWithSomeone,
+      canComeWithSomeone: guest.canComeWithSomeone,
     };
 
+    setAllChoices(guestChoicesConditions);
+  }, [currentStep, guest]);
 
-    setAllChoices(guestChoicesConditions)
-
-
-  }, [userSelections, currentStep]);
-
-  
   useEffect(() => {
     const _journey = determineJourney(allChoices);
 
     setJourney(_journey);
-  }, [userSelections, allChoices]);
+  }, [allChoices]);
 
   const handleNext = () => {
     const currentIndex = journey.indexOf(currentStep);
@@ -68,12 +70,33 @@ const FormStepper: React.FC<{ guest: WeddingGuests }> = ({ guest }) => {
     }
   };
 
-  const handleSelectionChange = (value: string | object) => {
-    setUserSelections({ ...userSelections, [currentStep]: value });
+  const handleSelectionChange = (value: string | object | boolean) => {
+    setAllChoices({ ...allChoices, [currentStep]: value });
   };
 
-  const handleSubmit = () => {
-    console.log("Réponses envoyées :", allChoices);
+  console.log({ allChoices });
+
+  const handleSubmit = async () => {
+    try {
+      setIsLoading(true);
+
+      console.log("Réponses envoyées :", allChoices);
+
+      const result = await updateGuest({ ...allChoices, invitSend: true });
+
+      console.log({ result });
+
+      if (result && result[0]) {
+        handleNext();
+      } else {
+        message.error(ERROR_MESSAGES.ASK_TO_REPORT);
+      }
+    } catch (error) {
+      message.error(ERROR_MESSAGES.ASK_TO_REPORT);
+      console.error("Erreur lors de la mise à jour de l'invité :", error);
+    } finally {
+      setIsLoading(false);
+    }
   };
 
   const renderContent = () => {
@@ -83,7 +106,7 @@ const FormStepper: React.FC<{ guest: WeddingGuests }> = ({ guest }) => {
           <StepIsPresent
             handleNext={handleNext}
             handleSelectionChange={handleSelectionChange}
-            defaultValue={userSelections[currentStep]}
+            defaultValue={booleanToString(allChoices.isPresent)}
           />
         );
       case "comeWithSomeone":
@@ -92,7 +115,7 @@ const FormStepper: React.FC<{ guest: WeddingGuests }> = ({ guest }) => {
             handleNext={handleNext}
             handlePrev={handlePrev}
             handleSelectionChange={handleSelectionChange}
-            defaultValue={userSelections[currentStep]}
+            defaultValue={booleanToString(allChoices.comeWithSomeone)}
           />
         );
       case "guestOfGuest":
@@ -101,7 +124,10 @@ const FormStepper: React.FC<{ guest: WeddingGuests }> = ({ guest }) => {
             handleNext={handleNext}
             handlePrev={handlePrev}
             handleSelectionChange={handleSelectionChange}
-            defaultValues={userSelections[currentStep] as { guestOfGuestFirstname?: string; guestOfGuestLastname?: string }}
+            defaultValues={{
+              guestOfGuestFirstname: allChoices.guestOfGuestFirstname,
+              guestOfGuestLastname: allChoices.guestOfGuestLastname,
+            }}
           />
         );
       case "message":
@@ -109,8 +135,9 @@ const FormStepper: React.FC<{ guest: WeddingGuests }> = ({ guest }) => {
           <StepMessage
             handlePrev={handlePrev}
             handleSubmit={handleSubmit}
+            loading={isLoading}
             handleSelectionChange={handleSelectionChange}
-            defaultValue={userSelections[currentStep]}
+            defaultValue={allChoices.message}
           />
         );
       case "dommage":

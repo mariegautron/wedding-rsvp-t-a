@@ -28,8 +28,6 @@ export default async function WeddingGuests() {
       "Une erreur s'est produite lors du chargement des invités.";
   }
 
-  console.log({ data });
-
   return (
     <AdminLayout>
       {!error && (

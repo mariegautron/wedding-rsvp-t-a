@@ -11,7 +11,10 @@ import RSVPStepper from "../molecules/RSVPStepper";
 
 const HomePage: FC<{
   fetchGuestData: (uuid: string) => Promise<WeddingGuests | null | undefined>;
-}> = ({ fetchGuestData }) => {
+  updateGuest: (
+    updatedGuestData: WeddingGuests
+  ) => Promise<WeddingGuests[] | null | undefined>;
+}> = ({ fetchGuestData, updateGuest }) => {
   const [guestData, loading] = useGuestData(fetchGuestData);
 
   if (loading) {
@@ -36,7 +39,7 @@ const HomePage: FC<{
   return (
     <div>
       <Hero guest={guestData} />
-      <RSVPStepper guest={guestData} />
+      <RSVPStepper guest={guestData} updateGuest={updateGuest} />
       {/* <PhotoGallery /> */}
       <Footer />
     </div>

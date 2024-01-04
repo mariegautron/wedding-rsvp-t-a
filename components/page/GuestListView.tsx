@@ -10,6 +10,7 @@ import FiltersAndSearchPanel from "../molecules/FiltersAndSearchPanel";
 import GuestListTable from "../molecules/GuestListTable";
 import LoginForm from "../molecules/LoginForm";
 import StatisticList from "../molecules/StatisticList";
+import { hasResponded } from "@/utils/functions/hasResponded";
 
 const { Panel } = Collapse;
 const { Title } = Typography;
@@ -39,7 +40,7 @@ const GuestView: React.FC<GuestViewProps> = ({ data, updateInvitSend }) => {
     (guest) => guest.isPresent === false
   ).length;
   const rsvpRespondedCount = data.filter(
-    (guest) => guest.isPresent !== true && guest.isPresent !== false
+    (guest) => !hasResponded(guest)
   ).length;
   const comeWithSomeoneCount = data.filter(
     (guest) => guest.comeWithSomeone === true
@@ -54,10 +55,9 @@ const GuestView: React.FC<GuestViewProps> = ({ data, updateInvitSend }) => {
   ];
 
   const guestsToShow = data.filter((guest) => {
-    if (
-      showOnlyNotResponded &&
-      (guest.isPresent === true || guest.isPresent === false)
-    ) {
+    const guestHasResponded = hasResponded(guest);
+
+    if (showOnlyNotResponded && guestHasResponded) {
       return false;
     }
     if (showOnlyPresent && guest.isPresent !== true) {

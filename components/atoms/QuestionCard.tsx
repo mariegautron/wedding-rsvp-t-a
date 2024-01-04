@@ -1,5 +1,5 @@
 import { Button, Card, Space, Typography } from "antd";
-import { ReactNode } from "react";
+import { MouseEventHandler, ReactNode } from "react";
 
 const { Text } = Typography;
 
@@ -11,8 +11,9 @@ interface QuestionCardProps {
   withSubmitButton?: boolean;
   handleNext?: () => void;
   handlePrev?: () => void;
-  handleSubmit?: () => void;
+  handleSubmit?: MouseEventHandler<HTMLElement> | undefined;
   children: ReactNode;
+  loading?: boolean;
 }
 
 const QuestionCard: React.FC<QuestionCardProps> = ({
@@ -25,6 +26,7 @@ const QuestionCard: React.FC<QuestionCardProps> = ({
   handlePrev,
   handleSubmit,
   children,
+  loading = false,
 }) => {
   const nextButton = withNextButton ? (
     <Button type="primary" onClick={handleNext}>
@@ -37,7 +39,7 @@ const QuestionCard: React.FC<QuestionCardProps> = ({
   ) : null;
 
   const submitButton = withSubmitButton ? (
-    <Button type="primary" onClick={handleSubmit}>
+    <Button type="primary" onClick={handleSubmit} loading={loading}>
       Envoyer ma réponse
     </Button>
   ) : null;

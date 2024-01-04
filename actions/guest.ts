@@ -77,7 +77,6 @@ export const addWeddingGuest = async (values: WeddingGuests): Promise<any> => {
       throw new Error("Une erreur s'est produite lors de l'ajout de l'invité.");
     }
 
-    console.log("Nouveaux invités ajoutés :", data);
     return data;
   } catch (error: any) {
     console.error("Erreur lors de l'ajout des invités :", error.message);
@@ -85,7 +84,9 @@ export const addWeddingGuest = async (values: WeddingGuests): Promise<any> => {
   }
 };
 
-const getGuestByUuid = async (uuid: string): Promise<WeddingGuests | null> => {
+export const getGuestByUuid = async (
+  uuid: string
+): Promise<WeddingGuests | null> => {
   "use server";
 
   const cookieStore = cookies();
@@ -106,20 +107,6 @@ const getGuestByUuid = async (uuid: string): Promise<WeddingGuests | null> => {
   return data;
 };
 
-export const fetchGuestData = async (uuid: string) => {
-  "use server";
-
-  try {
-    const guest: WeddingGuests | null = await getGuestByUuid(uuid as string);
-    return guest;
-  } catch (error) {
-    console.error(
-      "Erreur lors de la récupération des données du guest :",
-      error
-    );
-  }
-};
-
 export default async function updateInvitSend(
   guestId: number,
   invitSend: boolean
@@ -129,10 +116,38 @@ export default async function updateInvitSend(
   const cookieStore = cookies();
   const supabase = createClient(cookieStore);
 
-  const { data, error } = await supabase
+  await supabase
     .from(COLLECTION_NAMES.WEDDING_GUESTS)
     .update({ invitSend })
     .eq("id", guestId);
 
   revalidatePath(MenuPath.WEDDING_GUESTS);
 }
+
+export const updateGuest = async (
+  updatedGuestData: WeddingGuests
+): Promise<WeddingGuests[] | null | undefined> => {
+  try {
+    const cookieStore = cookies();
+    const supabase = createClient(cookieStore);
+
+    const { data, error } = await supabase
+      .from(COLLECTION_NAMES.WEDDING_GUESTS)
+      .update(updatedGuestData)
+      .eq("id", updatedGuestData.id)
+      .select();
+
+    if (error) {
+      throw new Error(
+        "Une erreur s'est produite lors de la mise à jour de l'invité."
+      );
+    }
+
+    revalidatePath(`/?uuid=${updatedGuestData.uuid}`);
+
+    return data;
+  } catch (error: any) {
+    console.error("Erreur lors de la mise à jour de l'invité :", error.message);
+    throw new Error(error.message);
+  }
+};

@@ -1,25 +1,22 @@
-import { Form, Input, Button } from "antd";
-import React, { FC } from "react";
+import { Input } from "antd";
+import { FC } from "react";
 import QuestionCard from "../QuestionCard";
 
 interface StepMessageProps {
   handlePrev: () => void;
   handleSubmit: () => void;
   handleSelectionChange: (value: string) => void;
-  defaultValue?: any
+  defaultValue?: string;
+  loading: boolean;
 }
 
 const StepMessage: FC<StepMessageProps> = ({
   handlePrev,
   handleSubmit,
   handleSelectionChange,
-  defaultValue = {}, // Récupération de la prop defaultValue
+  defaultValue = "",
+  loading,
 }) => {
-  const onFinish = (values: any) => {
-    handleSelectionChange(values.message);
-    handleSubmit();
-  };
-
   return (
     <QuestionCard
       questionNumber={4}
@@ -27,13 +24,15 @@ const StepMessage: FC<StepMessageProps> = ({
       withSubmitButton
       handleSubmit={handleSubmit}
       handlePrev={handlePrev}
+      loading={loading}
       withPrevButton
     >
-      <Form name="messageForm" initialValues={defaultValue} onFinish={onFinish}> 
-        <Form.Item name="message">
-          <Input.TextArea placeholder="Votre message" rows={4} />
-        </Form.Item>
-      </Form>
+      <Input.TextArea
+        placeholder="Votre message"
+        rows={4}
+        defaultValue={defaultValue}
+        onChange={(e) => handleSelectionChange(e.target.value)}
+      />
     </QuestionCard>
   );
 };

@@ -1,8 +1,9 @@
 import { useState, useEffect } from "react";
+import { stringToBoolean } from "../functions/stringToBoolean";
 
 const useIsAuthenticated = () => {
   const [isAuthenticated, setIsAuthenticated] = useState<boolean>(
-    Boolean(localStorage.getItem("IS_AUTH"))
+    stringToBoolean(localStorage.getItem("IS_AUTH"))
   );
 
   useEffect(() => {

@@ -1,10 +1,11 @@
+import { stringToBoolean } from "@/utils/functions/stringToBoolean";
 import RadioTagList from "../../molecules/RadioTagList";
 import QuestionCard from "../QuestionCard";
 import { FC } from "react";
 
 interface StepIsPresentProps {
   handleNext: () => void;
-  handleSelectionChange: (value: string) => void;
+  handleSelectionChange: (value: boolean) => void;
   defaultValue?: string | boolean | object;
 }
 
@@ -27,7 +28,7 @@ const StepIsPresent: FC<StepIsPresentProps> = ({
     >
       <RadioTagList
         options={optionsIsPresent}
-        onChange={handleSelectionChange}
+        onChange={(value) => handleSelectionChange(stringToBoolean(value))}
         defaultValue={defaultValue}
       />
     </QuestionCard>

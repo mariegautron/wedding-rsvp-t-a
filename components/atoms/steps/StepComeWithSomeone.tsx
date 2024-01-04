@@ -1,16 +1,16 @@
-import React, { FC } from "react";
-import { Typography } from "antd";
-import QuestionCard from "../QuestionCard";
 import RadioTagList from "@/components/molecules/RadioTagList";
-import useFormattedDeadline from "@/utils/hooks/useFormattedDeadline";
+import { stringToBoolean } from "@/utils/functions/stringToBoolean";
+import { Typography } from "antd";
+import { FC } from "react";
+import QuestionCard from "../QuestionCard";
 
 const { Title } = Typography;
 
 interface StepComeWithSomeoneProps {
   handleNext: () => void;
   handlePrev: () => void;
-  handleSelectionChange: (value: string) => void;
-  defaultValue?: string | boolean | object; 
+  handleSelectionChange: (value: boolean) => void;
+  defaultValue?: string | boolean | object;
 }
 
 const optionsCanComeWithSomeone = [
@@ -22,7 +22,7 @@ const StepComeWithSomeone: FC<StepComeWithSomeoneProps> = ({
   handleNext,
   handlePrev,
   handleSelectionChange,
-  defaultValue, 
+  defaultValue,
 }) => {
   return (
     <QuestionCard
@@ -35,7 +35,7 @@ const StepComeWithSomeone: FC<StepComeWithSomeoneProps> = ({
     >
       <RadioTagList
         options={optionsCanComeWithSomeone}
-        onChange={handleSelectionChange}
+        onChange={(value) => handleSelectionChange(stringToBoolean(value))}
         defaultValue={defaultValue}
       />
     </QuestionCard>
