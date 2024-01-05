@@ -15,7 +15,7 @@ import {
   TagRepsponseComeWithSomeone,
   TagResponseCanComeWithSomeone,
   TagResponseIsPresent,
-} from "../atoms/TagsResponses";
+} from "../../shared/atoms/TagsResponses";
 import DrawerDetailsGuest from "./DrawerDetailsGuest";
 import SendEmailModal from "./SendEmailModal";
 

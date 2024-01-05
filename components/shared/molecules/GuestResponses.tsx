@@ -1,5 +1,5 @@
 import { WeddingGuests } from "@/utils/types/weddinggests";
-import InvitationLink from "../atoms/InvitationLink";
+import InvitationLink from "../../admin/atoms/InvitationLink";
 import {
   TagDateInviteGuest,
   TagEmailGuest,
@@ -59,7 +59,7 @@ const GuestResponses: FC<{
               )}
               {guest.message && (
                 <p>
-                  <strong>Message :</strong> {guest.message || "Non spécifié"}
+                  <strong>Message :</strong> {guest.message}
                 </p>
               )}
             </Panel>

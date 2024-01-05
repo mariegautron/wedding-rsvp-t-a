@@ -1,7 +1,7 @@
 "use server";
 
 import { updateGuest } from "@/actions/guest";
-import GuestListView from "@/components/page/GuestListView";
+import GuestListView from "@/components/admin/page/GuestListView";
 import AdminLayout from "@/layouts/AdminLayout";
 import { COLLECTION_NAMES } from "@/utils/supabase/enums";
 import { createClient } from "@/utils/supabase/server";

@@ -1,6 +1,6 @@
 "use server";
 
-import { LoginFormValues } from "@/components/molecules/LoginForm";
+import { LoginFormValues } from "@/components/admin/molecules/LoginForm";
 import { MenuPath } from "@/utils/constants/menuItems";
 import { createClient } from "@/utils/supabase/server";
 import { cookies } from "next/headers";

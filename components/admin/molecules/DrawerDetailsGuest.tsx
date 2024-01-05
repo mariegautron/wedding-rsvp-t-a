@@ -1,7 +1,7 @@
 import { WeddingGuests } from "@/utils/types/weddinggests";
 import { Drawer } from "antd";
 import { FC } from "react";
-import GuestResponses from "./GuestResponses";
+import GuestResponses from "../../shared/molecules/GuestResponses";
 
 const DrawerDetailsGuest: FC<{
   guest: WeddingGuests;

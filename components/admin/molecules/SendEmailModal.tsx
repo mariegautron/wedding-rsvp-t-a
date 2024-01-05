@@ -38,12 +38,12 @@ const SendEmailModal: React.FC<SendEmailModalProps> = ({
 
       await sendEmail(guestEmail, invitationMessage, guestUuid);
       setSending(false);
-      message.success(`Le mail a bien été envoyé à ${guestEmail}`);
+      message.success(`Le courriel a bien été envoyé à ${guestEmail}`);
       setSendEmailOpen(false);
       clearSelectedGuest();
     } catch (error) {
       message.error(ERROR_MESSAGES.ADMIN_ERROR);
-      console.error("Send email error:", error);
+      console.error("Erreur lors de l'envoi du courriel :", error);
       setSending(false);
     }
   };
@@ -75,7 +75,7 @@ const SendEmailModal: React.FC<SendEmailModalProps> = ({
     >
       <Form form={form} layout="vertical">
         <Form.Item
-          label="Email de l'invité"
+          label="Email de la personne invitée"
           name="guestEmail"
           initialValue={guestEmail}
         >
@@ -84,8 +84,8 @@ const SendEmailModal: React.FC<SendEmailModalProps> = ({
         <Form.Item
           label="Message d'invitation"
           name="invitationMessage"
-          // TODO: Put in database for adminitrate default message
-          initialValue={`Bonjour,\n\nNous t'invitons à notre mariage ! Nous sommes ravis de t’inviter à partager ce jour unique avec nous, qui se déroulera le ${eventDate} au ${process.env.NEXT_PUBLIC_EVENT_PLACE}.\n\nConfirme-nous ta présence !`}
+          // TODO: Mettre en base de données pour avoir un message par défaut pour l'administrateur
+          initialValue={`Bonjour,\n\nNous vous invitons à notre mariage ! Nous sommes ravis de vous convier à partager ce jour unique avec nous, qui se déroulera le ${eventDate} à ${process.env.NEXT_PUBLIC_EVENT_PLACE}.\n\nVeuillez confirmer votre présence !`}
         >
           <Input.TextArea rows={4} />
         </Form.Item>

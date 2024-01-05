@@ -1,5 +1,6 @@
+import { ERROR_MESSAGES, SUCCESS_MESSAGES } from "@/utils/constants/messages";
 import { WeddingGuests } from "@/utils/types/weddinggests";
-import { Modal, Input, Button } from "antd";
+import { Modal, Input, Button, message } from "antd";
 import { useState } from "react";
 
 interface InvitationConfirmationModalProps {
@@ -31,9 +32,15 @@ const InvitationConfirmationModal: React.FC<
     onCancel();
   };
 
-  const handleConfirm = () => {
-    updateGuest({ ...guest, commentSend });
-    handleCancel();
+  const handleConfirm = async () => {
+    try {
+      await updateGuest({ ...guest, commentSend });
+      handleCancel();
+      message.success(SUCCESS_MESSAGES.COMMENT_SEND);
+    } catch (error) {
+      console.log("Erreur lors de la mise à jour de l'invité :", error);
+      message.error(ERROR_MESSAGES.ADMIN_ERROR);
+    }
   };
 
   return (
@@ -57,8 +64,8 @@ const InvitationConfirmationModal: React.FC<
     >
       <p>
         {invitSend
-          ? "Es-tu certain de vouloir indiquer que l'invitation n'a pas été envoyée à cet invité ?"
-          : "Es-tu certain d'avoir marqué l'invitation comme envoyée à cet invité ?"}
+          ? "Es-tu certain de vouloir indiquer que l'invitation n'a pas été envoyée à cette personne invitée ?"
+          : "Es-tu certain d'avoir marqué l'invitation comme envoyée à cette personne invitée ?"}
       </p>
       <Input.TextArea
         placeholder="Ajouter un commentaire"

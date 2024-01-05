@@ -2,7 +2,7 @@ import useIsAuthenticated from "@/utils/hooks/useIsAuthenticated";
 import { WeddingGuests } from "@/utils/types/weddinggests";
 import { Card } from "antd";
 import { FC } from "react";
-import InvitationLink from "./InvitationLink";
+import InvitationLink from "../../admin/atoms/InvitationLink";
 import {
   TagDateInviteGuest,
   TagRepsponseComeWithSomeone,
@@ -16,7 +16,7 @@ const GuestDetails: FC<{ guest: WeddingGuests }> = ({ guest }) => {
   return (
     <div style={{ display: "flex", flexDirection: "column", gap: "20px" }}>
       {isAdmin && (
-        <Card title="Informations de l'invité" style={{ flex: 1 }}>
+        <Card title="Détails de la personne invitée" style={{ flex: 1 }}>
           <>
             <p>
               <strong>Prénom :</strong> {guest?.firstname}
@@ -30,7 +30,7 @@ const GuestDetails: FC<{ guest: WeddingGuests }> = ({ guest }) => {
           </>
 
           <p>
-            <strong>Peut venir avec quelqu'un :</strong>{" "}
+            <strong>Peut être accompagné :</strong>{" "}
             <TagResponseCanComeWithSomeone
               canComeWithSomeone={guest.canComeWithSomeone}
             />
@@ -39,7 +39,7 @@ const GuestDetails: FC<{ guest: WeddingGuests }> = ({ guest }) => {
           <InvitationLink uuid={guest.uuid} />
 
           <p>
-            <strong>Statut d'envoi de l'invit:</strong>
+            <strong>Statut d'envoi de l'invitation :</strong>
             <TagDateInviteGuest
               dateInvitSend={guest.dateInvitSend}
               invitSend={guest.invitSend}
@@ -48,21 +48,21 @@ const GuestDetails: FC<{ guest: WeddingGuests }> = ({ guest }) => {
 
           {guest.commentSend && (
             <p>
-              <strong>Commentaire d'invitation :</strong> {guest.commentSend}
+              <strong>Commentaire de l'invitation :</strong> {guest.commentSend}
             </p>
           )}
         </Card>
       )}
 
-      <Card title="Réponses de l'invité" style={{ flex: 1 }}>
+      <Card title="Réponses de la personne invitée" style={{ flex: 1 }}>
         <p>
-          <strong>Réponse :</strong>{" "}
+          <strong>Réponse à l'invitation :</strong>{" "}
           <TagResponseIsPresent isPresent={guest.isPresent} />
         </p>
 
         {guest?.canComeWithSomeone && (
           <p>
-            <strong>Vient avec :</strong>{" "}
+            <strong>Accompagné :</strong>{" "}
             <TagRepsponseComeWithSomeone
               comeWithSomeone={guest.comeWithSomeone}
               guestOfGuestFirstname={guest.guestOfGuestFirstname}

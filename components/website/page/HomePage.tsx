@@ -5,7 +5,7 @@ import { WeddingGuests } from "@/utils/types/weddinggests";
 import { Result, Spin } from "antd";
 import { FC } from "react";
 import Footer from "../atoms/Footer";
-import HeroTemplatePage from "../atoms/HeroTemplatePage";
+import HeroTemplatePage from "../molecules/HeroTemplatePage";
 import Hero from "../molecules/Hero";
 import RSVPStepper from "../molecules/RSVPStepper";
 import useDeadlineCheck from "@/utils/hooks/useDeadlineCheck";

@@ -41,7 +41,7 @@ const AddGuestForm: FC<AddGuestFormProps> = ({ addWeddingGuest }) => {
 
   return (
     <div style={{ maxWidth: 400, margin: "auto" }}>
-      <h2>Ajouter un nouvel invité</h2>
+      <h2>Ajouter une nouvelle personne invitée</h2>
       <Form onFinish={handleFormSubmit}>
         <Form.Item
           label="Prénom"
@@ -76,24 +76,30 @@ const AddGuestForm: FC<AddGuestFormProps> = ({ addWeddingGuest }) => {
         {showAdditionalFields ? (
           <>
             <Form.Item
-              label="La personne sera-t-elle présente ?"
+              label="Cette personne sera-t-elle présente ?"
               name="isPresent"
             >
               <Switch checkedChildren="Oui" unCheckedChildren="Non" />
             </Form.Item>
 
             <Form.Item
-              label="La personne vient-elle avec quelqu'un ?"
+              label="Cette personne viendra-t-elle avec quelqu'un ?"
               name="comeWithSomeone"
             >
               <Switch checkedChildren="Oui" unCheckedChildren="Non" />
             </Form.Item>
 
-            <Form.Item label="Prénom de l'invité" name="guestOfGuestFirstname">
+            <Form.Item
+              label="Prénom de la personne invitée"
+              name="guestOfGuestFirstname"
+            >
               <Input />
             </Form.Item>
 
-            <Form.Item label="Nom de l'invité" name="guestOfGuestLastname">
+            <Form.Item
+              label="Nom de la personne invitée"
+              name="guestOfGuestLastname"
+            >
               <Input />
             </Form.Item>
           </>
@@ -110,7 +116,7 @@ const AddGuestForm: FC<AddGuestFormProps> = ({ addWeddingGuest }) => {
             }}
           >
             <PlusOutlined style={{ marginRight: 8 }} />
-            Je veux indiquer des informations supplémentaires
+            Je souhaite ajouter des informations supplémentaires
           </Button>
         )}
 

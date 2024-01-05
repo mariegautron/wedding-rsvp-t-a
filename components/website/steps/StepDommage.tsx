@@ -1,6 +1,6 @@
 import React, { FC } from "react";
 import { Typography } from "antd";
-import QuestionCard from "../QuestionCard";
+import QuestionCard from "../atoms/QuestionCard";
 import useFormattedDeadline from "@/utils/hooks/useFormattedDeadline";
 
 const { Title } = Typography;

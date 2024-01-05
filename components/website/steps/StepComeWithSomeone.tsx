@@ -1,8 +1,8 @@
-import RadioTagList from "@/components/molecules/RadioTagList";
+import RadioTagList from "@/components/website/atoms/RadioTagList";
 import { stringToBoolean } from "@/utils/functions/stringToBoolean";
 import { Typography } from "antd";
 import { FC } from "react";
-import QuestionCard from "../QuestionCard";
+import QuestionCard from "../atoms/QuestionCard";
 
 const { Title } = Typography;
 
@@ -14,8 +14,8 @@ interface StepComeWithSomeoneProps {
 }
 
 const optionsCanComeWithSomeone = [
-  { value: "true", text: "Oui, je ne viendrai pas seule" },
-  { value: "false", text: "Non, je viendrai seule" },
+  { value: "true", text: "Oui, je serai accompagné(e)" },
+  { value: "false", text: "Non, je serai seul(e)" },
 ];
 
 const StepComeWithSomeone: FC<StepComeWithSomeoneProps> = ({
@@ -27,7 +27,7 @@ const StepComeWithSomeone: FC<StepComeWithSomeoneProps> = ({
   return (
     <QuestionCard
       questionNumber={2}
-      questionTitle="Est-ce que tu as prévu d’emmener quelqu’un avec toi ?"
+      questionTitle="Envisages-tu d’être accompagné(e) ?"
       withNextButton
       withPrevButton
       handleNext={handleNext}

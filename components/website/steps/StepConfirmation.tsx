@@ -1,7 +1,7 @@
 import useFormattedDeadline from "@/utils/hooks/useFormattedDeadline";
 import { Typography } from "antd";
 import { FC } from "react";
-import QuestionCard from "../QuestionCard";
+import QuestionCard from "../atoms/QuestionCard";
 import { useFormattedEventDate } from "@/utils/hooks/useFormattedEventDate";
 
 const { Title } = Typography;

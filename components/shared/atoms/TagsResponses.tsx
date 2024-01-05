@@ -6,15 +6,15 @@ export const TagResponseIsPresent: FC<{
   isPresent: boolean | null | undefined;
 }> = ({ isPresent }) => {
   return (
-    <span>
+    <>
       {isPresent === true ? (
-        <Tag color="green">Présent</Tag>
+        <Tag color="green">Présent·e</Tag>
       ) : isPresent === false ? (
-        <Tag color="red">Absent</Tag>
+        <Tag color="red">Absent·e</Tag>
       ) : (
-        <Tag color="default">N'a pas encore répondu</Tag>
+        <Tag color="default">Non répondu·e</Tag>
       )}
-    </span>
+    </>
   );
 };
 
@@ -22,13 +22,13 @@ export const TagResponseCanComeWithSomeone: FC<{
   canComeWithSomeone: boolean;
 }> = ({ canComeWithSomeone }) => {
   return (
-    <span>
+    <>
       {canComeWithSomeone ? (
-        <Tag color="green">Oui, peut venir avec quelqu'un</Tag>
+        <Tag color="green">Peut être accompagné·e</Tag>
       ) : (
-        <Tag color="red">Non, ne peut pas venir avec quelqu'un</Tag>
+        <Tag color="red">Pas accompagné·e</Tag>
       )}
-    </span>
+    </>
   );
 };
 
@@ -38,19 +38,19 @@ export const TagRepsponseComeWithSomeone: FC<{
   guestOfGuestLastname?: string;
 }> = ({ comeWithSomeone, guestOfGuestFirstname, guestOfGuestLastname }) => {
   return (
-    <span>
+    <>
       {comeWithSomeone === true ? (
         <Tag color="green">
           {guestOfGuestLastname
-            ? `Vient avec ${guestOfGuestFirstname} ${guestOfGuestLastname}`
-            : `Vient avec ${guestOfGuestFirstname}`}
+            ? `Accompagné·e par ${guestOfGuestFirstname} ${guestOfGuestLastname}`
+            : `Accompagné·e par ${guestOfGuestFirstname}`}
         </Tag>
       ) : comeWithSomeone === false ? (
-        <Tag color="red">Ne vient pas accompagné·e</Tag>
+        <Tag color="red">Non accompagné·e</Tag>
       ) : (
-        <Tag color="default">N'a pas indiqué si accompagné</Tag>
+        <Tag color="default">Non spécifié pour l'accompagnement</Tag>
       )}
-    </span>
+    </>
   );
 };
 
@@ -70,10 +70,14 @@ export const TagDateInviteGuest: FC<{
   dateInvitSend?: Date;
 }> = ({ invitSend, dateInvitSend }) => {
   if (!invitSend) {
-    return <Tag color="red">{`Invitation non envoyée`}</Tag>;
+    return <Tag color="red">Invitation non envoyée</Tag>;
   } else if (dateInvitSend) {
-    return <Tag color="green">{`Invitation envoyée le ${dateInvitSend}`}</Tag>;
+    return (
+      <Tag color="green">{`Invitation envoyée le ${formatDate(
+        dateInvitSend
+      )}`}</Tag>
+    );
   } else {
-    return <Tag color="green">{`Invitation envoyée`}</Tag>;
+    return <Tag color="green">Invitation envoyée</Tag>;
   }
 };

@@ -6,12 +6,12 @@ import {
 import { WeddingGuests } from "@/utils/types/weddinggests";
 import { message } from "antd";
 import { useEffect, useState } from "react";
-import StepComeWithSomeone from "../atoms/steps/StepComeWithSomeone";
-import StepConfirmation from "../atoms/steps/StepConfirmation";
-import StepDommage from "../atoms/steps/StepDommage";
-import StepGuestOfGuest from "../atoms/steps/StepGuestOfGuest";
-import StepIsPresent from "../atoms/steps/StepIsPresent";
-import StepMessage from "../atoms/steps/StepMessage";
+import StepComeWithSomeone from "../steps/StepComeWithSomeone";
+import StepConfirmation from "../steps/StepConfirmation";
+import StepDommage from "../steps/StepDommage";
+import StepGuestOfGuest from "../steps/StepGuestOfGuest";
+import StepIsPresent from "../steps/StepIsPresent";
+import StepMessage from "../steps/StepMessage";
 import { booleanToString } from "@/utils/functions/booleanToString";
 import useGuestHasResponded from "@/utils/hooks/useGuestHasResponded";
 
@@ -36,8 +36,6 @@ const FormStepper: React.FC<{
   const [isLoading, setIsLoading] = useState(false);
 
   const hasResponded = useGuestHasResponded(allChoices);
-
-  console.log(allChoices);
 
   useEffect(() => {
     const guestChoicesConditions: WeddingGuests = {
@@ -100,7 +98,6 @@ const FormStepper: React.FC<{
   };
 
   const handleSubmit = async () => {
-    console.log({ ...allChoices, invitSend: true });
     try {
       setIsLoading(true);
       const result = await updateGuest({

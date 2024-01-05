@@ -1,6 +1,6 @@
 import { stringToBoolean } from "@/utils/functions/stringToBoolean";
-import RadioTagList from "../../molecules/RadioTagList";
-import QuestionCard from "../QuestionCard";
+import RadioTagList from "../atoms/RadioTagList";
+import QuestionCard from "../atoms/QuestionCard";
 import { FC } from "react";
 
 interface StepIsPresentProps {

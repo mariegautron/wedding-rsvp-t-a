@@ -49,11 +49,11 @@ const GuestView: React.FC<GuestViewProps> = ({ data, updateGuest }) => {
   const guestCount = data.length + comeWithSomeoneCount;
 
   const statistics = [
-    { title: "Invités (total)", value: guestCount },
-    { title: "Pas encore répondu", value: rsvpRespondedCount },
+    { title: "Personnes invitées (total)", value: guestCount },
+    { title: "Pas encore de réponse", value: rsvpRespondedCount },
     { title: "Présents", value: presentCount },
-    { title: "Pas présent", value: noPresentCount },
-    { title: "Invités avec quelqu'un", value: comeWithSomeoneCount },
+    { title: "Absent(e)s", value: noPresentCount },
+    { title: "Personnes invitées avec quelqu'un", value: comeWithSomeoneCount },
   ];
 
   const guestsToShow = data.filter((guest) => {
@@ -92,6 +92,8 @@ const GuestView: React.FC<GuestViewProps> = ({ data, updateGuest }) => {
     setShowOnlyNotResponded(false);
     setShowOnlyPresent(false);
     setShowOnlyOneCanCome(false);
+    setShowOnlyInvitNotSent(false);
+    setShowOnlyInvitSent(false);
     setSearchName("");
   };
 
@@ -113,14 +115,16 @@ const GuestView: React.FC<GuestViewProps> = ({ data, updateGuest }) => {
       >
         <Space>
           <UsergroupAddOutlined style={{ fontSize: "24px" }} />
-          <Title level={2}>Liste des invités</Title>
+          <Title level={2}>Liste des personnes invitées</Title>
         </Space>
         <Button type="primary" icon={<UserOutlined />}>
-          <Link href="/admin/weddingguests/add">Ajouter un invité</Link>
+          <Link href="/admin/weddingguests/add">
+            Ajouter une personne invitée
+          </Link>
         </Button>
       </div>
       <StatisticList statistics={statistics} />
-      <Title level={4}>Tableaux des invités</Title>
+      <Title level={4}>Tableau des personnes invitées</Title>
       <Collapse accordion style={{ marginBottom: 20, marginTop: 20 }}>
         <Panel header="Filtres & Recherche" key="2">
           <FiltersAndSearchPanel

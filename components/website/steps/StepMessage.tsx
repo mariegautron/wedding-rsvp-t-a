@@ -1,6 +1,6 @@
 import { Input } from "antd";
 import { FC } from "react";
-import QuestionCard from "../QuestionCard";
+import QuestionCard from "../atoms/QuestionCard";
 
 interface StepMessageProps {
   handlePrev: () => void;
@@ -17,7 +17,6 @@ const StepMessage: FC<StepMessageProps> = ({
   defaultValue = "",
   loading,
 }) => {
-  console.log({ defaultValue });
   return (
     <QuestionCard
       questionNumber={4}

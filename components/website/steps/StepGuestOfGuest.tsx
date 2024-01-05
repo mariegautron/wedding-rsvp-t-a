@@ -1,6 +1,6 @@
 import { Form, Input, Row, Col } from "antd";
 import React, { FC } from "react";
-import QuestionCard from "../QuestionCard";
+import QuestionCard from "../atoms/QuestionCard";
 
 interface StepGuestOfGuestProps {
   handleNext: () => void;
@@ -21,7 +21,7 @@ const StepGuestOfGuest: FC<StepGuestOfGuestProps> = ({
   return (
     <QuestionCard
       questionNumber={3}
-      questionTitle="Qui est ton invité ?"
+      questionTitle="Qui est ton invité(e) ?"
       withNextButton
       withPrevButton
       handleNext={handleNext}
@@ -30,13 +30,13 @@ const StepGuestOfGuest: FC<StepGuestOfGuestProps> = ({
       <Row gutter={[16, 16]}>
         <Col xs={24} sm={12}>
           <Form.Item
-            label="Prénom de l'invité"
+            label="Prénom de l'invité(e)"
             name="guestOfGuestFirstname"
             labelCol={{ span: 24 }}
             style={{ fontSize: "20px" }}
           >
             <Input
-              placeholder="Prénom de l'invité"
+              placeholder="Prénom de l'invité(e)"
               style={{ fontSize: "20px" }}
               defaultValue={defaultValues?.guestOfGuestFirstname || ""}
               onChange={(e) =>
@@ -47,13 +47,13 @@ const StepGuestOfGuest: FC<StepGuestOfGuestProps> = ({
         </Col>
         <Col xs={24} sm={12}>
           <Form.Item
-            label="Nom de l'invité"
+            label="Nom de l'invité(e)"
             name="guestOfGuestLastname"
             labelCol={{ span: 24 }}
             style={{ fontSize: "20px" }}
           >
             <Input
-              placeholder="Nom de l'invité"
+              placeholder="Nom de l'invité(e)"
               style={{ fontSize: "20px" }}
               defaultValue={defaultValues?.guestOfGuestLastname || ""}
               onChange={(e) =>

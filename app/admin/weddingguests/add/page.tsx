@@ -1,7 +1,7 @@
 "use server";
 
 import { addWeddingGuest } from "@/actions/guest";
-import AddGuestForm from "@/components/molecules/AddGuestForm";
+import AddGuestForm from "@/components/admin/molecules/AddGuestForm";
 import AdminLayout from "@/layouts/AdminLayout";
 import { FC } from "react";
 

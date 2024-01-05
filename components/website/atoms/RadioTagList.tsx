@@ -1,6 +1,6 @@
 import { Radio } from "antd";
 import { FC } from "react";
-import RadioButtonTag from "../atoms/RadioButtonTags";
+import RadioButtonTag from "./RadioButtonTags";
 
 interface RadioTagListProps {
   options: { value: string; text: string }[];
