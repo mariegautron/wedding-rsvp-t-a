@@ -16,11 +16,8 @@ interface HeroProps {
 
 const Hero: FC<HeroProps> = ({ guest }) => {
   const isDeadlinePassed = useDeadlineCheck();
-
   const eventDate = useFormattedEventDate();
-
   const hasResponded = useGuestHasResponded(guest);
-
   const formattedDeadline = useFormattedDeadline();
 
   const scrollToRsvp = () => {
@@ -42,18 +39,6 @@ const Hero: FC<HeroProps> = ({ guest }) => {
           modifier.
         </Text>
         <GuestResponses guest={guest} />
-        <Text style={{ display: "block", fontSize: 25 }}>
-          Pour rappel, le mariage aura lieu le{" "}
-          <span
-            style={{
-              textDecoration: "underline",
-              fontSize: 25,
-              marginRight: 5,
-            }}
-          >
-            {eventDate} au {process.env.NEXT_PUBLIC_EVENT_PLACE}
-          </span>
-        </Text>
         <Button type="primary" style={{ marginTop: 20 }} onClick={scrollToRsvp}>
           Modifier ma réponse
         </Button>
@@ -95,12 +80,6 @@ const Hero: FC<HeroProps> = ({ guest }) => {
           réponses est passée.
         </Text>
         <GuestResponses guest={guest} />
-        <Text style={{ display: "block", fontSize: 25 }}>
-          Pour rappel, le mariage aura lieu le
-          <span style={{ textDecoration: "underline", fontSize: 25 }}>
-            {eventDate} au {process.env.NEXT_PUBLIC_EVENT_PLACE}
-          </span>
-        </Text>
       </HeroTemplatePage>
     );
   }

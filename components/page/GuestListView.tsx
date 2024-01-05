@@ -1,26 +1,28 @@
 "use client";
 
+import { hasResponded } from "@/utils/functions/hasResponded";
 import useIsAuthenticated from "@/utils/hooks/useIsAuthenticated";
 import { WeddingGuests } from "@/utils/types/weddinggests";
 import { UserOutlined, UsergroupAddOutlined } from "@ant-design/icons";
 import { Button, Collapse, Space, Typography } from "antd";
 import Link from "next/link";
-import { useMemo, useRef, useState } from "react";
+import { useMemo, useState } from "react";
 import FiltersAndSearchPanel from "../molecules/FiltersAndSearchPanel";
 import GuestListTable from "../molecules/GuestListTable";
 import LoginForm from "../molecules/LoginForm";
 import StatisticList from "../molecules/StatisticList";
-import { hasResponded } from "@/utils/functions/hasResponded";
 
 const { Panel } = Collapse;
 const { Title } = Typography;
 
 interface GuestViewProps {
   data: WeddingGuests[];
-  updateInvitSend: (guestId: number, invitSend: boolean) => Promise<void>;
+  updateGuest: (
+    updatedGuestData: Partial<WeddingGuests>
+  ) => Promise<WeddingGuests[] | null | undefined>;
 }
 
-const GuestView: React.FC<GuestViewProps> = ({ data, updateInvitSend }) => {
+const GuestView: React.FC<GuestViewProps> = ({ data, updateGuest }) => {
   const isAuth = useIsAuthenticated();
 
   const [showOnlyNotResponded, setShowOnlyNotResponded] = useState(false);
@@ -137,7 +139,7 @@ const GuestView: React.FC<GuestViewProps> = ({ data, updateInvitSend }) => {
           />
         </Panel>
       </Collapse>
-      <GuestListTable data={sortedGuests} updateInvitSend={updateInvitSend} />
+      <GuestListTable data={sortedGuests} updateGuest={updateGuest} />
     </div>
   );
 };

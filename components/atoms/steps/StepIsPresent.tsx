@@ -6,7 +6,7 @@ import { FC } from "react";
 interface StepIsPresentProps {
   handleNext: () => void;
   handleSelectionChange: (value: boolean) => void;
-  defaultValue?: string | boolean | object;
+  defaultValue?: string;
 }
 
 const optionsIsPresent = [
@@ -17,7 +17,7 @@ const optionsIsPresent = [
 const StepIsPresent: FC<StepIsPresentProps> = ({
   handleNext,
   handleSelectionChange,
-  defaultValue,
+  defaultValue = "",
 }) => {
   return (
     <QuestionCard

@@ -11,4 +11,6 @@ export type WeddingGuests = {
   guestOfGuestFirstname?: string;
   guestOfGuestLastname?: string;
   invitSend?: boolean;
+  commentSend?: string;
+  dateInvitSend?: Date;
 };

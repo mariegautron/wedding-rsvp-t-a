@@ -1,4 +1,4 @@
-import { ERROR_MESSAGES } from "@/utils/constants/messages";
+import { ERROR_MESSAGES, SUCCESS_MESSAGES } from "@/utils/constants/messages";
 import {
   JourneyStep,
   determineJourney,
@@ -52,7 +52,7 @@ const FormStepper: React.FC<{
     const _journey = determineJourney(allChoices);
 
     setJourney(_journey);
-  }, [allChoices]);
+  }, [allChoices, guest]);
 
   const handleNext = () => {
     const currentIndex = journey.indexOf(currentStep);
@@ -65,6 +65,7 @@ const FormStepper: React.FC<{
   const handlePrev = () => {
     const currentIndex = journey.indexOf(currentStep);
     const prevIndex = currentIndex - 1;
+
     if (prevIndex >= 0) {
       setCurrentStep(journey[prevIndex]);
     }
@@ -80,6 +81,7 @@ const FormStepper: React.FC<{
       const result = await updateGuest({ ...allChoices, invitSend: true });
 
       if (result && result[0]) {
+        message.success(SUCCESS_MESSAGES.RESONSE_SEND);
         handleNext();
       } else {
         message.error(ERROR_MESSAGES.ASK_TO_REPORT);

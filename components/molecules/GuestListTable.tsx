@@ -3,30 +3,43 @@
 import { WeddingGuests } from "@/utils/types/weddinggests";
 import {
   CopyOutlined,
-  DownOutlined,
   EyeOutlined,
   MailOutlined,
+  MenuOutlined,
+  MessageOutlined,
 } from "@ant-design/icons";
-import { Button, Checkbox, Dropdown, Menu, Switch, Table, Tag } from "antd";
+import { Badge, Button, Dropdown, Menu, Table, Tooltip } from "antd";
 import { FC, useState } from "react";
-import DrawerDetailsGuest from "./DrawerDetailsGuest";
-import SendEmailModal from "./SendEmailModal";
+import InvitSendCheckbox from "../atoms/InvitSendCheckbox";
 import {
   TagRepsponseComeWithSomeone,
   TagResponseCanComeWithSomeone,
   TagResponseIsPresent,
 } from "../atoms/TagsResponses";
+import DrawerDetailsGuest from "./DrawerDetailsGuest";
+import SendEmailModal from "./SendEmailModal";
 
 const GuestListTable: FC<{
   data: WeddingGuests[];
-  updateInvitSend: (guestId: number, invitSend: boolean) => Promise<void>;
-}> = ({ data, updateInvitSend }) => {
+  updateGuest: (
+    updatedGuestData: Partial<WeddingGuests>
+  ) => Promise<WeddingGuests[] | null | undefined>;
+}> = ({ data, updateGuest }) => {
   const [emailOpen, setSendEmailOpen] = useState(false);
   const [selectedGuest, setSelectedGuest] = useState<WeddingGuests>();
   const [drawerVisible, setDrawerVisible] = useState(false);
 
   const clearSelectedGuest = () => {
     setSelectedGuest(undefined);
+  };
+
+  const rowClassName = (record: any) => {
+    if (record.isPresent === true) {
+      return "successRow";
+    } else if (record.isPresent === false) {
+      return "errorRow";
+    }
+    return "";
   };
 
   const actionsMenu = (record: any) => (
@@ -76,11 +89,12 @@ const GuestListTable: FC<{
       title: "Invit envoyée",
       key: "invitSend",
       render: (_: any, record: WeddingGuests) => (
-        <Checkbox
+        <InvitSendCheckbox
           checked={record.invitSend}
-          onChange={() =>
-            updateInvitSend(record.id as number, !record.invitSend)
-          }
+          updateGuest={updateGuest}
+          guest={record}
+          setSelectedGuest={setSelectedGuest}
+          clearSelectedGuest={clearSelectedGuest}
         />
       ),
     },
@@ -131,9 +145,9 @@ const GuestListTable: FC<{
       render: (_: any, record: any) => (
         <>
           <Dropdown overlay={actionsMenu(record)} trigger={["click"]}>
-            <Button>
-              Actions <DownOutlined />
-            </Button>
+            <Badge dot={record.message ? true : false}>
+              <Button type="text" icon={<MenuOutlined />} />
+            </Badge>
           </Dropdown>
         </>
       ),
@@ -147,6 +161,7 @@ const GuestListTable: FC<{
         columns={columns}
         pagination={false}
         className="border-collapse border border-gray-300"
+        rowClassName={rowClassName}
       />
       <SendEmailModal
         emailOpen={emailOpen}
@@ -160,6 +175,7 @@ const GuestListTable: FC<{
           guest={selectedGuest}
           drawerVisible={drawerVisible}
           setDrawerVisible={setDrawerVisible}
+          clearSelectedGuest={clearSelectedGuest}
         />
       )}
     </div>

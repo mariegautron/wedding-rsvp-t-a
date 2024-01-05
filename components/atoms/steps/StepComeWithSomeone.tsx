@@ -10,7 +10,7 @@ interface StepComeWithSomeoneProps {
   handleNext: () => void;
   handlePrev: () => void;
   handleSelectionChange: (value: boolean) => void;
-  defaultValue?: string | boolean | object;
+  defaultValue?: string;
 }
 
 const optionsCanComeWithSomeone = [
@@ -22,7 +22,7 @@ const StepComeWithSomeone: FC<StepComeWithSomeoneProps> = ({
   handleNext,
   handlePrev,
   handleSelectionChange,
-  defaultValue,
+  defaultValue = "",
 }) => {
   return (
     <QuestionCard

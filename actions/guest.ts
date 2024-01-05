@@ -77,6 +77,8 @@ export const addWeddingGuest = async (values: WeddingGuests): Promise<any> => {
       throw new Error("Une erreur s'est produite lors de l'ajout de l'invité.");
     }
 
+    revalidatePath(MenuPath.WEDDING_GUESTS);
+
     return data;
   } catch (error: any) {
     console.error("Erreur lors de l'ajout des invités :", error.message);
@@ -107,25 +109,8 @@ export const getGuestByUuid = async (
   return data;
 };
 
-export default async function updateInvitSend(
-  guestId: number,
-  invitSend: boolean
-) {
-  "use server";
-
-  const cookieStore = cookies();
-  const supabase = createClient(cookieStore);
-
-  await supabase
-    .from(COLLECTION_NAMES.WEDDING_GUESTS)
-    .update({ invitSend })
-    .eq("id", guestId);
-
-  revalidatePath(MenuPath.WEDDING_GUESTS);
-}
-
 export const updateGuest = async (
-  updatedGuestData: WeddingGuests
+  updatedGuestData: Partial<WeddingGuests>
 ): Promise<WeddingGuests[] | null | undefined> => {
   try {
     const cookieStore = cookies();
@@ -144,6 +129,7 @@ export const updateGuest = async (
     }
 
     revalidatePath(`/?uuid=${updatedGuestData.uuid}`);
+    revalidatePath(MenuPath.WEDDING_GUESTS);
 
     return data;
   } catch (error: any) {

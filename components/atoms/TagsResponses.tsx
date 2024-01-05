@@ -1,6 +1,6 @@
-import { WeddingGuests } from "@/utils/types/weddinggests";
-import { FC } from "react";
+import { formatDate } from "@/utils/functions/formatDate";
 import { Tag } from "antd";
+import { FC } from "react";
 
 export const TagResponseIsPresent: FC<{
   isPresent: boolean | null | undefined;
@@ -40,7 +40,11 @@ export const TagRepsponseComeWithSomeone: FC<{
   return (
     <span>
       {comeWithSomeone === true ? (
-        <Tag color="green">{guestOfGuestLastname ? `Vient avec ${guestOfGuestFirstname} ${guestOfGuestLastname}`: `Vient avec ${guestOfGuestFirstname}`}</Tag>
+        <Tag color="green">
+          {guestOfGuestLastname
+            ? `Vient avec ${guestOfGuestFirstname} ${guestOfGuestLastname}`
+            : `Vient avec ${guestOfGuestFirstname}`}
+        </Tag>
       ) : comeWithSomeone === false ? (
         <Tag color="red">Ne vient pas accompagné·e</Tag>
       ) : (
@@ -59,4 +63,17 @@ export const TagNameGuest: FC<{ firstname: string; lastname: string }> = ({
 
 export const TagEmailGuest: FC<{ email: string }> = ({ email }) => {
   return <Tag color="default">{`${email}`}</Tag>;
+};
+
+export const TagDateInviteGuest: FC<{
+  invitSend?: boolean;
+  dateInvitSend?: Date;
+}> = ({ invitSend, dateInvitSend }) => {
+  if (!invitSend) {
+    return <Tag color="red">{`Invitation non envoyée`}</Tag>;
+  } else if (dateInvitSend) {
+    return <Tag color="green">{`Invitation envoyée le ${dateInvitSend}`}</Tag>;
+  } else {
+    return <Tag color="green">{`Invitation envoyée`}</Tag>;
+  }
 };

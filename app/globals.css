@@ -45,6 +45,19 @@ body {
   box-shadow: 0px 4px 8px rgba(96, 108, 93, 0.6); /* Ombre plus prononcée au survol */
 }
 
+.ant-collapse-content,
+.ant-collapse-content-box {
+  background-color: transparent !important;
+}
+
+.successRow {
+  background-color: #ebf5e1; /* Nouvelle couleur de surbrillance verte très claire */
+}
+
+.errorRow {
+  background-color: #fcecec; /* Nouvelle couleur de surbrillance rouge très claire */
+}
+
 /* Styles pour le composant Hero */
 .hero {
   position: relative;
