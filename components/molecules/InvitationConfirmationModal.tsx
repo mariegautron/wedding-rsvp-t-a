@@ -33,7 +33,7 @@ const InvitationConfirmationModal: React.FC<
 
   const handleConfirm = () => {
     updateGuest({ ...guest, commentSend });
-    handleCancel;
+    handleCancel();
   };
 
   return (

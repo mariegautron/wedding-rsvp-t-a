@@ -37,11 +37,20 @@ const FormStepper: React.FC<{
 
   const hasResponded = useGuestHasResponded(allChoices);
 
+  console.log(allChoices);
+
   useEffect(() => {
     const guestChoicesConditions: WeddingGuests = {
       ...guest,
+      guestOfGuestFirstname:
+        allChoices.guestOfGuestFirstname || guest.guestOfGuestFirstname,
+      guestOfGuestLastname:
+        allChoices.guestOfGuestLastname || guest.guestOfGuestLastname,
       isPresent: hasResponded ? allChoices.isPresent : guest.isPresent,
-      comeWithSomeone: allChoices.comeWithSomeone || guest.comeWithSomeone,
+      comeWithSomeone:
+        allChoices !== undefined && allChoices !== null
+          ? allChoices.comeWithSomeone
+          : guest.comeWithSomeone,
       canComeWithSomeone: guest.canComeWithSomeone,
     };
 
@@ -71,14 +80,38 @@ const FormStepper: React.FC<{
     }
   };
 
-  const handleSelectionChange = (value: string | object | boolean) => {
-    setAllChoices({ ...allChoices, [currentStep]: value });
+  const handleSelectionChange = (
+    value:
+      | string
+      | { guestOfGuestFirstname?: string; guestOfGuestLastname?: string }
+      | boolean
+  ) => {
+    if (currentStep === "guestOfGuest") {
+      setAllChoices({
+        ...allChoices,
+        ...(value as {
+          guestOfGuestFirstname?: string;
+          guestOfGuestLastname?: string;
+        }),
+      });
+    } else {
+      setAllChoices({ ...allChoices, [currentStep]: value });
+    }
   };
 
   const handleSubmit = async () => {
+    console.log({ ...allChoices, invitSend: true });
     try {
       setIsLoading(true);
-      const result = await updateGuest({ ...allChoices, invitSend: true });
+      const result = await updateGuest({
+        ...allChoices,
+        invitSend: true,
+        dateResponseSend: new Date(),
+        dateInvitSend:
+          allChoices.dateInvitSend === null
+            ? new Date()
+            : allChoices.dateInvitSend,
+      });
 
       if (result && result[0]) {
         message.success(SUCCESS_MESSAGES.RESONSE_SEND);

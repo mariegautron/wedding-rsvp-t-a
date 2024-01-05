@@ -17,6 +17,7 @@ const StepMessage: FC<StepMessageProps> = ({
   defaultValue = "",
   loading,
 }) => {
+  console.log({ defaultValue });
   return (
     <QuestionCard
       questionNumber={4}

@@ -36,7 +36,6 @@ const GuestView: React.FC<GuestViewProps> = ({ data, updateGuest }) => {
     return <LoginForm />;
   }
 
-  const guestCount = data.length;
   const presentCount = data.filter((guest) => guest.isPresent === true).length;
   const noPresentCount = data.filter(
     (guest) => guest.isPresent === false
@@ -47,9 +46,10 @@ const GuestView: React.FC<GuestViewProps> = ({ data, updateGuest }) => {
   const comeWithSomeoneCount = data.filter(
     (guest) => guest.comeWithSomeone === true
   ).length;
+  const guestCount = data.length + comeWithSomeoneCount;
 
   const statistics = [
-    { title: "Invités", value: guestCount },
+    { title: "Invités (total)", value: guestCount },
     { title: "Pas encore répondu", value: rsvpRespondedCount },
     { title: "Présents", value: presentCount },
     { title: "Pas présent", value: noPresentCount },

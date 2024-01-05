@@ -18,10 +18,6 @@ const StepGuestOfGuest: FC<StepGuestOfGuestProps> = ({
   handleSelectionChange,
   defaultValues = {},
 }) => {
-  const onFinish = (values: any) => {
-    handleSelectionChange(values);
-  };
-
   return (
     <QuestionCard
       questionNumber={3}
@@ -31,40 +27,42 @@ const StepGuestOfGuest: FC<StepGuestOfGuestProps> = ({
       handleNext={handleNext}
       handlePrev={handlePrev}
     >
-      <Form
-        name="guestOfGuestForm"
-        initialValues={defaultValues}
-        onFinish={onFinish}
-      >
-        <Row gutter={[16, 16]}>
-          <Col xs={24} sm={12}>
-            <Form.Item
-              label="Prénom de l'invité"
-              name="guestOfGuestFirstname"
-              labelCol={{ span: 24 }}
+      <Row gutter={[16, 16]}>
+        <Col xs={24} sm={12}>
+          <Form.Item
+            label="Prénom de l'invité"
+            name="guestOfGuestFirstname"
+            labelCol={{ span: 24 }}
+            style={{ fontSize: "20px" }}
+          >
+            <Input
+              placeholder="Prénom de l'invité"
               style={{ fontSize: "20px" }}
-            >
-              <Input
-                placeholder="Prénom de l'invité"
-                style={{ fontSize: "20px" }}
-              />
-            </Form.Item>
-          </Col>
-          <Col xs={24} sm={12}>
-            <Form.Item
-              label="Nom de l'invité"
-              name="guestOfGuestLastname"
-              labelCol={{ span: 24 }}
+              defaultValue={defaultValues?.guestOfGuestFirstname || ""}
+              onChange={(e) =>
+                handleSelectionChange({ guestOfGuestFirstname: e.target.value })
+              }
+            />
+          </Form.Item>
+        </Col>
+        <Col xs={24} sm={12}>
+          <Form.Item
+            label="Nom de l'invité"
+            name="guestOfGuestLastname"
+            labelCol={{ span: 24 }}
+            style={{ fontSize: "20px" }}
+          >
+            <Input
+              placeholder="Nom de l'invité"
               style={{ fontSize: "20px" }}
-            >
-              <Input
-                placeholder="Nom de l'invité"
-                style={{ fontSize: "20px" }}
-              />
-            </Form.Item>
-          </Col>
-        </Row>
-      </Form>
+              defaultValue={defaultValues?.guestOfGuestLastname || ""}
+              onChange={(e) =>
+                handleSelectionChange({ guestOfGuestLastname: e.target.value })
+              }
+            />
+          </Form.Item>
+        </Col>
+      </Row>
     </QuestionCard>
   );
 };
