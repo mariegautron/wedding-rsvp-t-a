@@ -12,7 +12,7 @@ const DrawerDetailsGuest: FC<{
   return (
     <Drawer
       className="isAdmin"
-      title="Détails de l'invité"
+      title="Détails"
       placement="right"
       onClose={() => {
         clearSelectedGuest();

@@ -1,4 +1,5 @@
 import { formatDate } from "@/utils/functions/formatDate";
+import { hasResponded } from "@/utils/functions/hasResponded";
 import { Tag } from "antd";
 import { FC } from "react";
 
@@ -79,5 +80,20 @@ export const TagDateInviteGuest: FC<{
     );
   } else {
     return <Tag color="green">Invitation envoyée</Tag>;
+  }
+};
+
+export const TagDateResponseGuest: FC<{
+  isPresent?: boolean;
+  dateResponseSend?: Date;
+}> = ({ isPresent, dateResponseSend }) => {
+  const guestHasResponded = hasResponded(isPresent);
+
+  if (!guestHasResponded) {
+    return <Tag color="grey">N'a pas répondu</Tag>;
+  } else if (dateResponseSend) {
+    return (
+      <Tag color="grey">{`Répondu le ${formatDate(dateResponseSend)}`}</Tag>
+    );
   }
 };

@@ -5,6 +5,7 @@ import { FC } from "react";
 import InvitationLink from "../../admin/atoms/InvitationLink";
 import {
   TagDateInviteGuest,
+  TagDateResponseGuest,
   TagRepsponseComeWithSomeone,
   TagResponseCanComeWithSomeone,
   TagResponseIsPresent,
@@ -16,7 +17,18 @@ const GuestDetails: FC<{ guest: WeddingGuests }> = ({ guest }) => {
   return (
     <div style={{ display: "flex", flexDirection: "column", gap: "20px" }}>
       {isAdmin && (
-        <Card title="Détails de la personne invitée" style={{ flex: 1 }}>
+        <Card
+          title={
+            <div style={{ display: "flex", justifyContent: "space-between" }}>
+              <span>Détails de la personne invitée</span>
+              <TagDateInviteGuest
+                dateInvitSend={guest.dateInvitSend}
+                invitSend={guest.invitSend}
+              />
+            </div>
+          }
+          style={{ flex: 1 }}
+        >
           <>
             <p>
               <strong>Prénom :</strong> {guest?.firstname}
@@ -38,14 +50,6 @@ const GuestDetails: FC<{ guest: WeddingGuests }> = ({ guest }) => {
 
           <InvitationLink uuid={guest.uuid} />
 
-          <p>
-            <strong>Statut d'envoi de l'invitation :</strong>
-            <TagDateInviteGuest
-              dateInvitSend={guest.dateInvitSend}
-              invitSend={guest.invitSend}
-            />
-          </p>
-
           {guest.commentSend && (
             <p>
               <strong>Commentaire de l'invitation :</strong> {guest.commentSend}
@@ -54,7 +58,18 @@ const GuestDetails: FC<{ guest: WeddingGuests }> = ({ guest }) => {
         </Card>
       )}
 
-      <Card title="Réponses de la personne invitée" style={{ flex: 1 }}>
+      <Card
+        style={{ flex: 1 }}
+        title={
+          <div style={{ display: "flex", justifyContent: "space-between" }}>
+            <span>Réponses de la personne invitée</span>
+            <TagDateResponseGuest
+              isPresent={guest.isPresent}
+              dateResponseSend={guest.dateResponseSend}
+            />
+          </div>
+        }
+      >
         <p>
           <strong>Réponse à l'invitation :</strong>{" "}
           <TagResponseIsPresent isPresent={guest.isPresent} />

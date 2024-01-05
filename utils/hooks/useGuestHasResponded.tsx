@@ -4,7 +4,7 @@ import { hasResponded } from "../functions/hasResponded";
 
 function useGuestHasResponded(guest: WeddingGuests): boolean {
   const guestHasResponded: boolean = useMemo(() => {
-    return hasResponded(guest);
+    return hasResponded(guest.isPresent);
   }, [guest.isPresent]);
 
   return guestHasResponded;

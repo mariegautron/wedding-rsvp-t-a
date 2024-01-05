@@ -41,7 +41,7 @@ const GuestView: React.FC<GuestViewProps> = ({ data, updateGuest }) => {
     (guest) => guest.isPresent === false
   ).length;
   const rsvpRespondedCount = data.filter(
-    (guest) => !hasResponded(guest)
+    (guest) => !hasResponded(guest.isPresent)
   ).length;
   const comeWithSomeoneCount = data.filter(
     (guest) => guest.comeWithSomeone === true
@@ -57,7 +57,7 @@ const GuestView: React.FC<GuestViewProps> = ({ data, updateGuest }) => {
   ];
 
   const guestsToShow = data.filter((guest) => {
-    const guestHasResponded = hasResponded(guest);
+    const guestHasResponded = hasResponded(guest.isPresent);
 
     if (showOnlyNotResponded && guestHasResponded) {
       return false;
