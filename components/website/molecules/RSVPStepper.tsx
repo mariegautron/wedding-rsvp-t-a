@@ -1,5 +1,5 @@
 import { FC } from "react";
-import FormStepper from "./FormStepper";
+import FormStepper from "./InvitFormStepper";
 import { WeddingGuests } from "@/utils/types/weddinggests";
 import { Typography } from "antd";
 import useGuestHasResponded from "@/utils/hooks/useGuestHasResponded";

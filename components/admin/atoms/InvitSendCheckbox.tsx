@@ -1,8 +1,9 @@
 import { WeddingGuests } from "@/utils/types/weddinggests";
 import { MessageOutlined } from "@ant-design/icons";
-import { Button, Checkbox, Space } from "antd";
+import { Button, Checkbox, Space, Tooltip } from "antd";
 import { useState } from "react";
 import InvitationConfirmationModal from "../molecules/InvitationConfirmationModal";
+import IconButtonCommentSend from "./IconButtonCommentSend";
 
 interface InvitSendCheckboxProps {
   checked?: boolean;
@@ -40,16 +41,10 @@ const InvitSendCheckbox: React.FC<InvitSendCheckboxProps> = ({
     <>
       <Space>
         <Checkbox checked={checked} onChange={handleCheckboxChange} />
-        <Button
-          type="link"
+        <IconButtonCommentSend
+          comment={guest?.commentSend}
           onClick={handleCommentClick}
-          style={{
-            border: "none",
-            padding: 8,
-          }}
-        >
-          <MessageOutlined />
-        </Button>
+        />
       </Space>
 
       {modalInvitSendVisible && (
