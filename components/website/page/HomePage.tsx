@@ -10,13 +10,15 @@ import Hero from "../molecules/Hero";
 import RSVPStepper from "../molecules/RSVPStepper";
 import useDeadlineCheck from "@/utils/hooks/useDeadlineCheck";
 import ImportantInformation from "../molecules/ImportantInformations";
+import PhotoGallery from "../molecules/PhotoGallery";
 
 const HomePage: FC<{
   fetchGuestData: (uuid: string) => Promise<WeddingGuests | null | undefined>;
   updateGuest: (
     updatedGuestData: WeddingGuests
   ) => Promise<WeddingGuests[] | null | undefined>;
-}> = ({ fetchGuestData, updateGuest }) => {
+  getImagesUrlFromStorage: () => Promise<any>;
+}> = ({ fetchGuestData, updateGuest, getImagesUrlFromStorage }) => {
   const [guestData, loading] = useGuestData(fetchGuestData);
 
   const deadlinePassed = useDeadlineCheck();
@@ -47,7 +49,7 @@ const HomePage: FC<{
         <RSVPStepper guest={guestData} updateGuest={updateGuest} />
       )}
       <ImportantInformation />
-      {/* <PhotoGallery /> */}
+      <PhotoGallery getImagesUrlFromStorage={getImagesUrlFromStorage} />
       <Footer />
     </div>
   );

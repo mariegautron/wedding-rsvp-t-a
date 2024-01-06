@@ -35,8 +35,8 @@ const Hero: FC<HeroProps> = ({ guest }) => {
         <Title level={2}>tu as déjà répondu à l'invitation !</Title>
 
         <Text style={{ display: "block", fontSize: 25 }}>
-          (Voici tes réponses. Tu as jusqu'au {formattedDeadline} pour les
-          modifier.)
+          Voici tes réponses. Tu as jusqu'au {formattedDeadline} pour les
+          modifier.
         </Text>
         <GuestResponses guest={guest} />
         <div style={{ padding: 10, display: "flex", justifyContent: "center" }}>
@@ -57,14 +57,16 @@ const Hero: FC<HeroProps> = ({ guest }) => {
     return (
       <HeroTemplatePage>
         <Title level={2}>Bonjour {guest.firstname},</Title>
-        <Title level={2}>tu es invité(e) au mariage de Thomas & Amélie</Title>
+        <Title level={2}>tu es invité(e) au mariage de </Title>
+        <Title level={1} style={{ marginTop: 20, marginBottom: 20 }}>
+          Thomas & Amélie
+        </Title>
         <Text style={{ display: "block", fontSize: 25 }}>
-          (Nous sommes ravis de t’inviter à partager ce jour unique avec nous,
+          Nous sommes ravis de t’inviter à partager ce jour unique avec nous,
           qui se déroulera le{" "}
           <span style={{ textDecoration: "underline", fontSize: 25 }}>
             {eventDate} au {process.env.NEXT_PUBLIC_EVENT_PLACE}
           </span>
-          )
         </Text>
         <div style={{ padding: 10, display: "flex", justifyContent: "center" }}>
           <Button
@@ -86,8 +88,8 @@ const Hero: FC<HeroProps> = ({ guest }) => {
         <Title level={2}>Bonjour {guest.firstname},</Title>
         <Title level={2}>tu as déjà répondu à l'invitation !</Title>
         <Text style={{ display: "block", fontSize: 25 }}>
-          (Voici tes réponses. Malheureusement, la date limite pour modifier tes
-          réponses est passée.)
+          Voici tes réponses. Malheureusement, la date limite pour modifier tes
+          réponses est passée.
         </Text>
         <GuestResponses guest={guest} />
       </HeroTemplatePage>
@@ -98,9 +100,13 @@ const Hero: FC<HeroProps> = ({ guest }) => {
   return (
     <HeroTemplatePage>
       <Title level={2}>Bonjour {guest.firstname},</Title>
-      <Title level={2}>tu es invité(e) au mariage de Thomas & Amélie</Title>
+      <Title level={2}>tu es invité(e) au mariage de </Title>
+      <Title level={1} style={{ marginTop: 20, marginBottom: 20 }}>
+        Thomas & Amélie
+      </Title>
+
       <Text style={{ display: "block", fontSize: 25 }}>
-        (Il est malheureusement trop tard pour répondre.)
+        Il est malheureusement trop tard pour répondre.
       </Text>
     </HeroTemplatePage>
   );

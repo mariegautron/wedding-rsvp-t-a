@@ -108,7 +108,7 @@ body {
 
 .rsvp {
   background-color: #b7c3a8;
-  padding-bottom: 150px;
+  padding-bottom: 80px;
   padding-top: 80px;
   padding-left: 80px;
   padding-right: 80px;
@@ -119,10 +119,30 @@ body {
 }
 
 .photoGallery {
-  padding-bottom: 150px;
+  padding-bottom: 80px;
   padding-top: 80px;
   padding-left: 80px;
   padding-right: 80px;
+}
+
+/* Styles pour le composant PhotoGallery */
+
+.photoGrid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr); /* 4 colonnes pour 8 photos */
+  gap: 16px; /* Espacement entre les photos */
+}
+
+.photoWrapper {
+  padding-bottom: 100%; /* Pour maintenir le ratio carré */
+  position: relative;
+}
+
+.photoItem {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  object-fit: cover; /* Remplir le conteneur carré sans déformer l'image */
 }
 
 @media screen and (min-width: 767px) {
