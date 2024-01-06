@@ -5,6 +5,7 @@ import { WeddingGuests } from "@/utils/types/weddinggests";
 import {
   CopyOutlined,
   DeleteOutlined,
+  EditOutlined,
   EyeOutlined,
   MailOutlined,
   MenuOutlined,
@@ -18,9 +19,8 @@ import {
 } from "../../shared/atoms/TagsResponses";
 import InvitSendCheckbox from "../atoms/InvitSendCheckbox";
 import DrawerDetailsGuest from "./DrawerDetailsGuest";
+import ModalUpdateGuest from "./ModalUpdateGuest";
 import SendEmailModal from "./SendEmailModal";
-import { getDeadlineDate } from "@/utils/functions/getDeadlineDate";
-import { formatDate } from "@/utils/functions/formatDate";
 
 const GuestListTable: FC<{
   data: WeddingGuests[];
@@ -32,6 +32,7 @@ const GuestListTable: FC<{
   const [emailOpen, setSendEmailOpen] = useState(false);
   const [selectedGuest, setSelectedGuest] = useState<WeddingGuests>();
   const [drawerVisible, setDrawerVisible] = useState(false);
+  const [modalUpdateVisible, setModalUpdateVisible] = useState(false);
 
   const clearSelectedGuest = () => {
     setSelectedGuest(undefined);
@@ -81,7 +82,16 @@ const GuestListTable: FC<{
       >
         Voir le détail
       </Menu.Item>
-
+      <Menu.Item
+        key="viewDetails"
+        onClick={() => {
+          setSelectedGuest({ ...record });
+          setModalUpdateVisible(true);
+        }}
+        icon={<EditOutlined />}
+      >
+        Modifier
+      </Menu.Item>
       {process.env.NEXT_PUBLIC_ACTIVATE_EMAIL === "1" &&
         record.email &&
         record.isPresent !== true &&
@@ -97,9 +107,8 @@ const GuestListTable: FC<{
             Envoyer l'email d'invitation
           </Menu.Item>
         )}
-
       <Menu.Item
-        key="deleteGuest"
+        key="updateGuest"
         onClick={() => handleDeleteGuest(record.id)}
         icon={<DeleteOutlined color="#bc5354" />}
         style={{ color: "#bc5354" }}
@@ -201,6 +210,14 @@ const GuestListTable: FC<{
           drawerVisible={drawerVisible}
           setDrawerVisible={setDrawerVisible}
           clearSelectedGuest={clearSelectedGuest}
+        />
+      )}
+      {modalUpdateVisible && selectedGuest && (
+        <ModalUpdateGuest
+          visible={modalUpdateVisible}
+          handleCancel={() => setModalUpdateVisible(false)}
+          updateGuest={updateGuest}
+          selectedGuest={selectedGuest}
         />
       )}
     </div>

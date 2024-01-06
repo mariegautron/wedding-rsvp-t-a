@@ -7,5 +7,6 @@ export enum SUCCESS_MESSAGES {
   ADD_GUEST = "Invité ajouté avec succès !",
   RESONSE_SEND = "La réponse à l'invitation à bien été envoyée !",
   COMMENT_SEND = "Commentaire ajouté avec succès !",
-  DELETE_GUEST = "Ivnité supprimé avec succès !",
+  DELETE_GUEST = "Invité supprimé avec succès !",
+  UPDATE_GUEST = "Invité mis à jour avec succès !",
 }

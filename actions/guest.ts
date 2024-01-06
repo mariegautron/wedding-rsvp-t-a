@@ -116,6 +116,19 @@ export const updateGuest = async (
     const cookieStore = cookies();
     const supabase = createClient(cookieStore);
 
+    const { guestOfGuestFirstname, guestOfGuestLastname } = updatedGuestData;
+
+    if (guestOfGuestFirstname && guestOfGuestLastname) {
+      const guestExists = await checkIfGuestExists(
+        guestOfGuestFirstname,
+        guestOfGuestLastname
+      );
+
+      if (guestExists) {
+        throw new Error("Ce +1 est déjà dans la liste !");
+      }
+    }
+
     const { data, error } = await supabase
       .from(COLLECTION_NAMES.WEDDING_GUESTS)
       .update(updatedGuestData)
