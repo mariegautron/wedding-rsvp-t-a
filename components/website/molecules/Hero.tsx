@@ -39,9 +39,15 @@ const Hero: FC<HeroProps> = ({ guest }) => {
           modifier.)
         </Text>
         <GuestResponses guest={guest} />
-        <Button type="primary" style={{ marginTop: 20 }} onClick={scrollToRsvp}>
-          Modifier ma réponse
-        </Button>
+        <div style={{ padding: 10, display: "flex", justifyContent: "center" }}>
+          <Button
+            type="primary"
+            style={{ marginTop: 20 }}
+            onClick={scrollToRsvp}
+          >
+            Modifier ma réponse
+          </Button>
+        </div>
       </HeroTemplatePage>
     );
   }
@@ -60,9 +66,15 @@ const Hero: FC<HeroProps> = ({ guest }) => {
           </span>
           )
         </Text>
-        <Button type="primary" style={{ marginTop: 20 }} onClick={scrollToRsvp}>
-          Répondre à l'invitation
-        </Button>
+        <div style={{ padding: 10, display: "flex", justifyContent: "center" }}>
+          <Button
+            type="primary"
+            style={{ marginTop: 20 }}
+            onClick={scrollToRsvp}
+          >
+            Répondre à l'invitation
+          </Button>
+        </div>
       </HeroTemplatePage>
     );
   }

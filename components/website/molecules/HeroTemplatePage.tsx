@@ -1,3 +1,4 @@
+import { Button } from "antd";
 import React, { FC, ReactNode } from "react";
 
 interface HeroTemplateProps {
@@ -9,7 +10,16 @@ const HeroTemplatePage: FC<HeroTemplateProps> = ({ children }) => {
     <div className="hero">
       <div className=" hero-container">
         <div className="container">
-          <div className="text-container">{children}</div>
+          <div className="text-container">
+            {children}
+            <div
+              style={{ padding: 10, display: "flex", justifyContent: "center" }}
+            >
+              <Button type="default" href="#informations">
+                Voir les informations importantes
+              </Button>
+            </div>
+          </div>
         </div>
         <img
           className="image-container"

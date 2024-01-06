@@ -9,6 +9,7 @@ import HeroTemplatePage from "../molecules/HeroTemplatePage";
 import Hero from "../molecules/Hero";
 import RSVPStepper from "../molecules/RSVPStepper";
 import useDeadlineCheck from "@/utils/hooks/useDeadlineCheck";
+import ImportantInformation from "../molecules/ImportantInformations";
 
 const HomePage: FC<{
   fetchGuestData: (uuid: string) => Promise<WeddingGuests | null | undefined>;
@@ -45,6 +46,7 @@ const HomePage: FC<{
       {!deadlinePassed && (
         <RSVPStepper guest={guestData} updateGuest={updateGuest} />
       )}
+      <ImportantInformation />
       {/* <PhotoGallery /> */}
       <Footer />
     </div>
