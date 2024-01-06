@@ -62,7 +62,9 @@ export async function POST(req: Request) {
 
   const { guestEmail, invitationMessage, guestUuid } = body;
 
-  const deadline = getDeadlineDate();
+  const deadline = formatDate(
+    process.env.NEXT_PUBLIC_DEADLINE_DATE as unknown as Date
+  );
 
   try {
     await sendEmail({
@@ -72,7 +74,7 @@ export async function POST(req: Request) {
       variables: {
         message: invitationMessage,
         url: `${process.env.NEXT_PUBLIC_BASE_URL}?uuid=${guestUuid}`,
-        deadline: formatDate(deadline),
+        deadline: deadline,
       },
     });
 
