@@ -1,6 +1,6 @@
 "use server";
 
-import { updateGuest } from "@/actions/guest";
+import { deleteGuest, updateGuest } from "@/actions/guest";
 import GuestListView from "@/components/admin/page/GuestListView";
 import AdminLayout from "@/layouts/AdminLayout";
 import { COLLECTION_NAMES } from "@/utils/supabase/enums";
@@ -30,7 +30,13 @@ export default async function WeddingGuests() {
 
   return (
     <AdminLayout>
-      {!error && <GuestListView data={data} updateGuest={updateGuest} />}
+      {!error && (
+        <GuestListView
+          data={data}
+          updateGuest={updateGuest}
+          deleteGuest={deleteGuest}
+        />
+      )}
     </AdminLayout>
   );
 }

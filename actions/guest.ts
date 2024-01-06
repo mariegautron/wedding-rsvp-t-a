@@ -137,3 +137,30 @@ export const updateGuest = async (
     throw new Error(error.message);
   }
 };
+
+export const deleteGuest = async (
+  guestId: string
+): Promise<{ success: boolean }> => {
+  try {
+    const cookieStore = cookies();
+    const supabase = createClient(cookieStore);
+
+    const { error } = await supabase
+      .from(COLLECTION_NAMES.WEDDING_GUESTS)
+      .delete()
+      .eq("id", guestId);
+
+    if (error) {
+      throw new Error(
+        "Une erreur s'est produite lors de la suppression de l'invité."
+      );
+    }
+
+    revalidatePath(MenuPath.WEDDING_GUESTS);
+
+    return { success: true };
+  } catch (error: any) {
+    console.error("Erreur lors de la suppression de l'invité :", error.message);
+    throw new Error(error.message);
+  }
+};

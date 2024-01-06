@@ -1,3 +1,5 @@
+import { formatDate } from "@/utils/functions/formatDate";
+import { getDeadlineDate } from "@/utils/functions/getDeadlineDate";
 import { NextResponse } from "next/server";
 import mailjet from "node-mailjet";
 
@@ -8,6 +10,7 @@ interface SendEmailParams {
   variables: {
     message: string;
     url: string;
+    deadline: string;
   };
 }
 
@@ -59,6 +62,8 @@ export async function POST(req: Request) {
 
   const { guestEmail, invitationMessage, guestUuid } = body;
 
+  const deadline = getDeadlineDate();
+
   try {
     await sendEmail({
       to: guestEmail,
@@ -67,6 +72,7 @@ export async function POST(req: Request) {
       variables: {
         message: invitationMessage,
         url: `${process.env.NEXT_PUBLIC_BASE_URL}?uuid=${guestUuid}`,
+        deadline: formatDate(deadline),
       },
     });
 

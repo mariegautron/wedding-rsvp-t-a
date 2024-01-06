@@ -20,9 +20,14 @@ interface GuestViewProps {
   updateGuest: (
     updatedGuestData: Partial<WeddingGuests>
   ) => Promise<WeddingGuests[] | null | undefined>;
+  deleteGuest: (guestId: string) => Promise<{ success: boolean }>;
 }
 
-const GuestView: React.FC<GuestViewProps> = ({ data, updateGuest }) => {
+const GuestView: React.FC<GuestViewProps> = ({
+  data,
+  updateGuest,
+  deleteGuest,
+}) => {
   const isAuth = useIsAuthenticated();
 
   const [showOnlyNotResponded, setShowOnlyNotResponded] = useState(false);
@@ -143,7 +148,11 @@ const GuestView: React.FC<GuestViewProps> = ({ data, updateGuest }) => {
           />
         </Panel>
       </Collapse>
-      <GuestListTable data={sortedGuests} updateGuest={updateGuest} />
+      <GuestListTable
+        data={sortedGuests}
+        updateGuest={updateGuest}
+        deleteGuest={deleteGuest}
+      />
     </div>
   );
 };

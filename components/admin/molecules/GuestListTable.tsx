@@ -1,21 +1,22 @@
 "use client";
 
+import { ERROR_MESSAGES, SUCCESS_MESSAGES } from "@/utils/constants/messages";
 import { WeddingGuests } from "@/utils/types/weddinggests";
 import {
   CopyOutlined,
+  DeleteOutlined,
   EyeOutlined,
   MailOutlined,
   MenuOutlined,
-  MessageOutlined,
 } from "@ant-design/icons";
-import { Badge, Button, Dropdown, Menu, Table, Tooltip } from "antd";
+import { Badge, Button, Dropdown, Menu, Table, message } from "antd";
 import { FC, useState } from "react";
-import InvitSendCheckbox from "../atoms/InvitSendCheckbox";
 import {
   TagRepsponseComeWithSomeone,
   TagResponseCanComeWithSomeone,
   TagResponseIsPresent,
 } from "../../shared/atoms/TagsResponses";
+import InvitSendCheckbox from "../atoms/InvitSendCheckbox";
 import DrawerDetailsGuest from "./DrawerDetailsGuest";
 import SendEmailModal from "./SendEmailModal";
 
@@ -24,7 +25,8 @@ const GuestListTable: FC<{
   updateGuest: (
     updatedGuestData: Partial<WeddingGuests>
   ) => Promise<WeddingGuests[] | null | undefined>;
-}> = ({ data, updateGuest }) => {
+  deleteGuest: (guestId: string) => Promise<{ success: boolean }>;
+}> = ({ data, updateGuest, deleteGuest }) => {
   const [emailOpen, setSendEmailOpen] = useState(false);
   const [selectedGuest, setSelectedGuest] = useState<WeddingGuests>();
   const [drawerVisible, setDrawerVisible] = useState(false);
@@ -40,6 +42,18 @@ const GuestListTable: FC<{
       return "errorRow";
     }
     return "";
+  };
+
+  const handleDeleteGuest = async (guestId: string) => {
+    try {
+      // Appelle la fonction pour supprimer l'invité en utilisant l'ID
+      await deleteGuest(guestId);
+
+      message.success(SUCCESS_MESSAGES.DELETE_GUEST);
+    } catch (error) {
+      console.error("Erreur lors de la suppression de l'invité :", error);
+      message.error(ERROR_MESSAGES.ADMIN_ERROR);
+    }
   };
 
   const actionsMenu = (record: any) => (
@@ -81,6 +95,15 @@ const GuestListTable: FC<{
             Envoyer l'email d'invitation
           </Menu.Item>
         )}
+
+      <Menu.Item
+        key="deleteGuest"
+        onClick={() => handleDeleteGuest(record.id)}
+        icon={<DeleteOutlined color="#bc5354" />}
+        style={{ color: "#bc5354" }}
+      >
+        Supprimer
+      </Menu.Item>
     </Menu>
   );
 
