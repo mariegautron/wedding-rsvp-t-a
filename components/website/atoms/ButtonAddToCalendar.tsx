@@ -35,12 +35,7 @@ const ButtonAddToCalendar: React.FC<{ eventDetails: EventDetails }> = ({
   };
 
   return (
-    <Button
-      type="primary"
-      size="large"
-      onClick={addToCalendar}
-      style={{ marginTop: 20 }}
-    >
+    <Button type="primary" onClick={addToCalendar} style={{ marginTop: 20 }}>
       Ajouter à mon calendrier
     </Button>
   );

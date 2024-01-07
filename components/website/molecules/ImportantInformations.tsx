@@ -94,13 +94,12 @@ Vos contributions rendront notre journée encore plus spéciale et mémorable po
               </p>
               <Button
                 type="primary"
-                size="large"
                 href={presentsListUrl}
                 target="_blank"
                 rel="noopener noreferrer"
                 style={{ marginTop: 20 }}
               >
-                Voir la liste de cadeaux de mariage
+                Voir la liste de cadeaux
               </Button>
             </div>
           </Col>

@@ -145,6 +145,14 @@ body {
   object-fit: cover; /* Remplir le conteneur carré sans déformer l'image */
 }
 
+label.ant-radio-button-wrapper {
+  border-radius: 10px !important;
+}
+
+label.ant-radio-button-wrapper::before {
+  display: none !important;
+}
+
 @media screen and (min-width: 767px) {
   label.ant-radio-button-wrapper {
     font-size: 25px !important;
@@ -167,6 +175,10 @@ body {
 
   h2.ant-typography {
     font-size: 25px !important;
+  }
+
+  .small-text {
+    font-size: 14px !important;
   }
 
   .ant-space-horizontal {

@@ -9,12 +9,12 @@ const Footer: React.FC = () => {
       style={{
         textAlign: "center",
         backgroundColor: "#f7f3ed",
-        fontSize: 20,
+        fontSize: 16,
         position: "relative",
       }}
     >
       Made with ❤️ by Marie{" "}
-      <span style={{ display: "block", padding: 10, fontSize: 16 }}>
+      <span style={{ display: "block", padding: 10 }} className="small-text">
         (sous la direction exigeante des futurs mariés)
       </span>
       <img
