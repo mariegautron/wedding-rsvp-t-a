@@ -55,7 +55,6 @@ const SendEmailModal: React.FC<SendEmailModalProps> = ({
 
   return (
     <Modal
-      className="isAdmin"
       title="Envoyer un email d'invitation"
       visible={emailOpen}
       onCancel={handleCancel}

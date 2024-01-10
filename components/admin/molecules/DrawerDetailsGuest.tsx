@@ -11,7 +11,6 @@ const DrawerDetailsGuest: FC<{
 }> = ({ guest, drawerVisible, setDrawerVisible, clearSelectedGuest }) => {
   return (
     <Drawer
-      className="isAdmin"
       title="Détails"
       placement="right"
       onClose={() => {

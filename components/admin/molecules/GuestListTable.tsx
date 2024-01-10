@@ -60,7 +60,7 @@ const GuestListTable: FC<{
   };
 
   const actionsMenu = (record: any) => (
-    <Menu className="isAdmin">
+    <Menu>
       <Menu.Item
         key="copyLink"
         onClick={() => {

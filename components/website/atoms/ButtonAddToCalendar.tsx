@@ -17,7 +17,6 @@ const ButtonAddToCalendar: React.FC<{ eventDetails: EventDetails }> = ({
   const addToCalendar = () => {
     const userAgent = window.navigator.userAgent;
 
-    // Exemple basique de détection d'un client de messagerie
     const isOutlook = userAgent.includes("Outlook");
     const calendarUrl = isOutlook
       ? `https://outlook.live.com/owa/?path=/calendar/action/compose&rru=addevent&subject=${encodeURIComponent(
@@ -35,7 +34,7 @@ const ButtonAddToCalendar: React.FC<{ eventDetails: EventDetails }> = ({
   };
 
   return (
-    <Button type="primary" onClick={addToCalendar} style={{ marginTop: 20 }}>
+    <Button type="primary" onClick={addToCalendar} className="mt-5">
       Ajouter à mon calendrier
     </Button>
   );

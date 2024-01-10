@@ -122,7 +122,11 @@ const GuestView: React.FC<GuestViewProps> = ({
           <UsergroupAddOutlined style={{ fontSize: "24px" }} />
           <Title level={2}>Liste des personnes invitées</Title>
         </Space>
-        <Button type="primary" icon={<UserOutlined />}>
+        <Button
+          type="primary"
+          icon={<UserOutlined />}
+          style={{ background: "#4d5a4f" }}
+        >
           <Link href="/admin/weddingguests/add">
             Ajouter une personne invitée
           </Link>

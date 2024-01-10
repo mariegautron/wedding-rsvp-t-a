@@ -29,13 +29,15 @@ const QuestionCard: React.FC<QuestionCardProps> = ({
   loading = false,
 }) => {
   const nextButton = withNextButton ? (
-    <Button type="primary" onClick={handleNext}>
+    <Button type="primary" onClick={handleNext} className="mr-4">
       Suivant
     </Button>
   ) : null;
 
   const prevButton = withPrevButton ? (
-    <Button onClick={handlePrev}>Précédent</Button>
+    <Button onClick={handlePrev} className="mr-4">
+      Précédent
+    </Button>
   ) : null;
 
   const submitButton = withSubmitButton ? (
@@ -45,29 +47,21 @@ const QuestionCard: React.FC<QuestionCardProps> = ({
   ) : null;
 
   return (
-    <>
-      <Card
-        title={
-          <Text style={{ fontSize: "20px" }}>Question {questionNumber}</Text>
-        }
-        style={{
-          padding: "30px",
-          textAlign: "center",
-          boxShadow: "0px 2px 2px 0px rgba(0, 0, 0, 0.10)",
-        }}
-      >
-        <Space direction="vertical" size="large">
-          <Text style={{ fontSize: "40px" }}>{questionTitle}</Text>
-          {children}
+    <Card
+      title={<Text className="text-lg">Question {questionNumber}</Text>}
+      className="p-8 text-center shadow-md"
+    >
+      <Space direction="vertical" className="space-y-6">
+        <Text className="text-2xl">{questionTitle}</Text>
+        {children}
 
-          <Space direction="horizontal" size="large">
-            {prevButton}
-            {nextButton}
-            {submitButton}
-          </Space>
+        <Space direction="horizontal" className="space-x-6">
+          {prevButton}
+          {nextButton}
+          {submitButton}
         </Space>
-      </Card>
-    </>
+      </Space>
+    </Card>
   );
 };
 

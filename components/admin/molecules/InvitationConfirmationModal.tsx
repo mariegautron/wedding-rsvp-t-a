@@ -45,7 +45,6 @@ const InvitationConfirmationModal: React.FC<
 
   return (
     <Modal
-      className="isAdmin"
       title={
         invitSend
           ? "Confirmer l'absence d'envoi d'invitation"

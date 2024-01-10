@@ -1,4 +1,4 @@
-import { Button, Row, Col } from "antd";
+import Button from "@/components/design-system/Button";
 import { FC } from "react";
 
 const FooterHero: FC<{ type?: "modify" | "respond" | "basic" }> = ({
@@ -12,40 +12,30 @@ const FooterHero: FC<{ type?: "modify" | "respond" | "basic" }> = ({
   };
 
   const scrollToInformations = () => {
-    const rsvpSection = document.getElementById("informations");
-    if (rsvpSection) {
-      rsvpSection.scrollIntoView({ behavior: "smooth" });
+    const informationsSection = document.getElementById("informations");
+    if (informationsSection) {
+      informationsSection.scrollIntoView({ behavior: "smooth" });
     }
   };
 
-  if (type === "basic") {
-    return (
-      <Button
-        type="default"
-        onClick={scrollToInformations}
-        block={true}
-        style={{ marginTop: 30 }}
-      >
-        Voir les informations
-      </Button>
-    );
-  }
-
   return (
-    <Row gutter={10} justify="start" align="middle" style={{ marginTop: 30 }}>
-      <Col xs={24} sm={12}>
-        <Button type="primary" onClick={scrollToRsvp} block={true}>
-          {type === "modify"
-            ? "Modifier ma réponse"
-            : "Répondre à l'invitation"}
-        </Button>
-      </Col>
-      <Col xs={24} sm={12}>
-        <Button type="default" onClick={scrollToInformations} block={true}>
+    <div className="flex flex-wrap mt-5">
+      {type !== "basic" && (
+        <div className="mb-4 mr-4">
+          <Button onClick={scrollToRsvp}>
+            {type === "modify"
+              ? "Modifier ma réponse"
+              : "Répondre à l'invitation"}
+          </Button>
+        </div>
+      )}
+
+      <div className="mb-4">
+        <Button outlined onClick={scrollToInformations}>
           Voir les informations
         </Button>
-      </Col>
-    </Row>
+      </div>
+    </div>
   );
 };
 

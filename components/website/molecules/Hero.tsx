@@ -1,15 +1,15 @@
+import Heading from "@/components/design-system/Heading";
+import Paragraph from "@/components/design-system/Paragraph";
 import useDeadlineCheck from "@/utils/hooks/useDeadlineCheck";
 import useFormattedDeadline from "@/utils/hooks/useFormattedDeadline";
 import { useFormattedEventDate } from "@/utils/hooks/useFormattedEventDate";
 import useGuestHasResponded from "@/utils/hooks/useGuestHasResponded";
 import { WeddingGuests } from "@/utils/types/weddinggests";
-import { Typography } from "antd";
 import { FC } from "react";
 import GuestResponses from "../../shared/molecules/GuestResponses";
 import FooterHero from "../atoms/FooterHero";
 import HeroTemplatePage from "./HeroTemplatePage";
-
-const { Title, Text } = Typography;
+import Subtile from "@/components/design-system/Subtitle";
 
 interface HeroProps {
   guest: WeddingGuests;
@@ -22,16 +22,19 @@ const Hero: FC<HeroProps> = ({ guest }) => {
   const formattedDeadline = useFormattedDeadline();
 
   if (hasResponded && !isDeadlinePassed) {
-    // Personne a répondu et la date limite n'est pas passée
     return (
       <HeroTemplatePage>
-        <Title level={2}>Bonjour {guest.firstname},</Title>
-        <Title level={2}>tu as déjà répondu à l'invitation !</Title>
-
-        <Text style={{ display: "block", fontSize: 25 }}>
+        <div>
+          <Subtile mode="dark">Bonjour {guest.firstname},</Subtile>
+          <Subtile mode="dark">tu as déjà répondu à </Subtile>
+        </div>{" "}
+        <Heading level={1} className="my-5">
+          l'invitation !
+        </Heading>{" "}
+        <Paragraph mode="dark" className="md:w-1/2 w-full">
           Voici tes réponses. Tu as jusqu'au {formattedDeadline} pour les
           modifier.
-        </Text>
+        </Paragraph>
         <GuestResponses guest={guest} />
         <FooterHero type="modify" />
       </HeroTemplatePage>
@@ -39,54 +42,59 @@ const Hero: FC<HeroProps> = ({ guest }) => {
   }
 
   if (!hasResponded && !isDeadlinePassed) {
-    // Personne n'a répondu et la date limite n'est pas passée
     return (
       <HeroTemplatePage>
-        <Title level={2}>Bonjour {guest.firstname},</Title>
-        <Title level={2}>tu es invité(e) au mariage de </Title>
-        <Title level={1} style={{ marginTop: 20, marginBottom: 20 }}>
+        <div>
+          <Subtile mode="dark">Bonjour {guest.firstname},</Subtile>
+          <Subtile mode="dark">tu es invité·e au mariage de </Subtile>
+        </div>
+        <Heading level={1} className="my-5">
           Thomas & Amélie
-        </Title>
-        <Text style={{ display: "block", fontSize: 25 }}>
+        </Heading>
+        <Paragraph mode="dark" className="md:w-1/2 w-full">
           Nous sommes ravis de t’inviter à partager ce jour unique avec nous,
           qui se déroulera le{" "}
-          <span style={{ textDecoration: "underline", fontSize: 25 }}>
+          <span className="font-bold">
             {eventDate} au {process.env.NEXT_PUBLIC_EVENT_PLACE}
           </span>
-        </Text>
+        </Paragraph>
         <FooterHero type="respond" />
       </HeroTemplatePage>
     );
   }
 
   if (hasResponded && isDeadlinePassed) {
-    // Personne a répondu et la date limite est passée
     return (
       <HeroTemplatePage>
-        <Title level={2}>Bonjour {guest.firstname},</Title>
-        <Title level={2}>tu as déjà répondu à l'invitation !</Title>
-        <Text style={{ display: "block", fontSize: 25 }}>
+        <div>
+          <Subtile mode="dark">Bonjour {guest.firstname},</Subtile>
+          <Subtile mode="dark">tu as déjà répondu à </Subtile>
+        </div>{" "}
+        <Heading level={1} className="my-5">
+          l'invitation !
+        </Heading>{" "}
+        <Paragraph mode="dark" className="md:w-1/2 w-full">
           Voici tes réponses. Malheureusement, la date limite pour modifier tes
           réponses est passée.
-        </Text>
+        </Paragraph>
         <GuestResponses guest={guest} />
         <FooterHero />
       </HeroTemplatePage>
     );
   }
 
-  // Personne n'a répondu et la date limite est passée
   return (
     <HeroTemplatePage>
-      <Title level={2}>Bonjour {guest.firstname},</Title>
-      <Title level={2}>tu es invité(e) au mariage de </Title>
-      <Title level={1} style={{ marginTop: 20, marginBottom: 20 }}>
+      <div>
+        <Subtile mode="dark">Bonjour {guest.firstname},</Subtile>
+        <Subtile mode="dark">tu es invité·e au mariage de </Subtile>
+      </div>
+      <Heading level={1} className="my-5">
         Thomas & Amélie
-      </Title>
-
-      <Text style={{ display: "block", fontSize: 25 }}>
+      </Heading>
+      <Paragraph mode="dark" className="md:w-1/2 w-full">
         Il est malheureusement trop tard pour répondre.
-      </Text>
+      </Paragraph>
       <FooterHero />
     </HeroTemplatePage>
   );

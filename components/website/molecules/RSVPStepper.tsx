@@ -30,7 +30,10 @@ const RSVPStepper: FC<{
       >
         {hasResponded ? "Modifier ma réponse" : "Repond à l'invitation"}
       </Title>
-      <div className="container py-10" style={{ position: "relative" }}>
+      <div
+        className="container py-10"
+        style={{ position: "relative", width: "60%" }}
+      >
         <FormStepper guest={guest} updateGuest={updateGuest} />
       </div>
       <img

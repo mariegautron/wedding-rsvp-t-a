@@ -1,4 +1,5 @@
 import { ConfigProvider } from "antd";
+import "./tailwind.css";
 import "./globals.css";
 import themeTokens from "@/utils/theme";
 
@@ -13,9 +14,9 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body>
+      <body style={{ height: "100%" }}>
         <ConfigProvider theme={themeTokens}>
-          <div style={{ height: "100vh" }}>{children}</div>
+          <div style={{ height: "100%" }}>{children}</div>
         </ConfigProvider>
       </body>
     </html>

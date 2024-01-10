@@ -36,7 +36,6 @@ const ModalUpdateGuest: React.FC<ModalUpdateGuestProps> = ({
 
   return (
     <Modal
-      className="isAdmin"
       title="Modifier les données d'une personne invitée"
       visible={visible}
       onCancel={handleCancel}

@@ -15,42 +15,31 @@ const ImportantInformation = () => {
 
   const date = useFormattedEventDate();
 
+  const textBlockClass = "text-lg";
+
+  const titleStyle = "underline text-center text-5xl font-serif";
+
   const description = `Rejoignez-nous pour une journée spéciale !
-Date: 22 juin
-Heure: 15h
-Lieu: Mairie de Chateau-Larcher, 2 rue de la Mairie, 86370 Chateau-Larcher
-
-Nous avons hâte de vous accueillir à la cérémonie ! Un jour rempli d'amour et de moments mémorables vous attend. Votre présence est le plus beau des cadeaux, mais si vous souhaitez offrir quelque chose, consultez notre liste de cadeaux de mariage pour trouver l'inspiration !
-
-La liste de cadeaux de mariage est disponible ici : ${presentsListUrl}
-Vos contributions rendront notre journée encore plus spéciale et mémorable pour nous deux. À bientôt ! 🎁💕`;
+  Date: 22 juin
+  Heure: 15h
+  Lieu: Mairie de Chateau-Larcher, 2 rue de la Mairie, 86370 Chateau-Larcher
+  
+  Nous avons hâte de vous accueillir à la cérémonie ! Un jour rempli d'amour et de moments mémorables vous attend. Votre présence est le plus beau des cadeaux, mais si vous souhaitez offrir quelque chose, consultez notre liste de cadeaux de mariage pour trouver l'inspiration !
+  
+  La liste de cadeaux de mariage est disponible ici : ${presentsListUrl}
+  Vos contributions rendront notre journée encore plus spéciale et mémorable pour nous deux. À bientôt ! 🎁💕`;
 
   return (
-    <div style={{ position: "relative" }}>
-      <div style={{ padding: "24px" }} className="container" id="informations">
-        <Title
-          level={2}
-          style={{
-            textAlign: "center",
-            fontSize: "50px",
-            fontFamily: "Playfair Display, serif",
-          }}
-        >
+    <div className="relative">
+      <div className="container py-6" id="informations">
+        <Title level={2} className={titleStyle}>
           Informations
         </Title>
         <Divider />
 
-        <Row justify="center" style={{ marginBottom: "50px" }}>
+        <Row justify="center" className="mb-10">
           <Col xs={24} md={12}>
-            <Text
-              style={{
-                fontSize: "20px",
-                textAlign: "center",
-                padding: "20px",
-                width: "100%", // Sur mobile, la largeur est de 100%
-                display: "block",
-              }}
-            >
+            <Text className={textBlockClass}>
               Nous avons hâte de vous accueillir à la cérémonie ! RDV à {hour} à
               la {placeName} pour partager ce moment spécial avec nous.
             </Text>
@@ -58,16 +47,14 @@ Vos contributions rendront notre journée encore plus spéciale et mémorable po
         </Row>
 
         <Row gutter={[16, 16]} justify="center">
-          <Col xs={24} sm={24} md={10} style={{ marginTop: 20 }}>
-            <div style={{ textAlign: "center" }}>
+          <Col xs={24} sm={24} md={10} className="mt-5">
+            <div className="text-center">
               <CustomIcon Icon={EnvironmentOutlined} />
-              <Title level={4} style={{ fontSize: "25px" }}>
+              <Title level={4} className="text-2xl">
                 Date et Lieu
               </Title>
-              <p>
-                <Text style={{ fontSize: "20px" }}>
-                  Le {date} à {hour} à la {placeName}, {placeAdress}
-                </Text>
+              <p className={textBlockClass}>
+                Le {date} à {hour} à la {placeName}, {placeAdress}
               </p>
               <ButtonAddToCalendar
                 eventDetails={{
@@ -80,24 +67,22 @@ Vos contributions rendront notre journée encore plus spéciale et mémorable po
             </div>
           </Col>
 
-          <Col xs={24} sm={24} md={10} style={{ marginTop: 20 }}>
-            <div style={{ textAlign: "center" }}>
+          <Col xs={24} sm={24} md={10} className="mt-5">
+            <div className="text-center">
               <CustomIcon Icon={GiftOutlined} />
-              <Title level={4} style={{ fontSize: "25px" }}>
+              <Title level={4} className="text-2xl">
                 Cadeaux
               </Title>
-              <p>
-                <Text style={{ fontSize: "20px" }}>
-                  Vos présents nous rendront le jour encore plus mémorable !
-                  Merci d'avance pour votre générosité.{" "}
-                </Text>
+              <p className={textBlockClass}>
+                Vos présents nous rendront le jour encore plus mémorable ! Merci
+                d'avance pour votre générosité.{" "}
               </p>
               <Button
                 type="primary"
                 href={presentsListUrl}
                 target="_blank"
                 rel="noopener noreferrer"
-                style={{ marginTop: 20 }}
+                className="mt-5"
               >
                 Voir la liste de cadeaux
               </Button>
@@ -109,12 +94,7 @@ Vos contributions rendront notre journée encore plus spéciale et mémorable po
       <img
         src={"/images/leaves-2.svg"}
         alt="Leaves"
-        style={{
-          position: "absolute",
-          bottom: "-40%",
-          left: "-2%",
-          zIndex: -1, // Derrière le contenu principal
-        }}
+        className="absolute bottom-[-40%] left-[-2%] z-[-1]"
       />
     </div>
   );

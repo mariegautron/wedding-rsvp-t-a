@@ -27,33 +27,25 @@ const PhotoGallery: FC<{ getImagesUrlFromStorage: () => Promise<any> }> = ({
   }
 
   return (
-    <div className="container">
+    <div className="container py-6">
       <div className="photoGallery">
-        <Title
-          level={2}
-          style={{
-            textAlign: "center",
-            fontSize: "50px",
-            fontFamily: "Playfair Display, serif",
-          }}
-        >
+        <Title level={2} className="text-center text-5xl font-serif">
           Photos
         </Title>
         <Divider />
-        <div className="photoGrid">
-          {photos.map((photo, index) => {
-            return (
-              index !== 0 && (
-                <div key={index} className="photoWrapper">
-                  <img
-                    src={photo}
-                    alt={`Photo ${index + 1}`}
-                    className="photoItem"
-                  />
-                </div>
-              )
-            );
-          })}
+        <div className="photoGrid grid grid-cols-4 gap-4">
+          {photos.slice(1).map((photo, index) => (
+            <div
+              key={index}
+              className="photoWrapper aspect-w-1 aspect-h-1 relative"
+            >
+              <img
+                src={photo}
+                alt={`Photo ${index + 1}`}
+                className="photoItem absolute inset-0 w-full h-full object-cover"
+              />
+            </div>
+          ))}
         </div>
       </div>
     </div>

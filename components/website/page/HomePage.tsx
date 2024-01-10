@@ -1,16 +1,15 @@
 "use client";
 
+import Heading from "@/components/design-system/Heading";
+import Subtile from "@/components/design-system/Subtitle";
+import useDeadlineCheck from "@/utils/hooks/useDeadlineCheck";
 import useGuestData from "@/utils/hooks/useGuestData";
 import { WeddingGuests } from "@/utils/types/weddinggests";
-import { Result, Spin } from "antd";
+import { Spin } from "antd";
 import { FC } from "react";
-import Footer from "../atoms/Footer";
-import HeroTemplatePage from "../molecules/HeroTemplatePage";
 import Hero from "../molecules/Hero";
-import RSVPStepper from "../molecules/RSVPStepper";
-import useDeadlineCheck from "@/utils/hooks/useDeadlineCheck";
-import ImportantInformation from "../molecules/ImportantInformations";
-import PhotoGallery from "../molecules/PhotoGallery";
+import HeroTemplatePage from "../molecules/HeroTemplatePage";
+import Loading from "@/components/design-system/Loading";
 
 const HomePage: FC<{
   fetchGuestData: (uuid: string) => Promise<WeddingGuests | null | undefined>;
@@ -24,20 +23,18 @@ const HomePage: FC<{
   const deadlinePassed = useDeadlineCheck();
 
   if (loading) {
-    return (
-      <HeroTemplatePage>
-        <Spin size="large" />
-      </HeroTemplatePage>
-    );
+    return <Loading />;
   }
 
   if (!guestData) {
     return (
       <HeroTemplatePage>
-        <Result
-          status="error"
-          title="Ton lien d'invitation n'est sûrement pas bon !"
-        />
+        <div>
+          <Subtile mode="dark">Il y a une erreur !</Subtile>
+        </div>{" "}
+        <Heading level={1} className="my-5">
+          Ton lien d'invitation n'est sûrement pas bon !
+        </Heading>{" "}
       </HeroTemplatePage>
     );
   }
@@ -45,12 +42,12 @@ const HomePage: FC<{
   return (
     <div>
       <Hero guest={guestData} />
-      {!deadlinePassed && (
+      {/* {!deadlinePassed && (
         <RSVPStepper guest={guestData} updateGuest={updateGuest} />
       )}
       <ImportantInformation />
       <PhotoGallery getImagesUrlFromStorage={getImagesUrlFromStorage} />
-      <Footer />
+      <Footer /> */}
     </div>
   );
 };

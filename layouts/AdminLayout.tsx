@@ -17,7 +17,7 @@ const AdminLayout = ({ children }: { children: React.ReactNode }) => {
 
   return (
     <ConfigProvider theme={themeTokens}>
-      <Layout className="isAdmin">
+      <Layout>
         <CustomSider collapsed={collapsed} />
         <Layout>
           <CustomHeader collapsed={collapsed} setCollapsed={setCollapsed} />

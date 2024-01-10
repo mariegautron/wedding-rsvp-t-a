@@ -1,6 +1,6 @@
+import Tag from "@/components/design-system/Tag";
 import { formatDate } from "@/utils/functions/formatDate";
 import { hasResponded } from "@/utils/functions/hasResponded";
-import { Tag } from "antd";
 import { FC } from "react";
 
 export const TagResponseIsPresent: FC<{
@@ -9,11 +9,11 @@ export const TagResponseIsPresent: FC<{
   return (
     <>
       {isPresent === true ? (
-        <Tag color="green">Présent·e</Tag>
+        <Tag variant="success">Présent·e</Tag>
       ) : isPresent === false ? (
-        <Tag color="red">Absent·e</Tag>
+        <Tag variant="error">Absent·e</Tag>
       ) : (
-        <Tag color="default">Non répondu·e</Tag>
+        <Tag variant="default">Non répondu·e</Tag>
       )}
     </>
   );
@@ -25,9 +25,9 @@ export const TagResponseCanComeWithSomeone: FC<{
   return (
     <>
       {canComeWithSomeone ? (
-        <Tag color="green">Peut être accompagné·e</Tag>
+        <Tag variant="success">Peut être accompagné·e</Tag>
       ) : (
-        <Tag color="red">Pas accompagné·e</Tag>
+        <Tag variant="error">Pas accompagné·e</Tag>
       )}
     </>
   );
@@ -41,15 +41,15 @@ export const TagRepsponseComeWithSomeone: FC<{
   return (
     <>
       {comeWithSomeone === true ? (
-        <Tag color="green">
+        <Tag variant="success">
           {guestOfGuestLastname
             ? `Accompagné·e par ${guestOfGuestFirstname} ${guestOfGuestLastname}`
             : `Accompagné·e par ${guestOfGuestFirstname}`}
         </Tag>
       ) : comeWithSomeone === false ? (
-        <Tag color="red">Non accompagné·e</Tag>
+        <Tag variant="error">Non accompagné·e</Tag>
       ) : (
-        <Tag color="default">Non spécifié pour l'accompagnement</Tag>
+        <Tag variant="default">Non spécifié pour l'accompagnement</Tag>
       )}
     </>
   );
@@ -59,11 +59,11 @@ export const TagNameGuest: FC<{ firstname: string; lastname: string }> = ({
   firstname,
   lastname,
 }) => {
-  return <Tag color="default">{`${firstname} ${lastname}`}</Tag>;
+  return <Tag variant="default">{`${firstname} ${lastname}`}</Tag>;
 };
 
 export const TagEmailGuest: FC<{ email: string }> = ({ email }) => {
-  return <Tag color="default">{`${email}`}</Tag>;
+  return <Tag variant="default">{`${email}`}</Tag>;
 };
 
 export const TagDateInviteGuest: FC<{
@@ -71,15 +71,15 @@ export const TagDateInviteGuest: FC<{
   dateInvitSend?: Date;
 }> = ({ invitSend, dateInvitSend }) => {
   if (!invitSend) {
-    return <Tag color="red">Invitation non envoyée</Tag>;
+    return <Tag variant="error">Invitation non envoyée</Tag>;
   } else if (dateInvitSend) {
     return (
-      <Tag color="green">{`Invitation envoyée le ${formatDate(
+      <Tag variant="success">{`Invitation envoyée le ${formatDate(
         dateInvitSend
       )}`}</Tag>
     );
   } else {
-    return <Tag color="green">Invitation envoyée</Tag>;
+    return <Tag variant="success">Invitation envoyée</Tag>;
   }
 };
 
@@ -90,10 +90,12 @@ export const TagDateResponseGuest: FC<{
   const guestHasResponded = hasResponded(isPresent);
 
   if (!guestHasResponded) {
-    return <Tag color="grey">N'a pas répondu</Tag>;
+    return <Tag variant="default">N'a pas répondu</Tag>;
   } else if (dateResponseSend) {
     return (
-      <Tag color="grey">{`Répondu le ${formatDate(dateResponseSend)}`}</Tag>
+      <Tag variant="default">{`Répondu le ${formatDate(
+        dateResponseSend
+      )}`}</Tag>
     );
   }
 };
