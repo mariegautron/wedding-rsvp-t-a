@@ -40,7 +40,7 @@ const Heading: React.FC<HeadingProps> = ({
       case 3:
         return " text-2xl sm:text-2xl md:text-3xl lg:text-4xl xl:text-5xl ";
       default:
-        return "text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-10xl ";
+        return "text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-10xl uppercase ";
     }
   };
 
@@ -48,8 +48,7 @@ const Heading: React.FC<HeadingProps> = ({
     getFontSize(level),
     className,
     color,
-    "font-classico",
-    "uppercase"
+    "font-classico"
   );
 
   return <HeadingTag className={headingClasses}>{children}</HeadingTag>;

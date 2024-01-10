@@ -56,7 +56,7 @@ const LoginForm: React.FC = () => {
         </Form.Item>
 
         <Form.Item>
-          <Button type="primary" htmlType="submit" style={{ width: "100%" }}>
+          <Button htmlType="submit" style={{ width: "100%" }}>
             Se connecter
           </Button>
         </Form.Item>

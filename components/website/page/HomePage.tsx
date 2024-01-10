@@ -11,6 +11,9 @@ import HeroTemplatePage from "../molecules/HeroTemplatePage";
 import Loading from "@/components/design-system/Loading";
 import RSVPStepper from "../molecules/RSVPStepper";
 import Heading from "@/components/design-system/Headings";
+import ImportantInformation from "../molecules/ImportantInformations";
+import PhotoGallery from "../molecules/PhotoGallery";
+import Footer from "../atoms/Footer";
 
 const HomePage: FC<{
   fetchGuestData: (uuid: string) => Promise<WeddingGuests | null | undefined>;
@@ -41,14 +44,14 @@ const HomePage: FC<{
   }
 
   return (
-    <div>
+    <div className="flex flex-col gap-20">
       <Hero guest={guestData} />
       {!deadlinePassed && (
         <RSVPStepper guest={guestData} updateGuest={updateGuest} />
       )}
-      {/* <ImportantInformation />
+      <ImportantInformation />
       <PhotoGallery getImagesUrlFromStorage={getImagesUrlFromStorage} />
-      <Footer /> */}
+      <Footer />
     </div>
   );
 };

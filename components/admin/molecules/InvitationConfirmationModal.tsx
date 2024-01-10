@@ -56,7 +56,7 @@ const InvitationConfirmationModal: React.FC<
         <Button key="cancel" onClick={handleCancel}>
           Annuler
         </Button>,
-        <Button key="confirm" type="primary" onClick={handleConfirm}>
+        <Button key="confirm" onClick={handleConfirm}>
           Confirmer
         </Button>,
       ]}

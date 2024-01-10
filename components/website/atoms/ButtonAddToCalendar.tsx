@@ -34,7 +34,7 @@ const ButtonAddToCalendar: React.FC<{ eventDetails: EventDetails }> = ({
   };
 
   return (
-    <Button type="primary" onClick={addToCalendar} className="mt-5">
+    <Button onClick={addToCalendar} className="mt-5">
       Ajouter à mon calendrier
     </Button>
   );

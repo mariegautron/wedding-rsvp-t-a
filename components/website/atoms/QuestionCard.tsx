@@ -1,7 +1,7 @@
-import { Button, Card, Space, Typography } from "antd";
+import Button from "@/components/design-system/Button";
+import Heading from "@/components/design-system/Headings";
+import Paragraph from "@/components/design-system/Paragraph";
 import { MouseEventHandler, ReactNode } from "react";
-
-const { Text } = Typography;
 
 interface QuestionCardProps {
   questionNumber: number;
@@ -29,7 +29,7 @@ const QuestionCard: React.FC<QuestionCardProps> = ({
   loading = false,
 }) => {
   const nextButton = withNextButton ? (
-    <Button type="primary" onClick={handleNext} className="mr-4">
+    <Button onClick={handleNext} className="mr-4">
       Suivant
     </Button>
   ) : null;
@@ -41,27 +41,23 @@ const QuestionCard: React.FC<QuestionCardProps> = ({
   ) : null;
 
   const submitButton = withSubmitButton ? (
-    <Button type="primary" onClick={handleSubmit} loading={loading}>
+    <Button onClick={handleSubmit} loading={loading}>
       Envoyer ma réponse
     </Button>
   ) : null;
 
   return (
-    <Card
-      title={<Text className="text-lg">Question {questionNumber}</Text>}
-      className="p-8 text-center shadow-md"
-    >
-      <Space direction="vertical" className="space-y-6">
-        <Text className="text-2xl">{questionTitle}</Text>
-        {children}
-
-        <Space direction="horizontal" className="space-x-6">
-          {prevButton}
-          {nextButton}
-          {submitButton}
-        </Space>
-      </Space>
-    </Card>
+    <div className="flex flex-col items-center justify-center space-y-10 border border-fond-clair p-4">
+      <Paragraph>Question {questionNumber}</Paragraph>
+      <div className="w-40 h-0.5 bg-fond-clair"></div>
+      <Heading level={3}>{questionTitle}</Heading>
+      {children}
+      <div className="flex flex-wrap space-x-4">
+        {prevButton}
+        {nextButton}
+        {submitButton}
+      </div>
+    </div>
   );
 };
 

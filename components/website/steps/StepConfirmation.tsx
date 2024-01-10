@@ -26,7 +26,7 @@ const StepConfirmation: FC<StepConfirmationProps> = ({ handlePrev }) => {
         Tu as encore le temps de changer d’avis jusqu’au {formattedDeadline}.
       </Title>
       <Title level={3}>Thomas & Amélie</Title>
-      {/* <Button type="primary">Modifier ma réponse</Button> */}
+      {/* <Button  >Modifier ma réponse</Button> */}
     </QuestionCard>
   );
 };

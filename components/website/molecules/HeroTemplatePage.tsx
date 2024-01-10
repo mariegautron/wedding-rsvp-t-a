@@ -14,7 +14,7 @@ const HeroTemplatePage: FC<HeroTemplateProps> = ({
 
   return (
     <div
-      className={`bg-fond-foncé min-h-screen h-full flex flex-col justify-center items-center ${textColorClass}`}
+      className={`bg-fond-foncé min-h-screen h-full flex flex-col justify-center items-center overflow-hidden ${textColorClass}`}
     >
       <div
         className="w-4/5 mx-auto space-y-8 md:flex md:items-center md:justify-between relative"

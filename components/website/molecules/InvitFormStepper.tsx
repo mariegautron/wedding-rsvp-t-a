@@ -97,7 +97,7 @@ const FormStepper: React.FC<{
     }
   };
 
-  const handleSubmit = async () => {
+  const handleSubmit = async (): Promise<void> => {
     try {
       setIsLoading(true);
       const result = await updateGuest({

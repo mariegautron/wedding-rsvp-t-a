@@ -3,6 +3,7 @@ import { useFormattedEventDate } from "@/utils/hooks/useFormattedEventDate";
 import { EnvironmentOutlined, GiftOutlined } from "@ant-design/icons";
 import { Button, Col, Divider, Row, Typography } from "antd";
 import ButtonAddToCalendar from "../atoms/ButtonAddToCalendar";
+import Heading from "@/components/design-system/Headings";
 
 const { Title, Text } = Typography;
 
@@ -17,8 +18,6 @@ const ImportantInformation = () => {
 
   const textBlockClass = "text-lg";
 
-  const titleStyle = "underline text-center text-5xl font-serif";
-
   const description = `Rejoignez-nous pour une journée spéciale !
   Date: 22 juin
   Heure: 15h
@@ -32,10 +31,8 @@ const ImportantInformation = () => {
   return (
     <div className="relative">
       <div className="container py-6" id="informations">
-        <Title level={2} className={titleStyle}>
-          Informations
-        </Title>
-        <Divider />
+        <Heading level={2}>Informations</Heading>
+        {/* <Divider />
 
         <Row justify="center" className="mb-10">
           <Col xs={24} md={12}>
@@ -78,7 +75,6 @@ const ImportantInformation = () => {
                 d'avance pour votre générosité.{" "}
               </p>
               <Button
-                type="primary"
                 href={presentsListUrl}
                 target="_blank"
                 rel="noopener noreferrer"
@@ -88,14 +84,8 @@ const ImportantInformation = () => {
               </Button>
             </div>
           </Col>
-        </Row>
+        </Row> */}
       </div>
-
-      <img
-        src={"/images/leaves-2.svg"}
-        alt="Leaves"
-        className="absolute bottom-[-40%] left-[-2%] z-[-1]"
-      />
     </div>
   );
 };

@@ -1,5 +1,6 @@
 import React, { FC, useEffect, useState } from "react";
 import { Row, Col, Typography, Divider } from "antd";
+import Heading from "@/components/design-system/Headings";
 
 const { Title } = Typography;
 
@@ -29,10 +30,7 @@ const PhotoGallery: FC<{ getImagesUrlFromStorage: () => Promise<any> }> = ({
   return (
     <div className="container py-6">
       <div className="photoGallery">
-        <Title level={2} className="text-center text-5xl font-serif">
-          Photos
-        </Title>
-        <Divider />
+        <Heading level={2}>Gallerie photos</Heading>
         <div className="photoGrid grid grid-cols-4 gap-4">
           {photos.slice(1).map((photo, index) => (
             <div

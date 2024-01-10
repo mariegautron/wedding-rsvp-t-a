@@ -93,12 +93,8 @@ const AddOrUpdateForm: FC<{
       )}
 
       <Form.Item>
-        <Button
-          type="primary"
-          htmlType="submit"
-          style={{ width: "100%", marginTop: 20 }}
-        >
-          Ajouter
+        <Button htmlType="submit" style={{ width: "100%", marginTop: 20 }}>
+          {guest ? "Modfiier" : "Ajouter"}
         </Button>
       </Form.Item>
     </Form>

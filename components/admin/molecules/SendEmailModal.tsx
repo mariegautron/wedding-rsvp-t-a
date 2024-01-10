@@ -62,12 +62,7 @@ const SendEmailModal: React.FC<SendEmailModalProps> = ({
         <Button key="cancel" onClick={handleCancel}>
           Annuler
         </Button>,
-        <Button
-          key="submit"
-          type="primary"
-          onClick={handleSendEmail}
-          loading={sending}
-        >
+        <Button key="submit" onClick={handleSendEmail} loading={sending}>
           Envoyer
         </Button>,
       ]}
