@@ -3,11 +3,22 @@ import cn from "classnames";
 
 interface TagProps {
   children: React.ReactNode;
-  variant?: "default" | "success" | "error";
+  variant?: "default" | "success" | "error" | "transparent";
+  isRadio?: boolean;
 }
 
-const Tag: React.FC<TagProps> = ({ children, variant = "default" }) => {
-  let tagClasses = "inline-block px-4 py-1 m-1 text-xs border-2 rounded-sm";
+const Tag: React.FC<TagProps> = ({
+  children,
+  variant = "default",
+  isRadio = false,
+}) => {
+  let tagClasses = "inline-block m-1 border-2 rounded-sm font-Raleway";
+
+  if (isRadio) {
+    tagClasses += " px-6 py-4  text-xl";
+  } else {
+    tagClasses += " px-4 py-1 text-xs";
+  }
 
   switch (variant) {
     case "success":
@@ -16,6 +27,9 @@ const Tag: React.FC<TagProps> = ({ children, variant = "default" }) => {
       break;
     case "error":
       tagClasses += " bg-tagError border-tagErrorBorder text-tagErrorText";
+      break;
+    case "transparent":
+      tagClasses += " bg-transparent border-tagErrorBorder text-tagErrorText";
       break;
     default:
       tagClasses +=
