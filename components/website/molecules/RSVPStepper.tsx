@@ -1,10 +1,8 @@
+import Heading from "@/components/design-system/Headings";
+import useGuestHasResponded from "@/utils/hooks/useGuestHasResponded";
+import { WeddingGuests } from "@/utils/types/weddinggests";
 import { FC } from "react";
 import FormStepper from "./InvitFormStepper";
-import { WeddingGuests } from "@/utils/types/weddinggests";
-import { Typography } from "antd";
-import useGuestHasResponded from "@/utils/hooks/useGuestHasResponded";
-
-const { Title } = Typography;
 
 const RSVPStepper: FC<{
   guest: WeddingGuests;
@@ -16,38 +14,15 @@ const RSVPStepper: FC<{
 
   return (
     <div
-      className="rsvp"
-      style={{ position: "relative", overflow: "hidden" }}
       id="rsvp"
+      className="flex flex-col items-center justify-center gap-8 my-12"
     >
-      <Title
-        level={2}
-        style={{
-          textAlign: "center",
-          fontSize: 50,
-          fontFamily: "Playfair Display, serif",
-        }}
-      >
-        {hasResponded ? "Modifier ma réponse" : "Repond à l'invitation"}
-      </Title>
-      <div
-        className="container py-10"
-        style={{ position: "relative", width: "60%" }}
-      >
-        <FormStepper guest={guest} updateGuest={updateGuest} />
+      <Heading level={2}>
+        {hasResponded ? "Modifier ma réponse" : "Répondre à l'invitation"}
+      </Heading>
+      <div className="w-4/5 mx-auto">
+        {/* <FormStepper guest={guest} updateGuest={updateGuest} /> */}
       </div>
-      <img
-        src="/images/leaves-2.svg"
-        aria-hidden="true"
-        className="svg-decoration "
-        style={{
-          position: "absolute",
-          bottom: 0,
-          right: "-3%",
-          width: "300px",
-          transform: "scaleX(-1)",
-        }}
-      />
     </div>
   );
 };

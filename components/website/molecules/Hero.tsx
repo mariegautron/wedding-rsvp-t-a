@@ -1,4 +1,3 @@
-import Heading from "@/components/design-system/Heading";
 import Paragraph from "@/components/design-system/Paragraph";
 import useDeadlineCheck from "@/utils/hooks/useDeadlineCheck";
 import useFormattedDeadline from "@/utils/hooks/useFormattedDeadline";
@@ -10,6 +9,7 @@ import GuestResponses from "../../shared/molecules/GuestResponses";
 import FooterHero from "../atoms/FooterHero";
 import HeroTemplatePage from "./HeroTemplatePage";
 import Subtile from "@/components/design-system/Subtitle";
+import Heading from "@/components/design-system/Headings";
 
 interface HeroProps {
   guest: WeddingGuests;

@@ -14,9 +14,9 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body style={{ height: "100%" }}>
+      <body className="bg-white h-full">
         <ConfigProvider theme={themeTokens}>
-          <div style={{ height: "100%" }}>{children}</div>
+          <div className="h-full">{children}</div>
         </ConfigProvider>
       </body>
     </html>

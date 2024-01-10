@@ -1,6 +1,5 @@
 "use client";
 
-import Heading from "@/components/design-system/Heading";
 import Subtile from "@/components/design-system/Subtitle";
 import useDeadlineCheck from "@/utils/hooks/useDeadlineCheck";
 import useGuestData from "@/utils/hooks/useGuestData";
@@ -10,6 +9,8 @@ import { FC } from "react";
 import Hero from "../molecules/Hero";
 import HeroTemplatePage from "../molecules/HeroTemplatePage";
 import Loading from "@/components/design-system/Loading";
+import RSVPStepper from "../molecules/RSVPStepper";
+import Heading from "@/components/design-system/Headings";
 
 const HomePage: FC<{
   fetchGuestData: (uuid: string) => Promise<WeddingGuests | null | undefined>;
@@ -42,10 +43,10 @@ const HomePage: FC<{
   return (
     <div>
       <Hero guest={guestData} />
-      {/* {!deadlinePassed && (
+      {!deadlinePassed && (
         <RSVPStepper guest={guestData} updateGuest={updateGuest} />
       )}
-      <ImportantInformation />
+      {/* <ImportantInformation />
       <PhotoGallery getImagesUrlFromStorage={getImagesUrlFromStorage} />
       <Footer /> */}
     </div>

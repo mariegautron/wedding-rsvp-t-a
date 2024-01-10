@@ -37,6 +37,7 @@ module.exports = {
         xl: "1.25rem",
         "2xl": "1.5rem",
         // ... (autres tailles personnalisées)
+        "10xl": "13rem",
       },
       // Étendez ou remplacez d'autres propriétés de base de Tailwind selon vos besoins
     },
