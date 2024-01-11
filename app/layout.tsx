@@ -13,7 +13,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en">
+    <html lang="en" className="bg-white h-full">
       <body className="bg-white h-full">
         <ConfigProvider theme={themeTokens}>
           <div className="h-full">{children}</div>

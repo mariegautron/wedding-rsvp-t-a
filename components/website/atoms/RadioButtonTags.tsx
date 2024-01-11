@@ -22,8 +22,8 @@ const RadioButtonTag: React.FC<RadioButtonTagProps> = ({
 
   return (
     <div
-      className={`inline-flex items-center px-3 py-1 cursor-pointer 
-        transition-all duration-300 ease-in-out focus:outline-none`}
+      className={`inline-flex justify-center items-center px-3 py-1 cursor-pointer 
+        transition-all duration-300 ease-in-out focus:outline-none text-center`}
       onClick={handleClick}
     >
       <input

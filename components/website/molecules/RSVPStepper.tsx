@@ -15,7 +15,7 @@ const RSVPStepper: FC<{
   return (
     <div
       id="rsvp"
-      className="flex flex-col items-center justify-center gap-8 my-12 space-y-10 mb-12"
+      className="flex flex-col items-center justify-center gap-8 md:space-y-10 mb-12 md:w-11/12 mx-auto w-full"
     >
       <Heading level={2}>
         {hasResponded ? "Modifier ma réponse" : "Répondre à l'invitation"}

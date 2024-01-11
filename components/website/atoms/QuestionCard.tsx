@@ -29,13 +29,13 @@ const QuestionCard: React.FC<QuestionCardProps> = ({
   loading = false,
 }) => {
   const nextButton = withNextButton ? (
-    <Button onClick={handleNext} className="mr-4">
+    <Button onClick={handleNext} loading={loading}>
       Suivant
     </Button>
   ) : null;
 
   const prevButton = withPrevButton ? (
-    <Button onClick={handlePrev} className="mr-4">
+    <Button outlined mode="dark" onClick={handlePrev} loading={loading}>
       Précédent
     </Button>
   ) : null;
@@ -47,12 +47,14 @@ const QuestionCard: React.FC<QuestionCardProps> = ({
   ) : null;
 
   return (
-    <div className="flex flex-col items-center justify-center space-y-10 border border-fond-clair p-4">
-      <Paragraph>Question {questionNumber}</Paragraph>
-      <div className="w-40 h-0.5 bg-fond-clair"></div>
-      <Heading level={3}>{questionTitle}</Heading>
+    <div className="flex flex-col items-center justify-center space-y-10 border border-fond-clair p-10">
+      <Paragraph className="text-center">Question {questionNumber}</Paragraph>
+      <div className="w-20 h-0.5 bg-fond-clair"></div>
+      <Heading level={3} className="text-center">
+        {questionTitle}
+      </Heading>
       {children}
-      <div className="flex flex-wrap space-x-4">
+      <div className="flex flex-wrap justify-center items-center md:space-x-4 space-y-4">
         {prevButton}
         {nextButton}
         {submitButton}

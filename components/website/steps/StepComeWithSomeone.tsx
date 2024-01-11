@@ -1,10 +1,7 @@
 import RadioTagList from "@/components/website/atoms/RadioTagList";
 import { stringToBoolean } from "@/utils/functions/stringToBoolean";
-import { Typography } from "antd";
 import { FC } from "react";
 import QuestionCard from "../atoms/QuestionCard";
-
-const { Title } = Typography;
 
 interface StepComeWithSomeoneProps {
   handleNext: () => void;
@@ -14,8 +11,8 @@ interface StepComeWithSomeoneProps {
 }
 
 const optionsCanComeWithSomeone = [
-  { value: "true", text: "Oui, je serai accompagné(e)" },
-  { value: "false", text: "Non, je serai seul(e)" },
+  { value: "true", text: "Oui, je serai accompagné·e" },
+  { value: "false", text: "Non, je serai seul·e" },
 ];
 
 const StepComeWithSomeone: FC<StepComeWithSomeoneProps> = ({
@@ -27,7 +24,7 @@ const StepComeWithSomeone: FC<StepComeWithSomeoneProps> = ({
   return (
     <QuestionCard
       questionNumber={2}
-      questionTitle="Envisages-tu d’être accompagné(e) ?"
+      questionTitle="Envisages-tu d’être accompagné·e ?"
       withNextButton
       withPrevButton
       handleNext={handleNext}

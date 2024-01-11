@@ -1,8 +1,5 @@
-import React, { FC, useEffect, useState } from "react";
-import { Row, Col, Typography, Divider } from "antd";
 import Heading from "@/components/design-system/Headings";
-
-const { Title } = Typography;
+import { FC, useEffect, useState } from "react";
 
 const PhotoGallery: FC<{ getImagesUrlFromStorage: () => Promise<any> }> = ({
   getImagesUrlFromStorage,

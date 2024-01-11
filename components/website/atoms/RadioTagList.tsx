@@ -26,7 +26,7 @@ const RadioTagList: React.FC<RadioTagListProps> = ({
   };
 
   return (
-    <div className="flex space-x-1">
+    <div className="flex flex-wrap justify-center items-center space-x-1">
       {options.map((option) => (
         <RadioButtonTag
           key={option.value}
