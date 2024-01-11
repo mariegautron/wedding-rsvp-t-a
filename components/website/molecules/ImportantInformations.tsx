@@ -29,7 +29,7 @@ const ImportantInformation = () => {
   Vos contributions rendront notre journée encore plus spéciale et mémorable pour nous deux. À bientôt ! 🎁💕`;
 
   return (
-    <div className="relative">
+    <div className="relative bg-fond-clair py-10">
       <div className="container py-6" id="informations">
         <Heading level={2}>Informations</Heading>
         {/* <Divider />
