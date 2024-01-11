@@ -1,4 +1,5 @@
-import { Row, Col, Statistic } from "antd";
+import Statistic from "@/components/design-system/Statistic";
+import { Row, Col } from "antd";
 
 interface StatisticListProps {
   statistics: { title: string; value: number }[];
@@ -19,21 +20,7 @@ const StatisticList: React.FC<StatisticListProps> = ({ statistics }) => {
           lg={24 / numCols}
           style={{ maxWidth: colWidth }}
         >
-          <div
-            style={{
-              border: "1px solid #d9d9d9",
-              padding: "16px",
-              borderRadius: "4px",
-              marginBottom: "16px",
-              width: "100%",
-            }}
-          >
-            <Statistic
-              title={stat.title}
-              value={stat.value}
-              style={{ width: "100%" }}
-            />
-          </div>
+          <Statistic title={stat.title} value={stat.value} />
         </Col>
       ))}
     </Row>

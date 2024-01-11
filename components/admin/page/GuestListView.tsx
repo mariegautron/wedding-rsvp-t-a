@@ -1,19 +1,19 @@
 "use client";
 
+import Button from "@/components/design-system/Button";
+import Heading from "@/components/design-system/Headings";
 import { hasResponded } from "@/utils/functions/hasResponded";
 import useIsAuthenticated from "@/utils/hooks/useIsAuthenticated";
 import { WeddingGuests } from "@/utils/types/weddinggests";
-import { UserOutlined, UsergroupAddOutlined } from "@ant-design/icons";
-import { Button, Collapse, Space, Typography } from "antd";
-import Link from "next/link";
+import { Collapse } from "antd";
 import { useMemo, useState } from "react";
 import FiltersAndSearchPanel from "../molecules/FiltersAndSearchPanel";
 import GuestListTable from "../molecules/GuestListTable";
 import LoginForm from "../molecules/LoginForm";
 import StatisticList from "../molecules/StatisticList";
+import Accordion from "@/components/design-system/Accordion";
 
 const { Panel } = Collapse;
-const { Title } = Typography;
 
 interface GuestViewProps {
   data: WeddingGuests[];
@@ -58,7 +58,7 @@ const GuestView: React.FC<GuestViewProps> = ({
     { title: "Pas encore de réponse", value: rsvpRespondedCount },
     { title: "Présents", value: presentCount },
     { title: "Absent·e·s", value: noPresentCount },
-    { title: "Personnes invitées avec quelqu'un", value: comeWithSomeoneCount },
+    { title: "Personnes invitées avec un·e +1", value: comeWithSomeoneCount },
   ];
 
   const guestsToShow = data.filter((guest) => {
@@ -118,36 +118,29 @@ const GuestView: React.FC<GuestViewProps> = ({
           marginBottom: "24px",
         }}
       >
-        <Space>
-          <UsergroupAddOutlined style={{ fontSize: "24px" }} />
-          <Title level={2}>Liste des personnes invitées</Title>
-        </Space>
-        <Button icon={<UserOutlined />} style={{ background: "#4d5a4f" }}>
-          <Link href="/admin/weddingguests/add">
-            Ajouter une personne invitée
-          </Link>
+        <Heading level={3}>Liste des personnes invitées</Heading>
+        <Button outlined mode="dark" href="/admin/weddingguests/add">
+          Ajouter une personne invitée
         </Button>
       </div>
       <StatisticList statistics={statistics} />
-      <Title level={4}>Tableau des personnes invitées</Title>
-      <Collapse accordion style={{ marginBottom: 20, marginTop: 20 }}>
-        <Panel header="Filtres & Recherche" key="2">
-          <FiltersAndSearchPanel
-            showOnlyNotResponded={showOnlyNotResponded}
-            setShowOnlyNotResponded={setShowOnlyNotResponded}
-            showOnlyPresent={showOnlyPresent}
-            setShowOnlyPresent={setShowOnlyPresent}
-            showOnlyOneCanCome={showOnlyOneCanCome}
-            setShowOnlyOneCanCome={setShowOnlyOneCanCome}
-            setSearchName={setSearchName}
-            resetFilters={resetFilters}
-            showOnlyInvitNotSent={showOnlyInvitNotSent}
-            setShowOnlyInvitNotSent={setShowOnlyInvitNotSent}
-            showOnlyInvitSent={showOnlyInvitSent}
-            setShowOnlyInvitSent={setShowOnlyInvitSent}
-          />
-        </Panel>
-      </Collapse>
+      <Accordion title="Filtres & Recherche">
+        {" "}
+        <FiltersAndSearchPanel
+          showOnlyNotResponded={showOnlyNotResponded}
+          setShowOnlyNotResponded={setShowOnlyNotResponded}
+          showOnlyPresent={showOnlyPresent}
+          setShowOnlyPresent={setShowOnlyPresent}
+          showOnlyOneCanCome={showOnlyOneCanCome}
+          setShowOnlyOneCanCome={setShowOnlyOneCanCome}
+          setSearchName={setSearchName}
+          resetFilters={resetFilters}
+          showOnlyInvitNotSent={showOnlyInvitNotSent}
+          setShowOnlyInvitNotSent={setShowOnlyInvitNotSent}
+          showOnlyInvitSent={showOnlyInvitSent}
+          setShowOnlyInvitSent={setShowOnlyInvitSent}
+        />
+      </Accordion>
       <GuestListTable
         data={sortedGuests}
         updateGuest={updateGuest}
