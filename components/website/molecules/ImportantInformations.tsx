@@ -1,11 +1,9 @@
-import CustomIcon from "@/components/shared/atoms/CustomIcon";
+import Heading from "@/components/design-system/Headings";
 import { useFormattedEventDate } from "@/utils/hooks/useFormattedEventDate";
 import { EnvironmentOutlined, GiftOutlined } from "@ant-design/icons";
-import { Button, Col, Divider, Row, Typography } from "antd";
 import ButtonAddToCalendar from "../atoms/ButtonAddToCalendar";
-import Heading from "@/components/design-system/Headings";
-
-const { Title, Text } = Typography;
+import CardInformation from "../atoms/CardInformation";
+import Button from "@/components/design-system/Button";
 
 const ImportantInformation = () => {
   const hour = process.env.NEXT_PUBLIC_EVENT_HOUR;
@@ -15,8 +13,6 @@ const ImportantInformation = () => {
   const presentsListUrl = process.env.NEXT_PUBLIC_PRESENT_LIST;
 
   const date = useFormattedEventDate();
-
-  const textBlockClass = "text-lg";
 
   const description = `Rejoignez-nous pour une journée spéciale !
   Date: 22 juin
@@ -29,30 +25,14 @@ const ImportantInformation = () => {
   Vos contributions rendront notre journée encore plus spéciale et mémorable pour nous deux. À bientôt ! 🎁💕`;
 
   return (
-    <div className="relative bg-fond-clair py-10">
-      <div className="container py-6" id="informations">
+    <div className="relative bg-fond-clair py-10" id="informations">
+      <div className="w-4/5 mx-auto  flex flex-col justify-center items-center">
         <Heading level={2}>Informations</Heading>
-        {/* <Divider />
-
-        <Row justify="center" className="mb-10">
-          <Col xs={24} md={12}>
-            <Text className={textBlockClass}>
-              Nous avons hâte de vous accueillir à la cérémonie ! RDV à {hour} à
-              la {placeName} pour partager ce moment spécial avec nous.
-            </Text>
-          </Col>
-        </Row>
-
-        <Row gutter={[16, 16]} justify="center">
-          <Col xs={24} sm={24} md={10} className="mt-5">
-            <div className="text-center">
-              <CustomIcon Icon={EnvironmentOutlined} />
-              <Title level={4} className="text-2xl">
-                Date et Lieu
-              </Title>
-              <p className={textBlockClass}>
-                Le {date} à {hour} à la {placeName}, {placeAdress}
-              </p>
+        <div className="flex flex-col md:flex-row p-10">
+          <CardInformation
+            title="Date et Lieu"
+            text={`Le ${date} à ${hour} à la ${placeName}, ${placeAdress}`}
+            button={
               <ButtonAddToCalendar
                 eventDetails={{
                   title: "Mariage de Thomas & Amélie ❤️",
@@ -61,19 +41,13 @@ const ImportantInformation = () => {
                   description: description,
                 }}
               />
-            </div>
-          </Col>
-
-          <Col xs={24} sm={24} md={10} className="mt-5">
-            <div className="text-center">
-              <CustomIcon Icon={GiftOutlined} />
-              <Title level={4} className="text-2xl">
-                Cadeaux
-              </Title>
-              <p className={textBlockClass}>
-                Vos présents nous rendront le jour encore plus mémorable ! Merci
-                d'avance pour votre générosité.{" "}
-              </p>
+            }
+            icon={<EnvironmentOutlined className="text-primary text-5xl" />}
+          />
+          <CardInformation
+            title="Cadeaux"
+            text="Vos présents nous rendront le jour encore plus mémorable ! Merci d'avance pour votre générosité."
+            button={
               <Button
                 href={presentsListUrl}
                 target="_blank"
@@ -82,9 +56,10 @@ const ImportantInformation = () => {
               >
                 Voir la liste de cadeaux
               </Button>
-            </div>
-          </Col>
-        </Row> */}
+            }
+            icon={<GiftOutlined className="text-primary text-5xl" />}
+          />
+        </div>
       </div>
     </div>
   );

@@ -3,13 +3,16 @@ import { handleMouseEnter, handleMouseLeave } from "./utils";
 
 interface LinkContainerProps extends ContainerProps {
   href: string;
+  target?: string;
+  rel?: string;
 }
 
 const LinkContainer: React.FC<LinkContainerProps> = ({
   className,
-  onClick,
   href,
   children,
+  target,
+  rel,
 }) => (
   <a
     href={href}
@@ -17,6 +20,8 @@ const LinkContainer: React.FC<LinkContainerProps> = ({
     style={{ transition: "transform 0.2s" }}
     onMouseEnter={handleMouseEnter}
     onMouseLeave={handleMouseLeave}
+    target={target}
+    rel={rel}
   >
     {children}
   </a>

@@ -12,6 +12,8 @@ interface ButtonProps {
   mode?: "dark" | "light";
   className?: string;
   loading?: boolean;
+  target?: string;
+  rel?: string;
 }
 
 const Button: React.FC<ButtonProps> = ({
@@ -22,6 +24,8 @@ const Button: React.FC<ButtonProps> = ({
   mode = "light",
   className,
   loading = false,
+  rel,
+  target,
 }) => {
   const isDarkMode = mode === "dark";
   const buttonClasses = cn(
@@ -45,6 +49,8 @@ const Button: React.FC<ButtonProps> = ({
       onClick={onClick}
       href={href!}
       loading={loading}
+      target={target}
+      rel={rel}
     >
       {loading ? (
         <>

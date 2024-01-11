@@ -18,7 +18,7 @@ const Paragraph: React.FC<ParagraphProps> = ({
   const fontSizeClass = small ? "text-small" : "text-base md:text-lg";
 
   const paragraphClasses = cn(
-    "font-raleway",
+    "font-Raleway",
     fontSizeClass,
     textColorClass,
     className
