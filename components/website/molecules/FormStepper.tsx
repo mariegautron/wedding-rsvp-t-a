@@ -1,10 +1,9 @@
-import { ERROR_MESSAGES, SUCCESS_MESSAGES } from "@/utils/constants/messages";
+import { ERROR_MESSAGES, SUCCESS_MESSAGES } from "@/utils/enums/messages";
 import {
   JourneyStep,
   determineJourney,
 } from "@/utils/functions/determinateJourney";
 import { WeddingGuests } from "@/utils/types/weddinggests";
-import { message } from "antd";
 import { useEffect, useMemo, useState } from "react";
 import StepComeWithSomeone from "../steps/StepComeWithSomeone";
 import StepConfirmation from "../steps/StepConfirmation";
@@ -14,6 +13,7 @@ import StepIsPresent from "../steps/StepIsPresent";
 import StepMessage from "../steps/StepMessage";
 import { booleanToString } from "@/utils/functions/booleanToString";
 import useGuestHasResponded from "@/utils/hooks/useGuestHasResponded";
+import { messageService } from "@/components/design-system/Message/messageService";
 
 const globalJourney: JourneyStep[] = [
   "isPresent",
@@ -122,13 +122,13 @@ const FormStepper: React.FC<{
       const result = await updateGuest(guestUpdated);
 
       if (result && result[0]) {
-        message.success(SUCCESS_MESSAGES.RESONSE_SEND);
+        messageService.success(SUCCESS_MESSAGES.RESONSE_SEND);
         handleNext();
       } else {
-        message.error(ERROR_MESSAGES.ASK_TO_REPORT);
+        messageService.error(ERROR_MESSAGES.ASK_TO_REPORT);
       }
     } catch (error) {
-      message.error(ERROR_MESSAGES.ASK_TO_REPORT);
+      messageService.error(ERROR_MESSAGES.ASK_TO_REPORT);
       console.error("Erreur lors de la mise à jour de l'invité :", error);
     } finally {
       setIsLoading(false);
@@ -186,19 +186,9 @@ const FormStepper: React.FC<{
           />
         );
       case "dommage":
-        return (
-          <StepDommage
-            handlePrev={handlePrev}
-            questionNumber={questionNumber}
-          />
-        );
+        return <StepDommage handlePrev={handlePrev} />;
       case "confirmation":
-        return (
-          <StepConfirmation
-            handlePrev={handlePrev}
-            questionNumber={questionNumber}
-          />
-        );
+        return <StepConfirmation handlePrev={handlePrev} />;
       default:
         return null;
     }

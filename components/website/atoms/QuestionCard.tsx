@@ -6,7 +6,7 @@ import { MouseEventHandler, ReactNode } from "react";
 import FlowersDecoration from "@/components/design-system/FlowersDecoration";
 
 interface QuestionCardProps {
-  questionNumber: number;
+  questionNumber?: number;
   questionTitle: string;
   withNextButton?: boolean;
   withPrevButton?: boolean;
@@ -31,34 +31,46 @@ const QuestionCard: React.FC<QuestionCardProps> = ({
   loading = false,
 }) => {
   const nextButton = withNextButton ? (
-    <Button onClick={handleNext} loading={loading}>
+    <Button onClick={handleNext} loading={loading} className="m-1">
       Suivant
     </Button>
   ) : null;
 
   const prevButton = withPrevButton ? (
-    <Button outlined mode="dark" onClick={handlePrev} loading={loading}>
+    <Button
+      outlined
+      mode="dark"
+      onClick={handlePrev}
+      loading={loading}
+      className="m-1"
+    >
       Précédent
     </Button>
   ) : null;
 
   const submitButton = withSubmitButton ? (
-    <Button onClick={handleSubmit} loading={loading}>
+    <Button onClick={handleSubmit} loading={loading} className="m-1">
       Envoyer ma réponse
     </Button>
   ) : null;
 
   return (
-    <div className="relative flex flex-col items-center justify-center space-y-10 border border-fond-clair p-10">
+    <div className="relative flex flex-col items-center justify-center space-y-5 md:space-y-10 border border-fond-clair p-4 py-10 md:p-10">
       <FlowersDecoration variant="topLeft" />
 
-      <Paragraph className="text-center">Question {questionNumber}</Paragraph>
-      <div className="w-20 h-0.5 bg-fond-clair"></div>
+      {questionNumber && (
+        <>
+          <Paragraph className="text-center">
+            Question {questionNumber}
+          </Paragraph>
+          <div className="w-20 h-0.5 bg-fond-clair"></div>
+        </>
+      )}
       <Heading level={3} className="text-center">
         {questionTitle}
       </Heading>
       {children}
-      <div className="flex flex-wrap justify-center items-center md:space-x-2 xs:space-y-4">
+      <div className="flex flex-wrap justify-center items-center">
         {prevButton}
         {nextButton}
         {submitButton}

@@ -1,26 +1,26 @@
-import React, { FC } from "react";
-import { Typography } from "antd";
-import QuestionCard from "../atoms/QuestionCard";
+import Paragraph from "@/components/design-system/Paragraph";
 import useFormattedDeadline from "@/utils/hooks/useFormattedDeadline";
-
-const { Title } = Typography;
+import { FC } from "react";
+import QuestionCard from "../atoms/QuestionCard";
 
 interface StepDommageProps {
   handlePrev: () => void;
-  questionNumber: number;
 }
 
-const StepDommage: FC<StepDommageProps> = ({ handlePrev, questionNumber }) => {
+const StepDommage: FC<StepDommageProps> = ({ handlePrev }) => {
   const formattedDeadline = useFormattedDeadline();
 
   return (
     <QuestionCard
-      questionNumber={questionNumber}
-      questionTitle={`Dommage ! Tu as encore le temps de changer d’avis jusqu’au ${formattedDeadline}`}
+      questionTitle={"Dommage !"}
       withPrevButton
       handlePrev={handlePrev}
     >
-      <Title level={2}>Thomas & Amélie</Title>
+      <Paragraph>
+        Tu as encore le temps de changer d’avis jusqu’au{" "}
+        <span className="font-semibold">{formattedDeadline}</span>
+      </Paragraph>
+      <Paragraph>Thomas & Amélie</Paragraph>
     </QuestionCard>
   );
 };

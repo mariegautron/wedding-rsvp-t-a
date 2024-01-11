@@ -1,8 +1,9 @@
 "use client";
 
-import { ERROR_MESSAGES, SUCCESS_MESSAGES } from "@/utils/constants/messages";
+import { messageService } from "@/components/design-system/Message/messageService";
+import { ERROR_MESSAGES, SUCCESS_MESSAGES } from "@/utils/enums/messages";
 import { WeddingGuests } from "@/utils/types/weddinggests";
-import { Button, Modal, message } from "antd";
+import { Button, Modal } from "antd";
 import AddOrUpdateForm from "./AddOrUpdateForm";
 
 interface ModalUpdateGuestProps {
@@ -23,14 +24,14 @@ const ModalUpdateGuest: React.FC<ModalUpdateGuestProps> = ({
   const handleFormSubmit = async (values: WeddingGuests) => {
     try {
       await updateGuest({ ...selectedGuest, ...values });
-      message.success(SUCCESS_MESSAGES.UPDATE_GUEST);
+      messageService.success(SUCCESS_MESSAGES.UPDATE_GUEST);
       handleCancel();
     } catch (error) {
       console.error(
         "Erreur lors de la modification de l'invité :",
         (error as any).message
       );
-      message.error(ERROR_MESSAGES.ADMIN_ERROR);
+      messageService.error(ERROR_MESSAGES.ADMIN_ERROR);
     }
   };
 

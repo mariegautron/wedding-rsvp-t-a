@@ -1,9 +1,9 @@
 "use client";
 
-import { MenuPath } from "@/utils/constants/menuItems";
-import { ERROR_MESSAGES, SUCCESS_MESSAGES } from "@/utils/constants/messages";
+import { messageService } from "@/components/design-system/Message/messageService";
+import { MenuPath } from "@/utils/enums/menuItems";
+import { ERROR_MESSAGES, SUCCESS_MESSAGES } from "@/utils/enums/messages";
 import { WeddingGuests } from "@/utils/types/weddinggests";
-import { message } from "antd";
 import { useRouter } from "next/navigation";
 import { FC } from "react";
 import { v4 as uuidv4 } from "uuid";
@@ -23,14 +23,14 @@ const AddGuestForm: FC<AddGuestFormProps> = ({ addWeddingGuest }) => {
       const guestWithUUID = { ...values, uuid };
 
       await addWeddingGuest(guestWithUUID);
-      message.success(SUCCESS_MESSAGES.ADD_GUEST);
+      messageService.success(SUCCESS_MESSAGES.ADD_GUEST);
       router.push(MenuPath.WEDDING_GUESTS);
     } catch (error) {
       console.error(
         "Erreur lors de l'ajout de l'invité :",
         (error as any).message
       );
-      message.error(ERROR_MESSAGES.ADMIN_ERROR);
+      messageService.error(ERROR_MESSAGES.ADMIN_ERROR);
     }
   };
 

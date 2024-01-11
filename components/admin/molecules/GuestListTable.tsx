@@ -1,6 +1,7 @@
 "use client";
 
-import { ERROR_MESSAGES, SUCCESS_MESSAGES } from "@/utils/constants/messages";
+import { messageService } from "@/components/design-system/Message/messageService";
+import { ERROR_MESSAGES, SUCCESS_MESSAGES } from "@/utils/enums/messages";
 import { WeddingGuests } from "@/utils/types/weddinggests";
 import {
   CopyOutlined,
@@ -10,7 +11,7 @@ import {
   MailOutlined,
   MenuOutlined,
 } from "@ant-design/icons";
-import { Badge, Button, Dropdown, Menu, Table, message } from "antd";
+import { Badge, Button, Dropdown, Menu, Table } from "antd";
 import { FC, useState } from "react";
 import {
   TagRepsponseComeWithSomeone,
@@ -52,10 +53,10 @@ const GuestListTable: FC<{
       // Appelle la fonction pour supprimer l'invité en utilisant l'ID
       await deleteGuest(guestId);
 
-      message.success(SUCCESS_MESSAGES.DELETE_GUEST);
+      messageService.success(SUCCESS_MESSAGES.DELETE_GUEST);
     } catch (error) {
       console.error("Erreur lors de la suppression de l'invité :", error);
-      message.error(ERROR_MESSAGES.ADMIN_ERROR);
+      messageService.error(ERROR_MESSAGES.ADMIN_ERROR);
     }
   };
 

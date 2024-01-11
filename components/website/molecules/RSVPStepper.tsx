@@ -15,12 +15,12 @@ const RSVPStepper: FC<{
   return (
     <div
       id="rsvp"
-      className="flex flex-col items-center justify-center gap-8 md:space-y-10 mb-12 md:w-11/12 mx-auto w-full"
+      className="flex flex-col items-center justify-center gap-8 space-y-10  md:w-11/12 mx-auto w-full overflow-hidden"
     >
       <Heading level={2}>
         {hasResponded ? "Modifier ma réponse" : "Répondre à l'invitation"}
       </Heading>
-      <div className="w-4/5 mx-auto">
+      <div className="w-4/5 mx-auto pt-10 pb-20">
         <FormStepper guest={guest} updateGuest={updateGuest} />
       </div>
     </div>

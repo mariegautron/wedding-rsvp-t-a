@@ -5,7 +5,7 @@ import { createClient } from "@/utils/supabase/server";
 import { WeddingGuests } from "@/utils/types/weddinggests";
 import { cookies } from "next/headers";
 import { revalidatePath } from "next/cache";
-import { MenuPath } from "@/utils/constants/menuItems";
+import { MenuPath } from "@/utils/enums/menuItems";
 
 // Fonction pour vérifier si l'invité existe déjà dans la base de données
 const checkIfGuestExists = async (
@@ -113,8 +113,6 @@ export const updateGuest = async (
   updatedGuestData: Partial<WeddingGuests>
 ): Promise<WeddingGuests[] | null | undefined> => {
   try {
-    console.log({ updatedGuestData });
-
     const cookieStore = cookies();
     const supabase = createClient(cookieStore);
 

@@ -38,7 +38,7 @@ const Heading: React.FC<HeadingProps> = ({
   const getFontSize = (lvl: number) => {
     switch (lvl) {
       case 3:
-        return " text-3xl sm:text-3xl md:text-3xl lg:text-4xl xl:text-5xl ";
+        return " text-3xl sm:text-3xl md:text-3xl lg:text-3xl xl:text-5xl ";
       default:
         return "text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-10xl uppercase ";
     }

@@ -1,9 +1,10 @@
 "use client";
 
 import { sendEmail } from "@/actions/sendEmail";
-import { ERROR_MESSAGES } from "@/utils/constants/messages";
+import { messageService } from "@/components/design-system/Message/messageService";
+import { ERROR_MESSAGES } from "@/utils/enums/messages";
 import { useFormattedEventDate } from "@/utils/hooks/useFormattedEventDate";
-import { Modal, Form, Input, Button, message } from "antd";
+import { Button, Form, Input, Modal } from "antd";
 import { useState } from "react";
 
 interface SendEmailModalProps {
@@ -38,11 +39,11 @@ const SendEmailModal: React.FC<SendEmailModalProps> = ({
 
       await sendEmail(guestEmail, invitationMessage, guestUuid);
       setSending(false);
-      message.success(`Le courriel a bien été envoyé à ${guestEmail}`);
+      messageService.success(`Le courriel a bien été envoyé à ${guestEmail}`);
       setSendEmailOpen(false);
       clearSelectedGuest();
     } catch (error) {
-      message.error(ERROR_MESSAGES.ADMIN_ERROR);
+      messageService.error(ERROR_MESSAGES.ADMIN_ERROR);
       console.error("Erreur lors de l'envoi du courriel :", error);
       setSending(false);
     }

@@ -12,7 +12,8 @@ const Tag: React.FC<TagProps> = ({
   variant = "default",
   isRadio = false,
 }) => {
-  let tagClasses = "inline-block m-1 border-2 rounded-sm font-Raleway";
+  let tagClasses =
+    "inline-block m-1 border-2 rounded-sm font-Raleway text-center";
 
   if (isRadio) {
     tagClasses += " px-6 py-4  text-xl";

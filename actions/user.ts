@@ -1,7 +1,7 @@
 "use server";
 
 import { LoginFormValues } from "@/components/admin/molecules/LoginForm";
-import { MenuPath } from "@/utils/constants/menuItems";
+import { MenuPath } from "@/utils/enums/menuItems";
 import { createClient } from "@/utils/supabase/server";
 import { cookies } from "next/headers";
 import { redirect } from "next/navigation";

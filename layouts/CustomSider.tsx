@@ -1,6 +1,6 @@
 "use client";
 
-import { MENU_ITEMS } from "@/utils/constants/menuItems";
+import { MENU_ITEMS } from "@/utils/enums/menuItems";
 import { UserOutlined } from "@ant-design/icons";
 import { Layout, Menu } from "antd";
 import Link from "next/link";

@@ -16,7 +16,9 @@ export default function RootLayout({
     <html lang="en" className="bg-white h-full">
       <body className="bg-white h-full">
         <ConfigProvider theme={themeTokens}>
-          <div className="h-full">{children}</div>
+          <div className="h-full">
+            {children} <div id="message-root"></div>
+          </div>
         </ConfigProvider>
       </body>
     </html>

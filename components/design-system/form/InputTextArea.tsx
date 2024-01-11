@@ -14,7 +14,7 @@ const InputTextArea: React.FC<InputTextAreaProps> = ({
   onChange,
 }) => {
   return (
-    <div className="w-4/5">
+    <div className="md:w-4/5">
       <label
         className="block text-base mb-2 font-Raleway text-current"
         htmlFor={label}

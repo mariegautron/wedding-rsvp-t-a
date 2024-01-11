@@ -9,7 +9,7 @@ interface Heading2Props {
 
 const Heading2: React.FC<Heading2Props> = ({ children, color, className }) => {
   const headingClasses = cn(
-    "text-4xl sm:text-4xl md:text-4xl lg:text-4xl xl:text-8xl",
+    "text-5xl sm:text-5xl md:text-5xl lg:text-5xl xl:text-8xl",
     "font-classico",
     "uppercase",
     "text-current",

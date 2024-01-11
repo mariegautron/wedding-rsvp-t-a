@@ -1,6 +1,7 @@
-import { ERROR_MESSAGES, SUCCESS_MESSAGES } from "@/utils/constants/messages";
+import { messageService } from "@/components/design-system/Message/messageService";
+import { ERROR_MESSAGES, SUCCESS_MESSAGES } from "@/utils/enums/messages";
 import { WeddingGuests } from "@/utils/types/weddinggests";
-import { Modal, Input, Button, message } from "antd";
+import { Button, Input, Modal } from "antd";
 import { useState } from "react";
 
 interface InvitationConfirmationModalProps {
@@ -36,10 +37,10 @@ const InvitationConfirmationModal: React.FC<
     try {
       await updateGuest({ ...guest, commentSend });
       handleCancel();
-      message.success(SUCCESS_MESSAGES.COMMENT_SEND);
+      messageService.success(SUCCESS_MESSAGES.COMMENT_SEND);
     } catch (error) {
       console.log("Erreur lors de la mise à jour de l'invité :", error);
-      message.error(ERROR_MESSAGES.ADMIN_ERROR);
+      messageService.error(ERROR_MESSAGES.ADMIN_ERROR);
     }
   };
 
