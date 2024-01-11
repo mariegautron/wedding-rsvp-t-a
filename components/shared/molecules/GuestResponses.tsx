@@ -1,6 +1,5 @@
 import useIsAuthenticated from "@/utils/hooks/useIsAuthenticated";
 import { WeddingGuests } from "@/utils/types/weddinggests";
-import { Collapse } from "antd";
 import { FC } from "react";
 import GuestDetails from "../atoms/GuestDetails";
 import {
@@ -10,8 +9,6 @@ import {
   TagResponseCanComeWithSomeone,
   TagResponseIsPresent,
 } from "../atoms/TagsResponses";
-
-const { Panel } = Collapse;
 
 const GuestResponses: FC<{
   guest: WeddingGuests;

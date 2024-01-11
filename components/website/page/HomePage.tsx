@@ -1,19 +1,18 @@
 "use client";
 
+import Heading from "@/components/design-system/Headings";
+import Loading from "@/components/design-system/Loading";
 import Subtile from "@/components/design-system/Subtitle";
 import useDeadlineCheck from "@/utils/hooks/useDeadlineCheck";
 import useGuestData from "@/utils/hooks/useGuestData";
 import { WeddingGuests } from "@/utils/types/weddinggests";
-import { Spin } from "antd";
 import { FC } from "react";
+import Footer from "../atoms/Footer";
 import Hero from "../molecules/Hero";
 import HeroTemplatePage from "../molecules/HeroTemplatePage";
-import Loading from "@/components/design-system/Loading";
-import RSVPStepper from "../molecules/RSVPStepper";
-import Heading from "@/components/design-system/Headings";
 import ImportantInformation from "../molecules/ImportantInformations";
 import PhotoGallery from "../molecules/PhotoGallery";
-import Footer from "../atoms/Footer";
+import RSVPStepper from "../molecules/RSVPStepper";
 
 const HomePage: FC<{
   fetchGuestData: (uuid: string) => Promise<WeddingGuests | null | undefined>;
