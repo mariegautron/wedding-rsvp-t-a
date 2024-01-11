@@ -8,9 +8,13 @@ const { Title } = Typography;
 
 interface StepConfirmationProps {
   handlePrev: () => void;
+  questionNumber: number;
 }
 
-const StepConfirmation: FC<StepConfirmationProps> = ({ handlePrev }) => {
+const StepConfirmation: FC<StepConfirmationProps> = ({
+  handlePrev,
+  questionNumber,
+}) => {
   const eventDate = useFormattedEventDate();
 
   const formattedDeadline = useFormattedDeadline();

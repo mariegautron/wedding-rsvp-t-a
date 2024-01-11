@@ -2,7 +2,7 @@ import Heading from "@/components/design-system/Headings";
 import useGuestHasResponded from "@/utils/hooks/useGuestHasResponded";
 import { WeddingGuests } from "@/utils/types/weddinggests";
 import { FC } from "react";
-import FormStepper from "./InvitFormStepper";
+import FormStepper from "./FormStepper";
 
 const RSVPStepper: FC<{
   guest: WeddingGuests;

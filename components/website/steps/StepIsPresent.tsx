@@ -7,6 +7,7 @@ interface StepIsPresentProps {
   handleNext: () => void;
   handleSelectionChange: (value: boolean) => void;
   defaultValue?: string;
+  questionNumber: number;
 }
 
 const optionsIsPresent = [
@@ -18,10 +19,11 @@ const StepIsPresent: FC<StepIsPresentProps> = ({
   handleNext,
   handleSelectionChange,
   defaultValue = "",
+  questionNumber,
 }) => {
   return (
     <QuestionCard
-      questionNumber={1}
+      questionNumber={questionNumber}
       questionTitle="Tu viens ?"
       withNextButton
       handleNext={handleNext}

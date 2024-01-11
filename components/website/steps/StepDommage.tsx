@@ -7,14 +7,15 @@ const { Title } = Typography;
 
 interface StepDommageProps {
   handlePrev: () => void;
+  questionNumber: number;
 }
 
-const StepDommage: FC<StepDommageProps> = ({ handlePrev }) => {
+const StepDommage: FC<StepDommageProps> = ({ handlePrev, questionNumber }) => {
   const formattedDeadline = useFormattedDeadline();
 
   return (
     <QuestionCard
-      questionNumber={2}
+      questionNumber={questionNumber}
       questionTitle={`Dommage ! Tu as encore le temps de changer d’avis jusqu’au ${formattedDeadline}`}
       withPrevButton
       handlePrev={handlePrev}

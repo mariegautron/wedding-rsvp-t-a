@@ -8,6 +8,7 @@ interface StepComeWithSomeoneProps {
   handlePrev: () => void;
   handleSelectionChange: (value: boolean) => void;
   defaultValue?: string;
+  questionNumber: number;
 }
 
 const optionsCanComeWithSomeone = [
@@ -20,10 +21,11 @@ const StepComeWithSomeone: FC<StepComeWithSomeoneProps> = ({
   handlePrev,
   handleSelectionChange,
   defaultValue = "",
+  questionNumber,
 }) => {
   return (
     <QuestionCard
-      questionNumber={2}
+      questionNumber={questionNumber}
       questionTitle="Envisages-tu d’être accompagné·e ?"
       withNextButton
       withPrevButton

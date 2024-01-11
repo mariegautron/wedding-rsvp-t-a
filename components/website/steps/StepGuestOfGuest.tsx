@@ -10,6 +10,7 @@ interface StepGuestOfGuestProps {
     guestOfGuestFirstname?: string;
     guestOfGuestLastname?: string;
   };
+  questionNumber: number;
 }
 
 const StepGuestOfGuest: FC<StepGuestOfGuestProps> = ({
@@ -17,10 +18,11 @@ const StepGuestOfGuest: FC<StepGuestOfGuestProps> = ({
   handlePrev,
   handleSelectionChange,
   defaultValues = {},
+  questionNumber,
 }) => {
   return (
     <QuestionCard
-      questionNumber={3}
+      questionNumber={questionNumber}
       questionTitle="Qui est ton invité(e) ?"
       withNextButton
       withPrevButton

@@ -8,6 +8,7 @@ interface StepMessageProps {
   handleSelectionChange: (value: string) => void;
   defaultValue?: string;
   loading: boolean;
+  questionNumber: number;
 }
 
 const StepMessage: FC<StepMessageProps> = ({
@@ -16,10 +17,11 @@ const StepMessage: FC<StepMessageProps> = ({
   handleSelectionChange,
   defaultValue = "",
   loading,
+  questionNumber,
 }) => {
   return (
     <QuestionCard
-      questionNumber={4}
+      questionNumber={questionNumber}
       questionTitle="Un message pour nous ?"
       withSubmitButton
       handleSubmit={handleSubmit}

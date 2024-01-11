@@ -5,7 +5,7 @@ import {
 } from "@/utils/functions/determinateJourney";
 import { WeddingGuests } from "@/utils/types/weddinggests";
 import { message } from "antd";
-import { useEffect, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import StepComeWithSomeone from "../steps/StepComeWithSomeone";
 import StepConfirmation from "../steps/StepConfirmation";
 import StepDommage from "../steps/StepDommage";
@@ -124,6 +124,11 @@ const FormStepper: React.FC<{
     }
   };
 
+  const questionNumber = useMemo(() => {
+    const index = journey.indexOf(currentStep);
+    return index !== -1 ? index + 1 : 0;
+  }, [journey, currentStep]);
+
   const renderContent = () => {
     switch (currentStep) {
       case "isPresent":
@@ -132,6 +137,7 @@ const FormStepper: React.FC<{
             handleNext={handleNext}
             handleSelectionChange={handleSelectionChange}
             defaultValue={booleanToString(allChoices.isPresent)}
+            questionNumber={questionNumber}
           />
         );
       case "comeWithSomeone":
@@ -141,6 +147,7 @@ const FormStepper: React.FC<{
             handlePrev={handlePrev}
             handleSelectionChange={handleSelectionChange}
             defaultValue={booleanToString(allChoices.comeWithSomeone)}
+            questionNumber={questionNumber}
           />
         );
       case "guestOfGuest":
@@ -153,6 +160,7 @@ const FormStepper: React.FC<{
               guestOfGuestFirstname: allChoices.guestOfGuestFirstname,
               guestOfGuestLastname: allChoices.guestOfGuestLastname,
             }}
+            questionNumber={questionNumber}
           />
         );
       case "message":
@@ -163,12 +171,23 @@ const FormStepper: React.FC<{
             loading={isLoading}
             handleSelectionChange={handleSelectionChange}
             defaultValue={allChoices.message}
+            questionNumber={questionNumber}
           />
         );
       case "dommage":
-        return <StepDommage handlePrev={handlePrev} />;
+        return (
+          <StepDommage
+            handlePrev={handlePrev}
+            questionNumber={questionNumber}
+          />
+        );
       case "confirmation":
-        return <StepConfirmation handlePrev={handlePrev} />;
+        return (
+          <StepConfirmation
+            handlePrev={handlePrev}
+            questionNumber={questionNumber}
+          />
+        );
       default:
         return null;
     }

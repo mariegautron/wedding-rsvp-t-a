@@ -20,8 +20,6 @@ const PhotoGallery: FC<{ getImagesUrlFromStorage: () => Promise<any> }> = ({
     fetchPhotos();
   }, []);
 
-  console.log(photos);
-
   if (!photos || !photos.length) {
     return <></>;
   }
