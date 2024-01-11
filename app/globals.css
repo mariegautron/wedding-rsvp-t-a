@@ -42,3 +42,8 @@ html {
 .errorRow {
   background-color: #fcecec; /* Nouvelle couleur de surbrillance rouge très claire */
 }
+
+:focus {
+  outline: none; /* Supprime la bordure par défaut du navigateur */
+  box-shadow: 0 0 5px rgba(182, 142, 136, 0.7); /* Ajoute une ombre avec la couleur "primary" lorsque l'élément est en focus */
+}

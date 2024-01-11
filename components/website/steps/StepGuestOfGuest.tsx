@@ -1,6 +1,6 @@
-import { Form, Input, Row, Col } from "antd";
 import React, { FC } from "react";
 import QuestionCard from "../atoms/QuestionCard";
+import InputText from "@/components/design-system/form/InputText";
 
 interface StepGuestOfGuestProps {
   handleNext: () => void;
@@ -23,48 +23,34 @@ const StepGuestOfGuest: FC<StepGuestOfGuestProps> = ({
   return (
     <QuestionCard
       questionNumber={questionNumber}
-      questionTitle="Qui est ton invité(e) ?"
+      questionTitle="Qui est ton invité·e ?"
       withNextButton
       withPrevButton
       handleNext={handleNext}
       handlePrev={handlePrev}
     >
-      <Row gutter={[16, 16]}>
-        <Col xs={24} sm={12}>
-          <Form.Item
-            label="Prénom de l'invité(e)"
-            name="guestOfGuestFirstname"
-            labelCol={{ span: 24 }}
-            style={{ fontSize: "20px" }}
-          >
-            <Input
-              placeholder="Prénom de l'invité(e)"
-              style={{ fontSize: "20px" }}
-              defaultValue={defaultValues?.guestOfGuestFirstname || ""}
-              onChange={(e) =>
-                handleSelectionChange({ guestOfGuestFirstname: e.target.value })
-              }
-            />
-          </Form.Item>
-        </Col>
-        <Col xs={24} sm={12}>
-          <Form.Item
-            label="Nom de l'invité(e)"
-            name="guestOfGuestLastname"
-            labelCol={{ span: 24 }}
-            style={{ fontSize: "20px" }}
-          >
-            <Input
-              placeholder="Nom de l'invité(e)"
-              style={{ fontSize: "20px" }}
-              defaultValue={defaultValues?.guestOfGuestLastname || ""}
-              onChange={(e) =>
-                handleSelectionChange({ guestOfGuestLastname: e.target.value })
-              }
-            />
-          </Form.Item>
-        </Col>
-      </Row>
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-6 w-4/5">
+        <div>
+          <InputText
+            label="Prénom de l'invité·e"
+            placeholder="Prénom de l'invité·e"
+            value={defaultValues?.guestOfGuestFirstname || ""}
+            onChange={(e) =>
+              handleSelectionChange({ guestOfGuestFirstname: e.target.value })
+            }
+          />
+        </div>
+        <div>
+          <InputText
+            label="Nom de l'invité·e"
+            placeholder="Nom de l'invité·e"
+            value={defaultValues?.guestOfGuestLastname || ""}
+            onChange={(e) =>
+              handleSelectionChange({ guestOfGuestLastname: e.target.value })
+            }
+          />
+        </div>
+      </div>
     </QuestionCard>
   );
 };

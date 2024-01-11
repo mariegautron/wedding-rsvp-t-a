@@ -7,6 +7,7 @@ module.exports = {
   theme: {
     colors: {
       // Vos couleurs personnalisées
+      transparent: "transparent",
       "fond-foncé": "#4f4341ff",
       primary: "#b68e88ff",
       "fond-clair": "#e8dad6ff",

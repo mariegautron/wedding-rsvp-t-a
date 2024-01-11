@@ -57,7 +57,7 @@ const GuestView: React.FC<GuestViewProps> = ({
     { title: "Personnes invitées (total)", value: guestCount },
     { title: "Pas encore de réponse", value: rsvpRespondedCount },
     { title: "Présents", value: presentCount },
-    { title: "Absent(e)s", value: noPresentCount },
+    { title: "Absent·e·s", value: noPresentCount },
     { title: "Personnes invitées avec quelqu'un", value: comeWithSomeoneCount },
   ];
 
