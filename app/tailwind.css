@@ -580,10 +580,6 @@ video {
   position: relative;
 }
 
-.inset-0 {
-  inset: 0px;
-}
-
 .left-1\/2 {
   left: 50%;
 }
@@ -904,6 +900,10 @@ video {
   object-fit: cover;
 }
 
+.p-12 {
+  padding: 3rem;
+}
+
 .p-2 {
   padding: 0.5rem;
 }
@@ -993,10 +993,6 @@ video {
 
 .text-lg {
   font-size: 1.125rem;
-}
-
-.text-sm {
-  font-size: 0.875rem;
 }
 
 .text-xl {

@@ -23,24 +23,23 @@ const PhotoGallery: FC<{ getImagesUrlFromStorage: () => Promise<any> }> = ({
     fetchPhotos();
   }, []);
 
+  console.log(photos);
+
   if (!photos || !photos.length) {
     return <></>;
   }
 
   return (
-    <div className="container py-6">
+    <div className="w-4/5 mx-auto py-6">
       <div className="photoGallery">
         <Heading level={2}>Gallerie photos</Heading>
-        <div className="photoGrid grid grid-cols-4 gap-4">
+        <div className="grid grid-cols-4 gap-4 p-12">
           {photos.slice(1).map((photo, index) => (
-            <div
-              key={index}
-              className="photoWrapper aspect-w-1 aspect-h-1 relative"
-            >
+            <div key={index} className="relative aspect-w-1 aspect-h-1">
               <img
                 src={photo}
                 alt={`Photo ${index + 1}`}
-                className="photoItem absolute inset-0 w-full h-full object-cover"
+                className="w-full h-full object-cover"
               />
             </div>
           ))}
