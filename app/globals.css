@@ -56,11 +56,11 @@ html {
 }
 
 .successRow {
-  background-color: #ebf5e1; /* Nouvelle couleur de surbrillance verte très claire */
+  background-color: #e6f4e6ff; /* Nouvelle couleur de surbrillance verte très claire */
 }
 
 .errorRow {
-  background-color: #fcecec; /* Nouvelle couleur de surbrillance rouge très claire */
+  background-color: #fcececff; /* Nouvelle couleur de surbrillance rouge très claire */
 }
 
 :focus {

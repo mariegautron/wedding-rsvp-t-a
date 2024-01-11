@@ -1,5 +1,5 @@
 import cn from "classnames";
-import React, { MouseEventHandler } from "react";
+import React, { MouseEventHandler, ReactNode } from "react";
 import Loading from "../Loading";
 import ButtonContainer from "./ButtonContainer";
 import LinkContainer from "./LinkContainer";
@@ -14,6 +14,7 @@ interface ButtonProps {
   loading?: boolean;
   target?: string;
   rel?: string;
+  icon?: ReactNode;
 }
 
 const Button: React.FC<ButtonProps> = ({
@@ -26,6 +27,7 @@ const Button: React.FC<ButtonProps> = ({
   loading = false,
   rel,
   target,
+  icon,
 }) => {
   const isDarkMode = mode === "dark";
   const buttonClasses = cn(
@@ -58,7 +60,9 @@ const Button: React.FC<ButtonProps> = ({
           <Loading small white={!outlined} />
         </>
       ) : (
-        children
+        <>
+          {icon && <span>{icon}</span>} {children}
+        </>
       )}
     </Container>
   );

@@ -190,12 +190,11 @@ const GuestListTable: FC<{
   ];
 
   return (
-    <div className="bg-gray-100 p-6">
+    <div className="text-Raleway text-current bg-[#ffff] p-4 rounded">
       <Table
         dataSource={data}
         columns={columns}
         pagination={false}
-        className="border-collapse border border-gray-300"
         rowClassName={rowClassName}
       />
       <SendEmailModal
