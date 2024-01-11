@@ -28,7 +28,7 @@ const ImportantInformation = () => {
     <div className="relative bg-fond-clair py-10" id="informations">
       <div className="w-4/5 mx-auto  flex flex-col justify-center items-center">
         <Heading level={2}>Informations</Heading>
-        <div className="flex flex-col md:flex-row p-10">
+        <div className="flex flex-col md:flex-row p-4 md:p-10">
           <CardInformation
             title="Date et Lieu"
             text={`Le ${date} à ${hour} à la ${placeName}, ${placeAdress}`}

@@ -17,7 +17,7 @@ const CardInformation: FC<CardInformationProps> = ({
 }) => {
   return (
     <div
-      className="bg-white pt-20 pb-8 px-12 w-96 flex flex-col justify-end items-center space-y-10 m-8"
+      className="bg-white pt-20 pb-8 px-6 md:px-12 md:w-96 flex flex-col justify-end items-center space-y-10 my-4 md:m-8"
       style={{ borderRadius: "300px 300px 0 0" }}
     >
       <div>{icon}</div>
