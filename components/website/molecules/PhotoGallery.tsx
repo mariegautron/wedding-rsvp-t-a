@@ -1,3 +1,4 @@
+import FlowersDecoration from "@/components/design-system/FlowersDecoration";
 import Heading from "@/components/design-system/Headings";
 import { FC, useEffect, useState } from "react";
 
@@ -26,9 +27,10 @@ const PhotoGallery: FC<{ getImagesUrlFromStorage: () => Promise<any> }> = ({
 
   return (
     <div className="w-4/5 mx-auto py-6">
-      <div className="photoGallery">
-        <Heading level={2}>Galerie photos</Heading>
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-4 pt-12 md:p-12">
+      <Heading level={2}>Galerie photos</Heading>
+      <div className="pt-20">
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-4 relative">
+          <FlowersDecoration variant="topLeft" />
           {photos.slice(1).map((photo, index) => (
             <div key={index} className="relative aspect-square">
               <img

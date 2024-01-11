@@ -27,7 +27,7 @@ export const TagResponseCanComeWithSomeone: FC<{
       {canComeWithSomeone ? (
         <Tag variant="success">Peut être accompagné·e</Tag>
       ) : (
-        <Tag variant="error">Pas accompagné·e</Tag>
+        <Tag variant="error">Ne peut pas être accompagné·e</Tag>
       )}
     </>
   );

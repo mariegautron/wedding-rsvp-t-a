@@ -8,7 +8,7 @@ const FlowersDecoration: FC<{ variant: "topLeft" | "bottomRight" }> = ({
       <img
         src="/images/top-left-flowers.svg"
         alt="Decorative Image"
-        className="absolute top-0 left-0 transform -translate-x-[28%] -translate-y-1/4 z-[-1]"
+        className="absolute top-0 left-0 transform -translate-x-[28%] -translate-y-1/4 z-[1]"
       />
     );
   }

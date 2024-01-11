@@ -2,21 +2,19 @@ import Heading from "@/components/design-system/Headings";
 import { useFormattedEventDate } from "@/utils/hooks/useFormattedEventDate";
 import { EnvironmentOutlined, GiftOutlined } from "@ant-design/icons";
 import ButtonAddToCalendar from "../atoms/ButtonAddToCalendar";
+import ButtonLinkPresent, { presentsListUrl } from "../atoms/ButtonLinkPresent";
 import CardInformation from "../atoms/CardInformation";
-import Button from "@/components/design-system/Button";
 
 const ImportantInformation = () => {
   const hour = process.env.NEXT_PUBLIC_EVENT_HOUR;
   const placeName = process.env.NEXT_PUBLIC_EVENT_PLACE_NAME;
   const placeAdress = process.env.NEXT_PUBLIC_EVENT_PLACE;
 
-  const presentsListUrl = process.env.NEXT_PUBLIC_PRESENT_LIST;
-
   const date = useFormattedEventDate();
 
   const description = `Rejoignez-nous pour une journée spéciale !
-  Date: 22 juin
-  Heure: 15h
+  Date: ${date}
+  Heure: ${hour}
   Lieu: Mairie de Chateau-Larcher, 2 rue de la Mairie, 86370 Chateau-Larcher
   
   Nous avons hâte de vous accueillir à la cérémonie ! Un jour rempli d'amour et de moments mémorables vous attend. Votre présence est le plus beau des cadeaux, mais si vous souhaitez offrir quelque chose, consultez notre liste de cadeaux de mariage pour trouver l'inspiration !
@@ -31,7 +29,7 @@ const ImportantInformation = () => {
         <div className="flex flex-col md:flex-row p-4 md:p-10">
           <CardInformation
             title="Date et Lieu"
-            text={`Le ${date} à ${hour} à la ${placeName}, ${placeAdress}`}
+            text={`Le ${date} à ${hour} à ${placeName}, ${placeAdress}`}
             button={
               <ButtonAddToCalendar
                 eventDetails={{
@@ -47,16 +45,7 @@ const ImportantInformation = () => {
           <CardInformation
             title="Cadeaux"
             text="Vos présents nous rendront le jour encore plus mémorable ! Merci d'avance pour votre générosité."
-            button={
-              <Button
-                href={presentsListUrl}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="mt-5"
-              >
-                Voir la liste de cadeaux
-              </Button>
-            }
+            button={<ButtonLinkPresent />}
             icon={<GiftOutlined className="text-primary text-5xl" />}
           />
         </div>

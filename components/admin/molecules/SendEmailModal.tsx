@@ -80,7 +80,7 @@ const SendEmailModal: React.FC<SendEmailModalProps> = ({
           label="Message d'invitation"
           name="invitationMessage"
           // TODO: Mettre en base de données pour avoir un message par défaut pour l'administrateur
-          initialValue={`Bonjour,\n\nNous vous invitons à notre mariage ! Nous sommes ravis de vous convier à partager ce jour unique avec nous, qui se déroulera le ${eventDate} à ${process.env.NEXT_PUBLIC_EVENT_PLACE}.\n\nVeuillez confirmer votre présence !`}
+          initialValue={`Bonjour,\n\nNous vous invitons à notre mariage ! Nous sommes ravis de vous convier à partager ce jour unique avec nous, qui se déroulera le ${eventDate}.\n\nVeuillez confirmer votre présence !`}
         >
           <Input.TextArea rows={4} />
         </Form.Item>

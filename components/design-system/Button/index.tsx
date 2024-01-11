@@ -32,7 +32,7 @@ const Button: React.FC<ButtonProps> = ({
   const isDarkMode = mode === "dark";
   const buttonClasses = cn(
     "px-9 py-4 rounded-full block whitespace-nowrap flex justify-center align-center",
-    "font-raleway font-bold text-base",
+    "font-raleway font-bold text-xs md:text-base",
     className,
     {
       "border text-primary bg-transparent": outlined && isDarkMode,

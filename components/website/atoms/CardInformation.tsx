@@ -21,7 +21,7 @@ const CardInformation: FC<CardInformationProps> = ({
       style={{ borderRadius: "300px 300px 0 0" }}
     >
       <div>{icon}</div>
-      <Heading level={3} className="text-xl font-bold text-primary text-center">
+      <Heading level={3} className="font-bold text-primary text-center">
         {title}
       </Heading>
       <Paragraph className="text-center">{text}</Paragraph>

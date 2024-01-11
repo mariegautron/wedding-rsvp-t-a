@@ -53,10 +53,7 @@ const Hero: FC<HeroProps> = ({ guest }) => {
         </Heading>
         <Paragraph mode="dark" className="md:w-1/2 w-full">
           Nous sommes ravis de t’inviter à partager ce jour unique avec nous,
-          qui se déroulera le{" "}
-          <span className="font-bold">
-            {eventDate} au {process.env.NEXT_PUBLIC_EVENT_PLACE}
-          </span>
+          qui se déroulera le <span className="font-bold">{eventDate}.</span>
         </Paragraph>
         <FooterHero type="respond" />
       </HeroTemplatePage>

@@ -206,7 +206,7 @@ const FormStepper: React.FC<{
       case "dommage":
         return <StepDommage handlePrev={handlePrev} />;
       case "confirmation":
-        return <StepConfirmation handlePrev={handlePrev} />;
+        return <StepConfirmation />;
       default:
         return null;
     }
