@@ -100,7 +100,8 @@ const FormStepper: React.FC<{
   const handleSubmit = async (): Promise<void> => {
     try {
       setIsLoading(true);
-      const result = await updateGuest({
+
+      const guestUpdated: WeddingGuests = {
         ...allChoices,
         invitSend: true,
         dateResponseSend: new Date(),
@@ -108,7 +109,17 @@ const FormStepper: React.FC<{
           allChoices.dateInvitSend === null
             ? new Date()
             : allChoices.dateInvitSend,
-      });
+        comeWithSomeone:
+          allChoices.isPresent === false ? false : allChoices.comeWithSomeone,
+        guestOfGuestFirstname:
+          allChoices.isPresent === false
+            ? ""
+            : allChoices.guestOfGuestFirstname,
+        guestOfGuestLastname:
+          allChoices.isPresent === false ? "" : allChoices.guestOfGuestLastname,
+      };
+
+      const result = await updateGuest(guestUpdated);
 
       if (result && result[0]) {
         message.success(SUCCESS_MESSAGES.RESONSE_SEND);

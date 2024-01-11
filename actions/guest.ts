@@ -113,6 +113,8 @@ export const updateGuest = async (
   updatedGuestData: Partial<WeddingGuests>
 ): Promise<WeddingGuests[] | null | undefined> => {
   try {
+    console.log({ updatedGuestData });
+
     const cookieStore = cookies();
     const supabase = createClient(cookieStore);
 
@@ -129,7 +131,10 @@ export const updateGuest = async (
       }
     }
 
-    const { data, error } = await supabase
+    const {
+      data,
+      error,
+    }: { data: WeddingGuests[] | null | undefined; error: any } = await supabase
       .from(COLLECTION_NAMES.WEDDING_GUESTS)
       .update(updatedGuestData)
       .eq("id", updatedGuestData.id)

@@ -1,6 +1,6 @@
-import { Input } from "antd";
-import { FC } from "react";
+import React, { FC } from "react";
 import QuestionCard from "../atoms/QuestionCard";
+import InputTextArea from "@/components/design-system/form/InputTextArea";
 
 interface StepMessageProps {
   handlePrev: () => void;
@@ -29,10 +29,10 @@ const StepMessage: FC<StepMessageProps> = ({
       loading={loading}
       withPrevButton
     >
-      <Input.TextArea
+      <InputTextArea
+        label="Votre message"
         placeholder="Votre message"
-        rows={4}
-        defaultValue={defaultValue}
+        value={defaultValue}
         onChange={(e) => handleSelectionChange(e.target.value)}
       />
     </QuestionCard>

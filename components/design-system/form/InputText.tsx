@@ -15,7 +15,10 @@ const InputText: React.FC<InputTextProps> = ({
 }) => {
   return (
     <div>
-      <label className="block text-base  mb-2 font-Raleway" htmlFor={label}>
+      <label
+        className="block text-base  mb-2 font-Raleway text-current"
+        htmlFor={label}
+      >
         {label}
       </label>
       <input
