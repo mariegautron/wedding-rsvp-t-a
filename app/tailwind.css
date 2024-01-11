@@ -1310,6 +1310,10 @@ video {
     margin-bottom: calc(2.5rem * var(--tw-space-y-reverse));
   }
 
+  .md\:overflow-visible {
+    overflow: visible;
+  }
+
   .md\:p-10 {
     padding: 2.5rem;
   }
@@ -1363,8 +1367,8 @@ video {
     line-height: 1;
   }
 
-  .lg\:text-9xl {
-    font-size: 8rem;
+  .lg\:text-8xl {
+    font-size: 6rem;
     line-height: 1;
   }
 }
