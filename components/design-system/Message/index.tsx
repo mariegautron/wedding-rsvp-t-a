@@ -13,7 +13,7 @@ const Message: FC<MessageProps> = ({ type, text }) => {
   useEffect(() => {
     const timer = setTimeout(() => {
       setVisible(false);
-    }, 2000);
+    }, 5000);
 
     return () => clearTimeout(timer);
   }, []);

@@ -6,6 +6,8 @@ import { WeddingGuests } from "@/utils/types/weddinggests";
 import { cookies } from "next/headers";
 import { revalidatePath } from "next/cache";
 import { MenuPath } from "@/utils/enums/menuItems";
+import { GuestUpdateError } from "@/utils/errors";
+import { ERROR_MESSAGES } from "@/utils/enums/messages";
 
 // Fonction pour vérifier si l'invité existe déjà dans la base de données
 const checkIfGuestExists = async (
@@ -125,7 +127,11 @@ export const updateGuest = async (
       );
 
       if (guestExists) {
-        throw new Error("Ce +1 est déjà dans la liste !");
+        const error: GuestUpdateError = {
+          type: "guestExists",
+          message: ERROR_MESSAGES.GUEST_EXIST,
+        };
+        throw new Error(JSON.stringify(error));
       }
     }
 
@@ -139,18 +145,21 @@ export const updateGuest = async (
       .select();
 
     if (error) {
-      throw new Error(
-        "Une erreur s'est produite lors de la mise à jour de l'invité."
-      );
+      const updateError: GuestUpdateError = {
+        type: "updateError",
+        message:
+          "Une erreur s'est produite lors de la mise à jour de l'invité.",
+      };
+      throw new Error(JSON.stringify(updateError));
     }
 
     revalidatePath(`/?uuid=${updatedGuestData.uuid}`);
     revalidatePath(MenuPath.WEDDING_GUESTS);
 
     return data;
-  } catch (error: any) {
+  } catch (error: any | GuestUpdateError) {
     console.error("Erreur lors de la mise à jour de l'invité :", error.message);
-    throw new Error(error.message);
+    throw error;
   }
 };
 

@@ -14,6 +14,7 @@ import StepMessage from "../steps/StepMessage";
 import { booleanToString } from "@/utils/functions/booleanToString";
 import useGuestHasResponded from "@/utils/hooks/useGuestHasResponded";
 import { messageService } from "@/components/design-system/Message/messageService";
+import { GuestUpdateError } from "@/utils/errors";
 
 const globalJourney: JourneyStep[] = [
   "isPresent",
@@ -34,6 +35,8 @@ const FormStepper: React.FC<{
   const [journey, setJourney] = useState<JourneyStep[]>([]);
   const [allChoices, setAllChoices] = useState<WeddingGuests>(guest);
   const [isLoading, setIsLoading] = useState(false);
+
+  const [guestAlreadyExist, setGuestAlreadyExist] = useState(false);
 
   const hasResponded = useGuestHasResponded(allChoices);
 
@@ -110,7 +113,11 @@ const FormStepper: React.FC<{
             ? new Date()
             : allChoices.dateInvitSend,
         comeWithSomeone:
-          allChoices.isPresent === false ? false : allChoices.comeWithSomeone,
+          !allChoices.guestOfGuestFirstname && !allChoices.guestOfGuestLastname
+            ? false
+            : allChoices.isPresent === false
+            ? false
+            : allChoices.comeWithSomeone,
         guestOfGuestFirstname:
           allChoices.isPresent === false
             ? ""
@@ -127,9 +134,20 @@ const FormStepper: React.FC<{
       } else {
         messageService.error(ERROR_MESSAGES.ASK_TO_REPORT);
       }
-    } catch (error) {
-      messageService.error(ERROR_MESSAGES.ASK_TO_REPORT);
-      console.error("Erreur lors de la mise à jour de l'invité :", error);
+    } catch (error: any | GuestUpdateError) {
+      const errorObj = JSON.parse(error.message);
+
+      switch (errorObj.type) {
+        case "guestExists":
+          messageService.error(errorObj.message);
+          break;
+        case "updateError":
+          messageService.error(ERROR_MESSAGES.ASK_TO_REPORT);
+          break;
+        default:
+          console.error("Erreur lors de la mise à jour de l'invité :", error);
+          messageService.error(ERROR_MESSAGES.ASK_TO_REPORT);
+      }
     } finally {
       setIsLoading(false);
     }

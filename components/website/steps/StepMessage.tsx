@@ -1,6 +1,8 @@
 import React, { FC } from "react";
 import QuestionCard from "../atoms/QuestionCard";
 import InputTextArea from "@/components/design-system/form/InputTextArea";
+import Tag from "@/components/design-system/Tag";
+import { ERROR_MESSAGES } from "@/utils/enums/messages";
 
 interface StepMessageProps {
   handlePrev: () => void;

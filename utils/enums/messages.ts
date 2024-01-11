@@ -8,6 +8,7 @@ export enum MessageType {
 export enum ERROR_MESSAGES {
   ASK_TO_REPORT = "Il y a eu une erreur. Veuillez contacter Thomas & Amélie pour qu'ils rapportent ce bug à Marie :)",
   ADMIN_ERROR = "In y a un bug ! Ne tape pas Marie, va lui demander de corriger :)",
+  GUEST_EXIST = "La personne que tu souhaites inviter est déjà présente sur la liste d'invités. Il appartient à cette personne de remplir le formulaire de réponse. Nous te demandons de revenir en arrière et de ne pas l'ajouter en tant qu'invité·e.",
 }
 
 export enum SUCCESS_MESSAGES {
