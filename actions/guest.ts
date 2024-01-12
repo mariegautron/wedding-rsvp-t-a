@@ -7,7 +7,8 @@ import { cookies } from "next/headers";
 import { revalidatePath } from "next/cache";
 import { MenuPath } from "@/utils/enums/menuItems";
 import { GuestUpdateError } from "@/utils/errors";
-import { ERROR_MESSAGES } from "@/utils/enums/messages";
+import { ERROR_MESSAGES, MessageType } from "@/utils/enums/messages";
+import { addLogs } from "./logs";
 
 // Fonction pour vérifier si l'invité existe déjà dans la base de données
 const checkIfGuestExists = async (
@@ -26,10 +27,22 @@ const checkIfGuestExists = async (
     .eq("lastname", lastname);
 
   if (existingError) {
+    await addLogs({
+      type: MessageType.ERROR,
+      message: JSON.stringify(existingError),
+      params: JSON.stringify({ firstname, lastname }),
+      funcName: "checkIfGuestExists",
+    });
     throw new Error(
       "Une erreur s'est produite lors de la vérification de l'invité."
     );
   }
+
+  await addLogs({
+    type: MessageType.SUCCESS,
+    params: JSON.stringify({ firstname, lastname }),
+    funcName: "checkIfGuestExists",
+  });
 
   return existingGuests && existingGuests.length > 0;
 };
@@ -53,6 +66,12 @@ export const addWeddingGuest = async (values: WeddingGuests): Promise<any> => {
     const guestExists = await checkIfGuestExists(firstname, lastname);
 
     if (guestExists) {
+      await addLogs({
+        type: MessageType.ERROR,
+        message: "Cet invité est déjà dans la liste !",
+        params: JSON.stringify(values),
+        funcName: "addWeddingGuest",
+      });
       throw new Error("Cet invité est déjà dans la liste !");
     }
 
@@ -76,13 +95,32 @@ export const addWeddingGuest = async (values: WeddingGuests): Promise<any> => {
       .insert([guestData]);
 
     if (error) {
+      await addLogs({
+        type: MessageType.ERROR,
+        message: JSON.stringify(error),
+        params: JSON.stringify(values),
+        funcName: "addWeddingGuest",
+      });
       throw new Error("Une erreur s'est produite lors de l'ajout de l'invité.");
     }
+
+    await addLogs({
+      type: MessageType.SUCCESS,
+      params: JSON.stringify(values),
+      funcName: "addWeddingGuest",
+    });
 
     revalidatePath(MenuPath.WEDDING_GUESTS);
 
     return data;
   } catch (error: any) {
+    await addLogs({
+      type: MessageType.ERROR,
+      message: JSON.stringify(error),
+      params: JSON.stringify(values),
+      funcName: "addWeddingGuest",
+    });
+
     console.error("Erreur lors de l'ajout des invités :", error.message);
     throw new Error(error.message);
   }
@@ -103,10 +141,22 @@ export const getGuestByUuid = async (
     .single();
 
   if (error) {
+    await addLogs({
+      type: MessageType.ERROR,
+      message: JSON.stringify(error),
+      params: JSON.stringify(uuid),
+      funcName: "getGuestByUuid",
+    });
     throw new Error(
       "Une erreur s'est produite lors de la récupération de l'invité."
     );
   }
+
+  await addLogs({
+    type: MessageType.SUCCESS,
+    params: JSON.stringify(uuid),
+    funcName: "getGuestByUuid",
+  });
 
   return data;
 };
@@ -131,6 +181,13 @@ export const updateGuest = async (
           type: "guestExists",
           message: ERROR_MESSAGES.GUEST_EXIST,
         };
+
+        await addLogs({
+          type: MessageType.ERROR,
+          message: JSON.stringify(error),
+          params: JSON.stringify(updatedGuestData),
+          funcName: "updateGuest",
+        });
         throw new Error(JSON.stringify(error));
       }
     }
@@ -150,14 +207,34 @@ export const updateGuest = async (
         message:
           "Une erreur s'est produite lors de la mise à jour de l'invité.",
       };
+
+      await addLogs({
+        type: MessageType.ERROR,
+        message: JSON.stringify(error),
+        params: JSON.stringify(updatedGuestData),
+        funcName: "updateGuest",
+      });
       throw new Error(JSON.stringify(updateError));
     }
+
+    await addLogs({
+      type: MessageType.SUCCESS,
+      params: JSON.stringify(updatedGuestData),
+      funcName: "updateGuest",
+    });
 
     revalidatePath(`/?uuid=${updatedGuestData.uuid}`);
     revalidatePath(MenuPath.WEDDING_GUESTS);
 
     return data;
   } catch (error: any | GuestUpdateError) {
+    await addLogs({
+      type: MessageType.ERROR,
+      message: JSON.stringify(error),
+      params: JSON.stringify(updatedGuestData),
+      funcName: "updateGuest",
+    });
+
     console.error("Erreur lors de la mise à jour de l'invité :", error.message);
     throw error;
   }
@@ -176,15 +253,34 @@ export const deleteGuest = async (
       .eq("id", guestId);
 
     if (error) {
+      await addLogs({
+        type: MessageType.ERROR,
+        message: JSON.stringify(error),
+        params: JSON.stringify(guestId),
+        funcName: "deleteGuest",
+      });
       throw new Error(
         "Une erreur s'est produite lors de la suppression de l'invité."
       );
     }
 
+    await addLogs({
+      type: MessageType.SUCCESS,
+      params: JSON.stringify(guestId),
+      funcName: "deleteGuest",
+    });
+
     revalidatePath(MenuPath.WEDDING_GUESTS);
 
     return { success: true };
   } catch (error: any) {
+    await addLogs({
+      type: MessageType.ERROR,
+      message: JSON.stringify(error),
+      params: JSON.stringify(guestId),
+      funcName: "deleteGuest",
+    });
+
     console.error("Erreur lors de la suppression de l'invité :", error.message);
     throw new Error(error.message);
   }
