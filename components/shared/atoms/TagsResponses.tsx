@@ -5,13 +5,14 @@ import { FC } from "react";
 
 export const TagResponseIsPresent: FC<{
   isPresent: boolean | null | undefined;
-}> = ({ isPresent }) => {
+  isAdmin?: boolean;
+}> = ({ isPresent, isAdmin = true }) => {
   return (
     <>
       {isPresent === true ? (
-        <Tag variant="success">Présent·e</Tag>
+        <Tag variant={isAdmin ? "success" : "default"}>Présent·e</Tag>
       ) : isPresent === false ? (
-        <Tag variant="error">Absent·e</Tag>
+        <Tag variant={isAdmin ? "error" : "default"}>Absent·e</Tag>
       ) : (
         <Tag variant="default">Non répondu·e</Tag>
       )}
@@ -37,17 +38,23 @@ export const TagRepsponseComeWithSomeone: FC<{
   comeWithSomeone?: boolean | null;
   guestOfGuestFirstname?: string;
   guestOfGuestLastname?: string;
-}> = ({ comeWithSomeone, guestOfGuestFirstname, guestOfGuestLastname }) => {
+  isAdmin?: boolean;
+}> = ({
+  comeWithSomeone,
+  guestOfGuestFirstname,
+  guestOfGuestLastname,
+  isAdmin = true,
+}) => {
   return (
     <>
       {comeWithSomeone === true ? (
-        <Tag variant="success">
+        <Tag variant={isAdmin ? "success" : "default"}>
           {guestOfGuestLastname
             ? `Accompagné·e par ${guestOfGuestFirstname} ${guestOfGuestLastname}`
             : `Accompagné·e par ${guestOfGuestFirstname}`}
         </Tag>
       ) : comeWithSomeone === false ? (
-        <Tag variant="error">Non accompagné·e</Tag>
+        <Tag variant={isAdmin ? "error" : "default"}>Non accompagné·e</Tag>
       ) : (
         <Tag variant="default">Non spécifié pour l'accompagnement</Tag>
       )}

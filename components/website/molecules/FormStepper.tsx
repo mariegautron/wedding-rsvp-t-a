@@ -1,25 +1,27 @@
+import { messageService } from "@/components/design-system/Message/messageService";
 import { ERROR_MESSAGES, SUCCESS_MESSAGES } from "@/utils/enums/messages";
+import { GuestUpdateError } from "@/utils/errors";
+import { booleanToString } from "@/utils/functions/booleanToString";
 import {
   JourneyStep,
   determineJourney,
 } from "@/utils/functions/determinateJourney";
+import useGuestHasResponded from "@/utils/hooks/useGuestHasResponded";
 import { WeddingGuests } from "@/utils/types/weddinggests";
 import { useEffect, useMemo, useState } from "react";
 import StepComeWithSomeone from "../steps/StepComeWithSomeone";
 import StepConfirmation from "../steps/StepConfirmation";
 import StepDommage from "../steps/StepDommage";
+import StepEmail from "../steps/StepEmail";
 import StepGuestOfGuest from "../steps/StepGuestOfGuest";
 import StepIsPresent from "../steps/StepIsPresent";
 import StepMessage from "../steps/StepMessage";
-import { booleanToString } from "@/utils/functions/booleanToString";
-import useGuestHasResponded from "@/utils/hooks/useGuestHasResponded";
-import { messageService } from "@/components/design-system/Message/messageService";
-import { GuestUpdateError } from "@/utils/errors";
 
 const globalJourney: JourneyStep[] = [
   "isPresent",
   "comeWithSomeone",
   "guestOfGuest",
+  "email",
   "message",
   "dommage",
   "confirmation",
@@ -36,8 +38,6 @@ const FormStepper: React.FC<{
   const [allChoices, setAllChoices] = useState<WeddingGuests>(guest);
   const [isLoading, setIsLoading] = useState(false);
 
-  const [guestAlreadyExist, setGuestAlreadyExist] = useState(false);
-
   const hasResponded = useGuestHasResponded(allChoices);
 
   useEffect(() => {
@@ -53,6 +53,7 @@ const FormStepper: React.FC<{
           ? allChoices.comeWithSomeone
           : guest.comeWithSomeone,
       canComeWithSomeone: guest.canComeWithSomeone,
+      email: allChoices.email || guest.email,
     };
 
     setAllChoices(guestChoicesConditions);
@@ -179,6 +180,7 @@ const FormStepper: React.FC<{
             questionNumber={questionNumber}
           />
         );
+
       case "guestOfGuest":
         return (
           <StepGuestOfGuest
@@ -189,6 +191,16 @@ const FormStepper: React.FC<{
               guestOfGuestFirstname: allChoices.guestOfGuestFirstname,
               guestOfGuestLastname: allChoices.guestOfGuestLastname,
             }}
+            questionNumber={questionNumber}
+          />
+        );
+      case "email":
+        return (
+          <StepEmail
+            handleNext={handleNext}
+            handlePrev={handlePrev}
+            handleSelectionChange={handleSelectionChange}
+            defaultValue={allChoices.email}
             questionNumber={questionNumber}
           />
         );

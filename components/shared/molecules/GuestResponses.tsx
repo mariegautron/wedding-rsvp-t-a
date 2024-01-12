@@ -29,10 +29,9 @@ const GuestResponses: FC<{
                 firstname={guest.firstname}
                 lastname={guest.lastname}
               />
-              <TagEmailGuest email={guest.email} />
             </>
           )}
-          <TagResponseIsPresent isPresent={guest.isPresent} />
+          <TagResponseIsPresent isPresent={guest.isPresent} isAdmin={isAdmin} />
           {isAdmin && (
             <TagResponseCanComeWithSomeone
               canComeWithSomeone={guest.canComeWithSomeone}
@@ -43,8 +42,11 @@ const GuestResponses: FC<{
               comeWithSomeone={guest.comeWithSomeone}
               guestOfGuestFirstname={guest.guestOfGuestFirstname}
               guestOfGuestLastname={guest.guestOfGuestLastname}
+              isAdmin={isAdmin}
             />
           )}
+          {guest.email && <TagEmailGuest email={guest.email} />}
+
           {guest.message && (
             <p>
               <strong>Message :</strong> {guest.message}
