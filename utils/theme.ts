@@ -14,6 +14,19 @@ const themeTokens = {
     colorBgBase: "#ffffff", // Remplacez par votre couleur Tailwind
     wireframe: false,
   },
+  components: {
+    Menu: {
+      colorBgContainer: "#e8dad6ff", // Utilisez votre nouvelle couleur fond-clair
+      itemBg: "#4f4341ff", // Utilisez votre nouvelle couleur fond-foncé
+      itemColor: "#f9f7f4ff", // Utilisez votre nouvelle couleur white
+      itemDisabledColor: "rgba(96, 108, 93, 0.25)",
+      itemHoverBg: "#4f4341ff", // Utilisez votre nouvelle couleur fond-foncé
+      itemHoverColor: "#f9f7f4ff", // Utilisez votre nouvelle couleur white
+      itemSelectedBg: "#4f4341ff", // Utilisez votre nouvelle couleur fond-foncé
+      itemSelectedColor: "#f9f7f4ff", // Utilisez votre nouvelle couleur white
+      itemActiveBg: "#4f4341ff", // Utilisez votre nouvelle couleur fond-foncé
+    },
+  },
 };
 
 export default themeTokens;

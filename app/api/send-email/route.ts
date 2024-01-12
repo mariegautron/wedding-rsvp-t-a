@@ -91,7 +91,7 @@ export async function POST(req: Request) {
 
     return NextResponse.json(
       {
-        message: "COULD NOT SEND MESSAGE",
+        message: JSON.stringify(error),
       },
       {
         status: 500,

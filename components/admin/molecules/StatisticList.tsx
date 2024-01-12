@@ -1,29 +1,30 @@
 import Statistic from "@/components/design-system/Statistic";
-import { Row, Col } from "antd";
+import classNames from "classnames";
+
+export type Statistic = { title: string; value: number | string };
 
 interface StatisticListProps {
-  statistics: { title: string; value: number }[];
+  statistics: Statistic[];
+  numColumns?: number; // Ajout de la prop pour spécifier le nombre de colonnes (par défaut 5)
 }
 
-const StatisticList: React.FC<StatisticListProps> = ({ statistics }) => {
-  const numCols = Math.min(Math.max(1, 24 / statistics.length), 6);
-  const colWidth = `${100 / statistics.length}%`;
+const StatisticList: React.FC<StatisticListProps> = ({
+  statistics,
+  numColumns = 5,
+}) => {
+  const gridStyles = classNames("px-4 mb-4", {
+    "w-1/3": numColumns === 3,
+    "w-1/5": numColumns === 5,
+  });
 
   return (
-    <Row gutter={[16, 16]} justify="space-around" style={{ marginBottom: 10 }}>
+    <div className={`flex flex-wrap -mx-4 mb-10`}>
       {statistics.map((stat, index) => (
-        <Col
-          key={index}
-          xs={24 / numCols}
-          sm={24 / numCols}
-          md={24 / numCols}
-          lg={24 / numCols}
-          style={{ maxWidth: colWidth }}
-        >
+        <div key={index} className={gridStyles}>
           <Statistic title={stat.title} value={stat.value} />
-        </Col>
+        </div>
       ))}
-    </Row>
+    </div>
   );
 };
 

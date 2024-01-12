@@ -8,6 +8,7 @@ import { useRouter } from "next/navigation";
 import { FC } from "react";
 import { v4 as uuidv4 } from "uuid";
 import AddOrUpdateForm from "./AddOrUpdateForm";
+import Heading from "@/components/design-system/Headings";
 
 interface AddGuestFormProps {
   addWeddingGuest: (values: WeddingGuests) => Promise<void>;
@@ -35,8 +36,8 @@ const AddGuestForm: FC<AddGuestFormProps> = ({ addWeddingGuest }) => {
   };
 
   return (
-    <div style={{ maxWidth: 400, margin: "auto" }}>
-      <h2>Ajouter une nouvelle personne invitée</h2>
+    <div className="flex flex-col space-y-5">
+      <Heading level={3}>Ajouter une nouvelle personne invitée</Heading>
       <AddOrUpdateForm handleFormSubmit={handleFormSubmit} />
     </div>
   );

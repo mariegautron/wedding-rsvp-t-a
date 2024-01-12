@@ -67,3 +67,12 @@ html {
   outline: none; /* Supprime la bordure par défaut du navigateur */
   box-shadow: 0 0 5px rgba(182, 142, 136, 0.7); /* Ajoute une ombre avec la couleur "primary" lorsque l'élément est en focus */
 }
+
+li.ant-menu-item:hover {
+  color: #f9f7f4ff !important;
+}
+
+.ant-layout {
+  background: #f9f7f4ff !important;
+  min-height: 100% !important;
+}
