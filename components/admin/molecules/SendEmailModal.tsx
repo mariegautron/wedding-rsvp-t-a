@@ -5,7 +5,7 @@ import { messageService } from "@/components/design-system/Message/messageServic
 import { ERROR_MESSAGES } from "@/utils/enums/messages";
 import { useFormattedEventDate } from "@/utils/hooks/useFormattedEventDate";
 import { Button, Form, Input, Modal } from "antd";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 interface SendEmailModalProps {
   emailOpen: boolean;
@@ -26,6 +26,10 @@ const SendEmailModal: React.FC<SendEmailModalProps> = ({
 
   const [form] = Form.useForm();
   const [sending, setSending] = useState(false);
+
+  useEffect(() => {
+    form.setFieldsValue({ guestEmail });
+  }, [guestEmail]);
 
   const handleSendEmail = async () => {
     try {
@@ -69,12 +73,8 @@ const SendEmailModal: React.FC<SendEmailModalProps> = ({
       ]}
     >
       <Form form={form} layout="vertical">
-        <Form.Item
-          label="Email de la personne invitée"
-          name="guestEmail"
-          initialValue={guestEmail}
-        >
-          <Input disabled />
+        <Form.Item label="Email de la personne invitée" name="guestEmail">
+          <Input disabled value={guestEmail} />
         </Form.Item>
         <Form.Item
           label="Message d'invitation"

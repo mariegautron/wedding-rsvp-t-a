@@ -84,7 +84,7 @@ const GuestListTable: FC<{
         Voir le détail
       </Menu.Item>
       <Menu.Item
-        key="viewDetails"
+        key="edit"
         onClick={() => {
           setSelectedGuest({ ...record });
           setModalUpdateVisible(true);
