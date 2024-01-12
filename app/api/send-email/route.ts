@@ -1,5 +1,4 @@
 import { formatDate } from "@/utils/functions/formatDate";
-import { getDeadlineDate } from "@/utils/functions/getDeadlineDate";
 import { NextResponse } from "next/server";
 import mailjet from "node-mailjet";
 

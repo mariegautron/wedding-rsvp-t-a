@@ -13,6 +13,8 @@ interface FiltersAndSearchProps {
   setShowOnlyInvitNotSent: (showOnlyInvitNotSent: boolean) => void;
   showOnlyInvitSent: boolean;
   setShowOnlyInvitSent: (showOnlyInvitSent: boolean) => void;
+  showOnlyNoEmail: boolean;
+  setShowOnlyNoEmail: (showOnlyNoEmail: boolean) => void;
 }
 
 const FiltersAndSearchPanel: React.FC<FiltersAndSearchProps> = ({
@@ -28,6 +30,8 @@ const FiltersAndSearchPanel: React.FC<FiltersAndSearchProps> = ({
   setShowOnlyInvitNotSent,
   showOnlyInvitSent,
   setShowOnlyInvitSent,
+  showOnlyNoEmail,
+  setShowOnlyNoEmail,
 }) => {
   return (
     <div style={{ width: "100%" }}>
@@ -80,6 +84,15 @@ const FiltersAndSearchPanel: React.FC<FiltersAndSearchProps> = ({
             onChange={(e) => setShowOnlyInvitSent(e.target.checked)}
           >
             Invitations envoyées
+          </Checkbox>
+        </Col>{" "}
+        <Col span={4}>
+          <Checkbox
+            style={{ width: "100%" }}
+            checked={showOnlyNoEmail}
+            onChange={(e) => setShowOnlyNoEmail(e.target.checked)}
+          >
+            Pas d'email
           </Checkbox>
         </Col>
       </Row>

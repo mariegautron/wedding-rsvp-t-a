@@ -35,6 +35,7 @@ const GuestView: React.FC<GuestViewProps> = ({
   const [showOnlyOneCanCome, setShowOnlyOneCanCome] = useState(false);
   const [showOnlyInvitNotSent, setShowOnlyInvitNotSent] = useState(false);
   const [showOnlyInvitSent, setShowOnlyInvitSent] = useState(false);
+  const [showOnlyNoEmail, setShowOnlyNoEmail] = useState(false);
   const [searchName, setSearchName] = useState("");
 
   if (!isAuth) {
@@ -90,6 +91,10 @@ const GuestView: React.FC<GuestViewProps> = ({
       return false;
     }
 
+    if (showOnlyNoEmail && guest.email) {
+      return false;
+    }
+
     return true;
   });
 
@@ -99,6 +104,7 @@ const GuestView: React.FC<GuestViewProps> = ({
     setShowOnlyOneCanCome(false);
     setShowOnlyInvitNotSent(false);
     setShowOnlyInvitSent(false);
+    setShowOnlyNoEmail(false);
     setSearchName("");
   };
 
@@ -139,6 +145,8 @@ const GuestView: React.FC<GuestViewProps> = ({
           setShowOnlyInvitNotSent={setShowOnlyInvitNotSent}
           showOnlyInvitSent={showOnlyInvitSent}
           setShowOnlyInvitSent={setShowOnlyInvitSent}
+          showOnlyNoEmail={showOnlyNoEmail}
+          setShowOnlyNoEmail={setShowOnlyNoEmail}
         />
       </Accordion>
       <GuestListTable
