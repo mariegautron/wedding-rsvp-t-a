@@ -1,3 +1,5 @@
+"use server";
+
 import { MessageType } from "@/utils/enums/messages";
 import { addLogs } from "./logs";
 
@@ -20,6 +22,7 @@ export const sendEmail = async (
         type: MessageType.SUCCESS,
         params: JSON.stringify({ guestEmail, invitationMessage, guestUuid }),
         funcName: "sendEmail",
+        guestUuid,
       });
       console.log("Email sent successfully!");
     } else {
@@ -28,6 +31,7 @@ export const sendEmail = async (
         message: JSON.stringify(response),
         params: JSON.stringify({ guestEmail, invitationMessage, guestUuid }),
         funcName: "sendEmail",
+        guestUuid,
       });
       console.error("Failed to send email");
     }
@@ -37,6 +41,7 @@ export const sendEmail = async (
       message: JSON.stringify(error),
       params: JSON.stringify({ guestEmail, invitationMessage, guestUuid }),
       funcName: "sendEmail",
+      guestUuid,
     });
     console.error("Error sending email:", error);
     // Gérer les erreurs à l'utilisateur ic

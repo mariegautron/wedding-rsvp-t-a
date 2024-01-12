@@ -5,4 +5,6 @@ export type Logs = {
   message?: string;
   params: unknown;
   funcName: string;
+  guestID?: number;
+  guestUuid?: string;
 };

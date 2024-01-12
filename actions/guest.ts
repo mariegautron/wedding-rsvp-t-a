@@ -71,6 +71,8 @@ export const addWeddingGuest = async (values: WeddingGuests): Promise<any> => {
         message: "Cet invité est déjà dans la liste !",
         params: JSON.stringify(values),
         funcName: "addWeddingGuest",
+        guestID: values.id,
+        guestUuid: values.uuid,
       });
       throw new Error("Cet invité est déjà dans la liste !");
     }
@@ -100,6 +102,8 @@ export const addWeddingGuest = async (values: WeddingGuests): Promise<any> => {
         message: JSON.stringify(error),
         params: JSON.stringify(values),
         funcName: "addWeddingGuest",
+        guestID: values.id,
+        guestUuid: values.uuid,
       });
       throw new Error("Une erreur s'est produite lors de l'ajout de l'invité.");
     }
@@ -108,6 +112,8 @@ export const addWeddingGuest = async (values: WeddingGuests): Promise<any> => {
       type: MessageType.SUCCESS,
       params: JSON.stringify(values),
       funcName: "addWeddingGuest",
+      guestID: values.id,
+      guestUuid: values.uuid,
     });
 
     revalidatePath(MenuPath.WEDDING_GUESTS);
@@ -119,6 +125,8 @@ export const addWeddingGuest = async (values: WeddingGuests): Promise<any> => {
       message: JSON.stringify(error),
       params: JSON.stringify(values),
       funcName: "addWeddingGuest",
+      guestID: values.id,
+      guestUuid: values.uuid,
     });
 
     console.error("Erreur lors de l'ajout des invités :", error.message);
@@ -146,6 +154,7 @@ export const getGuestByUuid = async (
       message: JSON.stringify(error),
       params: JSON.stringify(uuid),
       funcName: "getGuestByUuid",
+      guestUuid: uuid,
     });
     throw new Error(
       "Une erreur s'est produite lors de la récupération de l'invité."
@@ -156,6 +165,7 @@ export const getGuestByUuid = async (
     type: MessageType.SUCCESS,
     params: JSON.stringify(uuid),
     funcName: "getGuestByUuid",
+    guestUuid: uuid,
   });
 
   return data;
@@ -187,6 +197,8 @@ export const updateGuest = async (
           message: JSON.stringify(error),
           params: JSON.stringify(updatedGuestData),
           funcName: "updateGuest",
+          guestID: updatedGuestData.id,
+          guestUuid: updatedGuestData.uuid,
         });
         throw new Error(JSON.stringify(error));
       }
@@ -213,6 +225,8 @@ export const updateGuest = async (
         message: JSON.stringify(error),
         params: JSON.stringify(updatedGuestData),
         funcName: "updateGuest",
+        guestID: updatedGuestData.id,
+        guestUuid: updatedGuestData.uuid,
       });
       throw new Error(JSON.stringify(updateError));
     }
@@ -221,6 +235,8 @@ export const updateGuest = async (
       type: MessageType.SUCCESS,
       params: JSON.stringify(updatedGuestData),
       funcName: "updateGuest",
+      guestID: updatedGuestData.id,
+      guestUuid: updatedGuestData.uuid,
     });
 
     revalidatePath(`/?uuid=${updatedGuestData.uuid}`);
@@ -233,6 +249,8 @@ export const updateGuest = async (
       message: JSON.stringify(error),
       params: JSON.stringify(updatedGuestData),
       funcName: "updateGuest",
+      guestID: updatedGuestData.id,
+      guestUuid: updatedGuestData.uuid,
     });
 
     console.error("Erreur lors de la mise à jour de l'invité :", error.message);
@@ -258,6 +276,7 @@ export const deleteGuest = async (
         message: JSON.stringify(error),
         params: JSON.stringify(guestId),
         funcName: "deleteGuest",
+        guestID: parseInt(guestId),
       });
       throw new Error(
         "Une erreur s'est produite lors de la suppression de l'invité."
@@ -268,6 +287,7 @@ export const deleteGuest = async (
       type: MessageType.SUCCESS,
       params: JSON.stringify(guestId),
       funcName: "deleteGuest",
+      guestID: parseInt(guestId),
     });
 
     revalidatePath(MenuPath.WEDDING_GUESTS);
@@ -279,6 +299,7 @@ export const deleteGuest = async (
       message: JSON.stringify(error),
       params: JSON.stringify(guestId),
       funcName: "deleteGuest",
+      guestID: parseInt(guestId),
     });
 
     console.error("Erreur lors de la suppression de l'invité :", error.message);
