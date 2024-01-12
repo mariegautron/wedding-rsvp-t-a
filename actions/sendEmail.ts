@@ -1,3 +1,6 @@
+import { MessageType } from "@/utils/enums/messages";
+import { addLogs } from "./logs";
+
 export const sendEmail = async (
   guestEmail: string,
   invitationMessage: string,
@@ -13,11 +16,28 @@ export const sendEmail = async (
     });
 
     if (response.ok) {
+      await addLogs({
+        type: MessageType.SUCCESS,
+        params: JSON.stringify({ guestEmail, invitationMessage, guestUuid }),
+        funcName: "sendEmail",
+      });
       console.log("Email sent successfully!");
     } else {
+      await addLogs({
+        type: MessageType.ERROR,
+        message: JSON.stringify(response),
+        params: JSON.stringify({ guestEmail, invitationMessage, guestUuid }),
+        funcName: "sendEmail",
+      });
       console.error("Failed to send email");
     }
   } catch (error) {
+    await addLogs({
+      type: MessageType.ERROR,
+      message: JSON.stringify(error),
+      params: JSON.stringify({ guestEmail, invitationMessage, guestUuid }),
+      funcName: "sendEmail",
+    });
     console.error("Error sending email:", error);
     // Gérer les erreurs à l'utilisateur ic
   }

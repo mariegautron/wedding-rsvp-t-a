@@ -12,14 +12,10 @@ export const addLogs = async (log: Logs): Promise<any> => {
 
     const logToAdd = { ...log, date: new Date() };
 
-    console.log(logToAdd);
-
     const { data } = await supabase
       .from(COLLECTION_NAMES.LOGS)
       .insert([logToAdd])
       .select();
-
-    console.log({ data });
 
     return data;
   } catch (error: any) {
