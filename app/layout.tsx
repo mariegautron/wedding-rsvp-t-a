@@ -2,6 +2,7 @@ import { ConfigProvider } from "antd";
 import "./tailwind.css";
 import "./globals.css";
 import themeTokens from "@/utils/theme";
+import { Analytics } from "@vercel/analytics/react";
 
 export const metadata = {
   title: "Thomas & Amélie - Le mariage",
@@ -20,6 +21,7 @@ export default function RootLayout({
             {children} <div id="message-root"></div>
           </div>
         </ConfigProvider>
+        <Analytics />
       </body>
     </html>
   );
