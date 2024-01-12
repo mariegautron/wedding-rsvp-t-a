@@ -3,6 +3,7 @@ import "./tailwind.css";
 import "./globals.css";
 import themeTokens from "@/utils/theme";
 import { Analytics } from "@vercel/analytics/react";
+import { SpeedInsights } from "@vercel/speed-insights/next";
 
 export const metadata = {
   title: "Thomas & Amélie - Le mariage",
@@ -22,6 +23,7 @@ export default function RootLayout({
           </div>
         </ConfigProvider>
         <Analytics />
+        <SpeedInsights />
       </body>
     </html>
   );
