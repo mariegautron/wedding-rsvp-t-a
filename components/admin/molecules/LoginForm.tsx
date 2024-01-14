@@ -1,7 +1,9 @@
 "use client";
 
 import { signIn } from "@/actions/user";
+import { MenuPath } from "@/utils/enums/menuItems";
 import { Button, Form, Input, Typography } from "antd";
+import { useRouter } from "next/navigation";
 
 const { Title } = Typography;
 
@@ -11,14 +13,17 @@ export interface LoginFormValues {
   remember: boolean;
 }
 const LoginForm: React.FC = () => {
+  const router = useRouter();
   const [form] = Form.useForm();
 
   const onFinish = async (values: LoginFormValues) => {
     try {
-      await signIn(values);
+      // await signIn(values);
 
       // TODO: Understanding cookie/session etc from supabase
       localStorage.setItem("IS_AUTH", "true");
+
+      router.push(MenuPath.WEDDING_GUESTS);
     } catch (error) {
       console.error("Sign in error:", error);
     }

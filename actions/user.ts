@@ -9,6 +9,9 @@ import { redirect } from "next/navigation";
 export const signIn = async (values: LoginFormValues) => {
   "use server";
 
+  console.log("coucou");
+  console.log(values);
+
   const { email, password } = values;
   const cookieStore = cookies();
   const supabase = createClient(cookieStore);
@@ -18,9 +21,7 @@ export const signIn = async (values: LoginFormValues) => {
     password,
   });
 
-  if (error) {
-    return redirect(MenuPath.WEDDING_GUESTS);
-  }
+  console.log(error);
 
   return redirect(MenuPath.WEDDING_GUESTS);
 };
