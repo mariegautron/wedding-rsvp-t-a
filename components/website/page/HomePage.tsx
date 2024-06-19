@@ -6,23 +6,20 @@ import Subtile from "@/components/design-system/Subtitle";
 import useDeadlineCheck from "@/utils/hooks/useDeadlineCheck";
 import useGuestData from "@/utils/hooks/useGuestData";
 import { WeddingGuests } from "@/utils/types/weddinggests";
-import { FC } from "react";
+import { FC, Suspense } from "react";
 import Footer from "../atoms/Footer";
 import Hero from "../molecules/Hero";
 import HeroTemplatePage from "../molecules/HeroTemplatePage";
 import ImportantInformation from "../molecules/ImportantInformations";
-import PhotoGallery from "../molecules/PhotoGallery";
 import RSVPStepper from "../molecules/RSVPStepper";
 
-const HomePage: FC<{
+const GuestDataComponent: FC<{
   fetchGuestData: (uuid: string) => Promise<WeddingGuests | null | undefined>;
   updateGuest: (
     updatedGuestData: WeddingGuests
   ) => Promise<WeddingGuests[] | null | undefined>;
-  getImagesUrlFromStorage: () => Promise<any>;
-}> = ({ fetchGuestData, updateGuest, getImagesUrlFromStorage }) => {
+}> = ({ fetchGuestData, updateGuest }) => {
   const [guestData, loading] = useGuestData(fetchGuestData);
-
   const deadlinePassed = useDeadlineCheck();
 
   if (loading) {
@@ -49,9 +46,24 @@ const HomePage: FC<{
         <RSVPStepper guest={guestData} updateGuest={updateGuest} />
       )}
       <ImportantInformation />
-      <PhotoGallery getImagesUrlFromStorage={getImagesUrlFromStorage} />
       <Footer />
     </div>
+  );
+};
+
+const HomePage: FC<{
+  fetchGuestData: (uuid: string) => Promise<WeddingGuests | null | undefined>;
+  updateGuest: (
+    updatedGuestData: WeddingGuests
+  ) => Promise<WeddingGuests[] | null | undefined>;
+}> = ({ fetchGuestData, updateGuest }) => {
+  return (
+    <Suspense fallback={<Loading />}>
+      <GuestDataComponent
+        fetchGuestData={fetchGuestData}
+        updateGuest={updateGuest}
+      />
+    </Suspense>
   );
 };
 

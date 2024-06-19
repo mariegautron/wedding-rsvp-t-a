@@ -1,29 +1,50 @@
+"use client";
+
+import { FC, useEffect, useState } from "react";
+import { Pagination } from "antd";
 import FlowersDecoration from "@/components/design-system/FlowersDecoration";
 import Heading from "@/components/design-system/Headings";
-import { FC, useEffect, useState } from "react";
+import Loading from "@/components/design-system/Loading";
+import PhotoShareCard from "./PhotoShareCard";
 
 const PhotoGallery: FC<{ getImagesUrlFromStorage: () => Promise<any> }> = ({
   getImagesUrlFromStorage,
 }) => {
-  const [photos, setPhotos] = useState([]);
+  const [photos, setPhotos] = useState<string[]>([]);
+  const [currentPage, setCurrentPage] = useState<number>(1);
+  const [pageSize, setPageSize] = useState<number>(8);
+  const [loading, setLoading] = useState<boolean>(true);
 
   useEffect(() => {
     async function fetchPhotos() {
+      setLoading(true);
       try {
         const data = await getImagesUrlFromStorage();
         const photosUrls = data.map((obj: any) => obj.data.publicUrl);
-
-        setPhotos(photosUrls);
+        setPhotos(photosUrls.slice(1));
       } catch (error) {
         console.error("Error fetching photos:", error);
+      } finally {
+        setLoading(false);
       }
     }
     fetchPhotos();
   }, []);
 
-  if (!photos || !photos.length) {
-    return <></>;
+  if (loading) {
+    return <Loading />;
   }
+
+  const handlePageChange = (page: number, pageSize?: number) => {
+    setCurrentPage(page);
+    if (pageSize) {
+      setPageSize(pageSize);
+    }
+  };
+
+  const startIndex = (currentPage - 1) * pageSize;
+  const endIndex = startIndex + pageSize;
+  const currentPhotos = photos.slice(startIndex, endIndex);
 
   return (
     <div className="w-4/5 mx-auto py-6">
@@ -31,7 +52,7 @@ const PhotoGallery: FC<{ getImagesUrlFromStorage: () => Promise<any> }> = ({
       <div className="pt-20">
         <div className="grid grid-cols-2 md:grid-cols-4 gap-4 relative">
           <FlowersDecoration variant="topLeft" />
-          {photos.slice(1).map((photo, index) => (
+          {currentPhotos.map((photo, index) => (
             <div key={index} className="relative aspect-square">
               <img
                 src={photo}
@@ -40,6 +61,15 @@ const PhotoGallery: FC<{ getImagesUrlFromStorage: () => Promise<any> }> = ({
               />
             </div>
           ))}
+        </div>
+        <div className="flex justify-center mt-8">
+          <Pagination
+            current={currentPage}
+            pageSize={pageSize}
+            total={photos.length}
+            onChange={handlePageChange}
+            showSizeChanger={false}
+          />
         </div>
       </div>
     </div>
