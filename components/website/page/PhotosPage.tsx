@@ -12,8 +12,8 @@ const PhotosPage: FC<{
   return (
     <div className="flex flex-col gap-10 mt-10">
       <Header />
-      <PhotoGallery getImagesUrlFromStorage={getImagesUrlFromStorage} />
       <PhotoShareCard />
+      <PhotoGallery getImagesUrlFromStorage={getImagesUrlFromStorage} />
       <Footer />
     </div>
   );

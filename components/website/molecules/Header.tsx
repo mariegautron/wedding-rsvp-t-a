@@ -20,9 +20,12 @@ const Header: FC = () => {
     );
 
   return (
-    <header className="bg-transparent py-2">
+    <header className="bg-transparent py-4">
       <div className="container mx-auto flex justify-center items-center px-4">
         <nav className="flex space-x-4">
+          <Link href="/menu" className={linkClasses("/menu")}>
+            <Paragraph>Menu</Paragraph>
+          </Link>
           <Link href="/photos" className={linkClasses("/photos")}>
             <Paragraph>Photos</Paragraph>
           </Link>
