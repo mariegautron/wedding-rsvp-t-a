@@ -1,15 +1,15 @@
 "use client";
 
-import { FC, useEffect, useState } from "react";
-import { Pagination } from "antd";
 import FlowersDecoration from "@/components/design-system/FlowersDecoration";
 import Heading from "@/components/design-system/Headings";
 import Loading from "@/components/design-system/Loading";
-import PhotoShareCard from "./PhotoShareCard";
+import { BucketName } from "@/utils/enums/bucket";
+import { Pagination } from "antd";
+import { FC, useEffect, useState } from "react";
 
-const PhotoGallery: FC<{ getImagesUrlFromStorage: () => Promise<any> }> = ({
-  getImagesUrlFromStorage,
-}) => {
+const PhotoGallery: FC<{
+  getImagesUrlFromStorage: (bucket: BucketName) => Promise<string[]>;
+}> = ({ getImagesUrlFromStorage }) => {
   const [photos, setPhotos] = useState<string[]>([]);
   const [currentPage, setCurrentPage] = useState<number>(1);
   const [pageSize, setPageSize] = useState<number>(8);
@@ -19,9 +19,10 @@ const PhotoGallery: FC<{ getImagesUrlFromStorage: () => Promise<any> }> = ({
     async function fetchPhotos() {
       setLoading(true);
       try {
-        const data = await getImagesUrlFromStorage();
-        const photosUrls = data.map((obj: any) => obj.data.publicUrl);
-        setPhotos(photosUrls.slice(1));
+        const photosUrls: string[] = await getImagesUrlFromStorage(
+          BucketName.IMAGES
+        );
+        setPhotos(photosUrls);
       } catch (error) {
         console.error("Error fetching photos:", error);
       } finally {
